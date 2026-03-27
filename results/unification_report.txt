@@ -1,0 +1,20 @@
+DATASET UNIFICATION REPORT
+============================================================
+
+Per-dataset statistics:
+  kaggle_pu_stages         :   159 total,   159 kept,     0 dropped
+  piid                     :  1091 total,  1091 kept,     0 dropped
+  roboflow_fid             :   691 total,   595 kept,    96 dropped
+  roboflow_maskrcnn        :  3833 total,  2495 kept,  1338 dropped
+  roboflow_mobile          :   313 total,   225 kept,    88 dropped
+  roboflow_project1        :  2013 total,  2013 kept,     0 dropped
+  roboflow_stage2          :  4813 total,  4813 kept,     0 dropped
+  roboflow_woundcare       :   714 total,   463 kept,   251 dropped
+
+Split: train=5495, val=1570, test=785
+Total: 7850
+
+Class distribution:
+  train: stage1=1427 stage2=1315 stage3=1624 stage4=1467 
+  val: stage1=406 stage2=396 stage3=511 stage4=367 
+  test: stage1=173 stage2=198 stage3=229 stage4=229 
