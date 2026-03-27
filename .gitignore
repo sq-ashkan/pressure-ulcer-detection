@@ -1,0 +1,44 @@
+# Environment and secrets
+.env
+!.env.example
+
+# Data directories (too large for git)
+data/raw/
+data/unified/
+data/augmented/
+
+# Model weights
+models/**/*.pt
+models/**/*.onnx
+models/**/*.engine
+*.pt
+*.onnx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+decubitus-env/
+
+# Training outputs
+runs/
+wandb/
+results/*.png
+results/*.jpg
+results/*.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/

@@ -1,0 +1,27 @@
+# Decubitus Detection Dataset Configuration
+# Place this file in data/ directory
+
+path: ./data/augmented
+train: images/train
+val: images/val
+test: images/test
+
+# Number of classes
+nc: 4
+
+# Class names (NPUAP/EPUAP staging)
+names:
+  0: stage1
+  1: stage2
+  2: stage3
+  3: stage4
+
+# For 6-class version, use:
+# nc: 6
+# names:
+#   0: stage1
+#   1: stage2
+#   2: stage3
+#   3: stage4
+#   4: unstageable
+#   5: dti
