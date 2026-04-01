@@ -1,0 +1,22 @@
+EXPLORATORY DATA ANALYSIS REPORT
+============================================================
+
+Total images: 7985
+Total annotations: 8477
+Mean annotations/image: 1.06
+Class imbalance ratio: 1.24:1
+
+Class distribution:
+  Stage 1: 2028 (23.9%)
+  Stage 2: 1921 (22.7%)
+  Stage 3: 2386 (28.1%)
+  Stage 4: 2142 (25.3%)
+
+Image dimensions:
+  Width:  mean=574, std=157
+  Height: mean=572, std=160
+
+Bbox statistics:
+  Width:  mean=0.796, std=0.273
+  Height: mean=0.798, std=0.272
+  Area:   mean=0.692, std=0.366
