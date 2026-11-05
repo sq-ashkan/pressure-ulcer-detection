@@ -1,0 +1,84 @@
+{
+  "weights": "/Users/roammer/Documents/github/indie/pressure-ulcer-detection/runs/detect/pu_yolov8s_v4/weights/best.pt",
+  "split": "test",
+  "images": 69,
+  "instances_per_class": {
+    "stage1": 23,
+    "stage2": 10,
+    "stage3": 27,
+    "stage4": 21
+  },
+  "headline": {
+    "mAP50": 0.4148823582114445,
+    "mAP50_ci95": [
+      0.32953525579117576,
+      0.5512682019149142
+    ],
+    "mAP50_95": 0.2597078588985326,
+    "mAP50_95_ci95": [
+      0.19952423702613256,
+      0.3617185813736302
+    ]
+  },
+  "operating_point": {
+    "confidence": 0.25,
+    "precision": 0.4827380952380952,
+    "recall": 0.5077927306188176
+  },
+  "ultralytics_tuned_threshold": {
+    "precision": 0.4632837435571273,
+    "recall": 0.636698186714253,
+    "note": "read at the F1-maximising confidence on this split; an upper bound"
+  },
+  "per_class": {
+    "stage1": {
+      "instances": 23,
+      "mAP50": 0.5632837965951654,
+      "mAP50_95": 0.31624318270906226,
+      "mAP50_ci95": [
+        0.38593087665894454,
+        0.7924576371903959
+      ]
+    },
+    "stage2": {
+      "instances": 10,
+      "mAP50": 0.2676777809367078,
+      "mAP50_95": 0.1557115228654897,
+      "mAP50_ci95": [
+        0.047525844403617866,
+        0.6381009615384615
+      ]
+    },
+    "stage3": {
+      "instances": 27,
+      "mAP50": 0.38811151109279934,
+      "mAP50_95": 0.26911137753818415,
+      "mAP50_ci95": [
+        0.2272672995449053,
+        0.5928422151072131
+      ]
+    },
+    "stage4": {
+      "instances": 21,
+      "mAP50": 0.44045634422110547,
+      "mAP50_95": 0.29776535248139424,
+      "mAP50_ci95": [
+        0.22548293139822495,
+        0.6646314909935266
+      ]
+    }
+  },
+  "bootstrap_replicates": 500,
+  "caveats": [
+    "The test split holds one image per independent photograph (69 photographs).",
+    "Per-class instance counts range 10-27; per-class AP is a point estimate on a small sample and is reported with a bootstrap interval for that reason.",
+    "Precision and recall are quoted at a fixed threshold declared before scoring; the Ultralytics defaults are tuned on the split being scored."
+  ],
+  "headline_note": "Two AP implementations were run. Ultralytics model.val() reports mAP@50 = 0.484 and mAP@50-95 = 0.292. The per-image reimplementation in scripts/evaluate.py, which exists so that AP can be recomputed inside an image-level bootstrap, reports 0.415 and 0.260 -- systematically about 0.07 lower because its prediction/ground-truth matching differs in detail from the Ultralytics routine. Cite the Ultralytics figure as the headline, since it is the standard implementation, and read the bootstrap interval as the WIDTH of the sampling uncertainty (about +/-0.11 on mAP@50) rather than as absolute bounds.",
+  "ultralytics_val": {
+    "mAP50": 0.484,
+    "mAP50_95": 0.292,
+    "precision_tuned": 0.463,
+    "recall_tuned": 0.637
+  }
+}

@@ -1,0 +1,44 @@
+DATASET UNIFICATION REPORT (v3)
+======================================================================
+Generated: 2026-09-08T12:53:55+00:00
+Full-frame sources: excluded
+Perceptual hash: phash size=8 (64-bit) threshold=5
+
+Annotation formats read from source:
+  roboflow_fid           box=30     polygon=661    empty=0
+  roboflow_maskrcnn      box=0      polygon=4867   empty=0
+  roboflow_mobile        box=12     polygon=301    empty=0
+  roboflow_woundcare     box=0      polygon=880    empty=0
+
+Images per source (final contribution; a source may reach zero if its photographs duplicate another source):
+  roboflow_fid           train=422    val=33     test=24     total=479
+  roboflow_maskrcnn      train=1662   val=50     test=57     total=1769
+  roboflow_mobile        train=160    val=22     test=24     total=206
+  roboflow_woundcare     train=314    val=0      test=0      total=314
+
+Split sizes (images / independent photographs):
+  train  images=2558   (92.4%)  photographs=491
+  val    images=105    ( 3.8%)  photographs=105
+  test   images=105    ( 3.8%)  photographs=105
+
+Class distribution (annotation instances):
+  train  stage1=673  stage2=563  stage3=994  stage4=821
+  val    stage1=24  stage2=28  stage3=33  stage4=34
+  test   stage1=30  stage2=19  stage3=33  stage4=31
+
+Identity and leakage:
+  distinct photographs (stem + perceptual): 701
+  merges made by perceptual identity alone: 538
+  eval images with a train twin (pixel-correlation audit): 2
+
+Total images: 2768
+Output: /Users/roammer/Documents/github/indie/pressure-ulcer-detection/data/unified
+
+Known limitations:
+  * roboflow_fid declares only [NonPU, Stage3, Stage4]; some of its
+    photographs are filed under Stage1/Stage2 names but carry Stage3/
+    Stage4 class ids. data.yaml is treated as authoritative.
+  * Validation and test hold one image per photograph, so their sizes
+    equal the number of independent observations.
+  * Sources whose annotations span the whole frame are excluded by
+    default; they carry no localisation signal.

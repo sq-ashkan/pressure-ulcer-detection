@@ -42,3 +42,5 @@ results/*.csv
 
 # Jupyter
 .ipynb_checkpoints/
+_synthetic_backup/
+app/examples/

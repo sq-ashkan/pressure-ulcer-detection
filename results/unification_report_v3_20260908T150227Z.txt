@@ -1,0 +1,44 @@
+DATASET UNIFICATION REPORT (v3)
+======================================================================
+Generated: 2026-09-08T15:02:27+00:00
+Full-frame sources: excluded
+Perceptual hash: phash size=8 (64-bit) threshold=5
+
+Annotation formats read from source:
+  roboflow_fid           box=30     polygon=661    empty=0
+  roboflow_maskrcnn      box=0      polygon=4867   empty=0
+  roboflow_mobile        box=12     polygon=301    empty=0
+  roboflow_woundcare     box=0      polygon=880    empty=0
+
+Images per source (final contribution; a source may reach zero if its photographs duplicate another source):
+  roboflow_fid           train=413    val=30     test=32     total=475
+  roboflow_maskrcnn      train=1676   val=50     test=47     total=1773
+  roboflow_mobile        train=163    val=4      test=5      total=172
+  roboflow_woundcare     train=316    val=0      test=0      total=316
+
+Split sizes (images / independent photographs):
+  train  images=2568   (93.9%)  photographs=390
+  val    images=84     ( 3.1%)  photographs=84
+  test   images=84     ( 3.1%)  photographs=84
+
+Class distribution (annotation instances):
+  train  stage1=714  stage2=596  stage3=1001  stage4=743
+  val    stage1=17  stage2=12  stage3=29  stage4=36
+  test   stage1=20  stage2=17  stage3=25  stage4=35
+
+Identity and leakage:
+  distinct photographs (stem + perceptual): 558
+  merges made by perceptual identity alone: 116
+  eval images with a train twin (ORB+RANSAC audit, >=25 inliers): 27
+
+Total images: 2736
+Output: /Users/roammer/Documents/github/indie/pressure-ulcer-detection/data/unified
+
+Known limitations:
+  * roboflow_fid declares only [NonPU, Stage3, Stage4]; some of its
+    photographs are filed under Stage1/Stage2 names but carry Stage3/
+    Stage4 class ids. data.yaml is treated as authoritative.
+  * Validation and test hold one image per photograph, so their sizes
+    equal the number of independent observations.
+  * Sources whose annotations span the whole frame are excluded by
+    default; they carry no localisation signal.

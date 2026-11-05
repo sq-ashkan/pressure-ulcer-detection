@@ -1,0 +1,44 @@
+DATASET UNIFICATION REPORT (v3)
+======================================================================
+Generated: 2026-09-08T12:52:53+00:00
+Full-frame sources: excluded
+Perceptual hash: phash size=8 (64-bit) threshold=5
+
+Annotation formats read from source:
+  roboflow_fid           box=30     polygon=661    empty=0
+  roboflow_maskrcnn      box=0      polygon=4867   empty=0
+  roboflow_mobile        box=12     polygon=301    empty=0
+  roboflow_woundcare     box=0      polygon=880    empty=0
+
+Images per source (final contribution; a source may reach zero if its photographs duplicate another source):
+  roboflow_fid           train=390    val=32     test=47     total=469
+  roboflow_maskrcnn      train=1780   val=48     test=47     total=1875
+  roboflow_mobile        train=155    val=17     test=30     total=202
+  roboflow_woundcare     train=318    val=0      test=0      total=318
+
+Split sizes (images / independent photographs):
+  train  images=2643   (92.3%)  photographs=499
+  val    images=97     ( 3.4%)  photographs=97
+  test   images=124    ( 4.3%)  photographs=124
+
+Class distribution (annotation instances):
+  train  stage1=736  stage2=640  stage3=917  stage4=851
+  val    stage1=27  stage2=18  stage3=39  stage4=27
+  test   stage1=17  stage2=22  stage3=51  stage4=40
+
+Identity and leakage:
+  distinct photographs (stem + perceptual): 720
+  merges made by perceptual identity alone: 519
+  cross-split near-duplicate pairs (dHash audit): 9
+
+Total images: 2864
+Output: /Users/roammer/Documents/github/indie/pressure-ulcer-detection/data/unified
+
+Known limitations:
+  * roboflow_fid declares only [NonPU, Stage3, Stage4]; some of its
+    photographs are filed under Stage1/Stage2 names but carry Stage3/
+    Stage4 class ids. data.yaml is treated as authoritative.
+  * Validation and test hold one image per photograph, so their sizes
+    equal the number of independent observations.
+  * Sources whose annotations span the whole frame are excluded by
+    default; they carry no localisation signal.

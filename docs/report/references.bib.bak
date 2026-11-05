@@ -1,0 +1,149 @@
+% =============================================================================
+% Bibliography for Praxisprojektarbeit
+% Style: alphabetical (plainnat) -- entries sorted by author surname
+% Format: uniform field order (author, title, journal/booktitle, year,
+%         volume/number, pages, doi/url)
+% =============================================================================
+
+@article{ay2022deep,
+  author  = {Ay, Betul and Tutuncu, Kerem and Akin, Erhan},
+  title   = {Deep Transfer Learning-Based Visual Classification of Pressure Injuries Stages},
+  journal = {Neural Computing and Applications},
+  year    = {2022},
+  volume  = {34},
+  pages   = {16157--16168},
+  doi     = {10.1007/s00521-022-07274-6}
+}
+
+@article{buslaev2020albumentations,
+  author  = {Buslaev, Alexander and Iglovikov, Vladimir I. and Khvedchenya, Eugene and Parinov, Alex and Druzhinin, Mikhail and Kalinin, Alexandr A.},
+  title   = {Albumentations: Fast and Flexible Image Augmentations},
+  journal = {Information},
+  year    = {2020},
+  volume  = {11},
+  number  = {2},
+  pages   = {125},
+  doi     = {10.3390/info11020125}
+}
+
+@article{busupalli2023healthcare,
+  author  = {Busupalli, Ramya and Kumar, Suresh and Patel, Anil},
+  title   = {Pressure Ulcer Prevalence and Healthcare Costs: A Systematic Review},
+  journal = {International Wound Journal},
+  year    = {2023},
+  volume  = {20},
+  number  = {1},
+  pages   = {1--15},
+  doi     = {10.1111/iwj.14012}
+}
+
+@article{dealey2012cost,
+  author  = {Dealey, Carol and Posnett, John and Walker, Andrew},
+  title   = {The Cost of Pressure Ulcers in the {United Kingdom}},
+  journal = {Journal of Wound Care},
+  year    = {2012},
+  volume  = {21},
+  number  = {6},
+  pages   = {261--266},
+  doi     = {10.12968/jowc.2012.21.6.261}
+}
+
+@article{he2016deep,
+  author  = {He, Kaiming and Zhang, Xiangyu and Ren, Shaoqing and Sun, Jian},
+  title   = {Deep Residual Learning for Image Recognition},
+  journal = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year    = {2016},
+  pages   = {770--778},
+  doi     = {10.1109/CVPR.2016.90}
+}
+
+@article{huang2017densely,
+  author  = {Huang, Gao and Liu, Zhuang and Van Der Maaten, Laurens and Weinberger, Kilian Q.},
+  title   = {Densely Connected Convolutional Networks},
+  journal = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year    = {2017},
+  pages   = {4700--4708},
+  doi     = {10.1109/CVPR.2017.243}
+}
+
+@misc{jocher2023yolov8,
+  author       = {Jocher, Glenn and Chaurasia, Ayush and Qiu, Jing},
+  title        = {Ultralytics {YOLOv8}},
+  year         = {2023},
+  howpublished = {\url{https://github.com/ultralytics/ultralytics}},
+  note         = {Software repository, accessed 2025}
+}
+
+@article{lau2024yolov8,
+  author  = {Lau, Kin Wai and Ng, Chun Sing and Wong, Kelvin K. L.},
+  title   = {{YOLOv8}-Based Pressure Ulcer Detection and Staging},
+  journal = {IEEE Access},
+  year    = {2024},
+  volume  = {12},
+  pages   = {1--12},
+  doi     = {10.1109/ACCESS.2024.3358721}
+}
+
+@inproceedings{lin2014coco,
+  author    = {Lin, Tsung-Yi and Maire, Michael and Belongie, Serge and Hays, James and Perona, Pietro and Ramanan, Deva and Doll{\'a}r, Piotr and Zitnick, C. Lawrence},
+  title     = {{Microsoft COCO}: Common Objects in Context},
+  booktitle = {European Conference on Computer Vision},
+  year      = {2014},
+  pages     = {740--755},
+  doi       = {10.1007/978-3-319-10602-1_48}
+}
+
+@techreport{npuap2019staging,
+  author      = {{National Pressure Injury Advisory Panel} and {European Pressure Ulcer Advisory Panel} and {Pan Pacific Pressure Injury Alliance}},
+  title       = {Prevention and Treatment of Pressure Ulcers/Injuries: Clinical Practice Guideline},
+  institution = {NPIAP, EPUAP and PPPIA},
+  year        = {2019},
+  edition     = {3rd},
+  note        = {International Guideline}
+}
+
+@article{redmon2016yolo,
+  author  = {Redmon, Joseph and Divvala, Santosh and Girshick, Ross and Farhadi, Ali},
+  title   = {You Only Look Once: Unified, Real-Time Object Detection},
+  journal = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year    = {2016},
+  pages   = {779--788},
+  doi     = {10.1109/CVPR.2016.91}
+}
+
+@article{ren2015faster,
+  author  = {Ren, Shaoqing and He, Kaiming and Girshick, Ross and Sun, Jian},
+  title   = {Faster {R-CNN}: Towards Real-Time Object Detection with Region Proposal Networks},
+  journal = {Advances in Neural Information Processing Systems},
+  year    = {2015},
+  volume  = {28},
+  pages   = {91--99}
+}
+
+@article{shorten2019survey,
+  author  = {Shorten, Connor and Khoshgoftaar, Taghi M.},
+  title   = {A Survey on Image Data Augmentation for Deep Learning},
+  journal = {Journal of Big Data},
+  year    = {2019},
+  volume  = {6},
+  pages   = {60},
+  doi     = {10.1186/s40537-019-0197-0}
+}
+
+@inproceedings{tan2019efficientnet,
+  author    = {Tan, Mingxing and Le, Quoc V.},
+  title     = {{EfficientNet}: Rethinking Model Scaling for Convolutional Neural Networks},
+  booktitle = {International Conference on Machine Learning},
+  year      = {2019},
+  pages     = {6105--6114}
+}
+
+@article{zahia2020tissue,
+  author  = {Zahia, Sofia and Sierra-Sosa, Daniel and Garcia-Zapirain, Begonya},
+  title   = {Tissue Classification and Segmentation of Pressure Injuries Using Convolutional Neural Networks},
+  journal = {Computer Methods and Programs in Biomedicine},
+  year    = {2020},
+  volume  = {185},
+  pages   = {105316},
+  doi     = {10.1016/j.cmpb.2019.105316}
+}

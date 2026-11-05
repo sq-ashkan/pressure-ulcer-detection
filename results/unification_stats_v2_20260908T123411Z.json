@@ -1,0 +1,85 @@
+{
+  "formats": {
+    "roboflow_maskrcnn": {
+      "polygon": 4867
+    },
+    "roboflow_woundcare": {
+      "polygon": 880
+    },
+    "roboflow_fid": {
+      "polygon": 661,
+      "box": 30
+    },
+    "roboflow_mobile": {
+      "polygon": 301,
+      "box": 12
+    }
+  },
+  "localisation": {
+    "roboflow_maskrcnn": {
+      "annotations": 3081,
+      "full_frame_pct": 0.0,
+      "median_area": 0.0748
+    },
+    "roboflow_woundcare": {
+      "annotations": 553,
+      "full_frame_pct": 0.0,
+      "median_area": 0.0845
+    },
+    "roboflow_fid": {
+      "annotations": 598,
+      "full_frame_pct": 0.0,
+      "median_area": 0.2989
+    },
+    "roboflow_mobile": {
+      "annotations": 225,
+      "full_frame_pct": 0.0,
+      "median_area": 0.3479
+    }
+  },
+  "per_source": {
+    "roboflow_maskrcnn": {
+      "train": 1367,
+      "val": 444,
+      "test": 213
+    },
+    "roboflow_fid": {
+      "train": 455,
+      "val": 75,
+      "test": 56
+    },
+    "roboflow_mobile": {
+      "train": 131,
+      "val": 37,
+      "test": 11
+    }
+  },
+  "per_split": {
+    "train": 1953,
+    "val": 556,
+    "test": 280
+  },
+  "per_class": {
+    "train": {
+      "0": 514,
+      "1": 408,
+      "2": 713,
+      "3": 648
+    },
+    "val": {
+      "0": 157,
+      "3": 144,
+      "1": 119,
+      "2": 218
+    },
+    "test": {
+      "1": 79,
+      "0": 99,
+      "2": 101,
+      "3": 81
+    }
+  },
+  "source_groups": 786,
+  "leaked_groups": 0,
+  "total": 2789
+}

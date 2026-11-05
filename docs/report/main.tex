@@ -4,8 +4,8 @@
 % Data Foundation and Model Selection
 %
 % Author:  Ashkan Sadri Ghamshi (769529)
-% HAWK -- Hochschule fur angewandte Wissenschaft und Kunst
-% Fakultat Ingenieurwissenschaften und Gesundheit
+% HAWK -- Hochschule für angewandte Wissenschaft und Kunst
+% Fakultät Ingenieurwissenschaften und Gesundheit
 %
 % Compiled with tectonic (XeLaTeX-based)
 % =============================================================================
@@ -168,14 +168,15 @@
     \textbf{Matriculation No.:} & 769529 \\[6pt]
     \textbf{Supervisor:}      & Prof.\ Dr.\ Claire Chalopin \\
                                & Gesundheitscampus G{\"o}ttingen \\[6pt]
-    \textbf{Date:}            & April 1, 2026
+    \textbf{Date:}            & April 1, 2026\\[4pt]
+    \textbf{Revision:}        & v1.2 -- June 23, 2026
   \end{tabular}
 
   \vfill
 \end{titlepage}
 
 % ============================================================================
-%  SELBSTANDIGKEITSERKLARUNG
+%  SELBSTÄNDIGKEITSERKLÄRUNG
 % ============================================================================
 \clearpage
 \thispagestyle{empty}
@@ -221,8 +222,9 @@ unique images through perceptual-hash-based deduplication, and expanded to
 literature-based comparison of four deep learning architectures---YOLOv8,
 DenseNet-121, EfficientNet-B0, and Faster R-CNN---using a weighted scoring
 matrix identifies YOLOv8s as the most suitable model, given its combined
-detection and localisation capability, published mean average precision of
-90.8\,\% on comparable data, and real-time inference performance.
+detection and localisation capability, published mean average precision between
+84.2\,\% and 90.8\,\% on comparable pressure ulcer data, and real-time
+inference performance.
 
 % ============================================================================
 %  TABLE OF CONTENTS
@@ -342,14 +344,14 @@ spinal cord injuries, and intensive care patients \citep{npuap2019staging}. Earl
 detection and accurate staging of pressure ulcers are essential for initiating
 timely treatment and preventing progression to deeper tissue damage. Despite
 decades of clinical research and prevention protocols, incidence rates remain
-high, with estimates indicating that between 5\,\% and 15\,\% of hospitalised
-patients develop at least one pressure ulcer during their stay
-\citep{busupalli2023healthcare}.
+high. A systematic review and meta-analysis of hospitalised adult patients
+reports a pooled pressure injury prevalence of 12.8\,\%, with a hospital-acquired
+incidence of 8.4\,\% \citep{li2020global}.
 
 The economic impact of pressure ulcers on healthcare systems is substantial.
 Treatment costs per patient can range from several thousand to tens of thousands
 of euros, depending on the severity of the wound and associated complications
-such as infection and prolonged hospitalisation \citep{dealey2005skin}. Beyond
+such as infection and prolonged hospitalisation \citep{dealey2012cost}. Beyond
 the financial dimension, pressure ulcers significantly reduce patient quality of
 life, cause pain, and increase morbidity and mortality. These factors collectively
 underscore the clinical imperative for improved detection methodologies.
@@ -510,7 +512,7 @@ from raw data acquisition to the final validated dataset.
     (70\,\% / 20\,\% / 10\,\%)\\[4pt]
     $\downarrow$ \quad Stratified partitions \\[6pt]
     \textbf{Stage 5: Augmentation}\\
-    (Albumentations, 10$\times$ expansion)\\[4pt]
+    (Albumentations, 9$\times$ expansion)\\[4pt]
     $\downarrow$ \quad 53{,}340 augmented images \\[2pt]
     \vspace{4pt}
   }}
@@ -618,6 +620,43 @@ categories:
     represents the most severe category of pressure injury.
 \end{description}
 
+Figure~\ref{fig:stages-schematic} provides a schematic cross-sectional view of
+the four stages, illustrating the progression of tissue damage from superficial
+erythema (Stage~I) through full-thickness loss with exposed bone (Stage~IV).
+The schematic complements the textual description above and serves as a visual
+reference for the class definitions used throughout this work.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/decubitus_stages_schematic.png}
+  \caption[Schematic representation of the four NPUAP/EPUAP pressure ulcer
+    stages]{Schematic cross-sectional representation of the four NPUAP/EPUAP
+    pressure ulcer stages, showing the progressive depth of tissue involvement
+    from intact skin (Stage~I) to full-thickness tissue loss with exposure of
+    underlying structures (Stage~IV). Original illustration based on
+    \citet{npuap2019staging}.}
+  \label{fig:stages-schematic}
+\end{figure}
+
+Pressure ulcers preferentially develop at body sites where soft tissue is
+compressed between a bony prominence and an external surface
+\citep{npuap2019staging}. Figure~\ref{fig:pressure-points} summarises the
+typical predilection sites in supine and lateral patient positions. The sacrum,
+heels, and greater trochanter are the most clinically relevant locations and
+account for the majority of cases observed in long-term care settings.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/pressure_points.png}
+  \caption[Anatomical predilection sites for pressure ulcer
+    development]{Anatomical predilection sites for pressure ulcer development
+    in supine (left) and lateral (right) patient positions. Marked locations
+    indicate the bony prominences where prolonged pressure most frequently
+    leads to tissue damage. Original illustration based on
+    \citet{npuap2019staging}.}
+  \label{fig:pressure-points}
+\end{figure}
+
 Additionally, the NPUAP defines unstageable wounds (depth unknown due to
 coverage by slough or eschar) and deep tissue injuries (localised
 discolouration of intact skin indicating damage to underlying tissue). These
@@ -643,7 +682,7 @@ models cannot localise wounds within an image. In clinical practice, knowing
 \textit{where} a pressure ulcer is located on the patient's body is as important
 as knowing its stage.
 
-Zahia et al.\ \citep{zahia2020tissue} developed a custom CNN architecture for
+Zahia et al.\ \citep{zahia2018tissue} developed a custom CNN architecture for
 tissue classification in pressure ulcer images, reporting an accuracy of
 91.4\,\% on a dataset of 600 images. However, this approach operated on
 pre-cropped tissue patches rather than whole images, which limits its
@@ -658,11 +697,17 @@ is more suitable for clinical deployment, where the system must identify the
 location, extent, and stage of each wound in an image without prior manual
 cropping.
 
-Lau et al.\ \citep{lau2024yolov8} applied YOLOv8 to pressure ulcer detection
-and staging on a dataset of 2,811 images, achieving a mean average precision at
-50\,\% IoU threshold (mAP@50) of 90.8\,\%. This study demonstrated that
-single-stage detectors can achieve competitive performance on medical wound
-images while maintaining real-time inference speeds.
+Chang et al.\ \citep{chang2024diagnosis} applied YOLOv8 to pressure ulcer
+detection and staging on a dataset of 2,800 annotated images, achieving a mean
+average precision at 50\,\% IoU threshold (mAP@50) of 90.8\,\% and an overall
+classification accuracy of 84.6\,\% with the Medium variant. Their label space
+comprises six categories---stages~I to~IV plus deep tissue injury and
+unstageable---so the figure is not directly comparable with a four-class scheme.
+Tusar et al.\ \citep{tusar2026ai} evaluated all five YOLOv8 variants on a
+public pressure injury dataset and report mAP@50 = 84.16\,\% for the Small
+variant with the AdamW optimiser. Together these studies show that single-stage
+detectors reach competitive accuracy on wound images while retaining real-time
+inference speed.
 
 Faster~R-CNN \citep{ren2015faster}, a two-stage detector that first generates
 region proposals and then classifies each proposal, has also been applied to
@@ -930,7 +975,7 @@ one or more of the sub-problems identified above. The key design decisions are:
   \item \textbf{Perceptual hashing for deduplication:} Rather than relying on
     exact file comparison (which would miss near-duplicates with different
     resolutions, crops, or compression artefacts), the pipeline uses perceptual
-    hashing \citep{buslaev2020albumentations}. The \texttt{imagehash} library
+    hashing via the \texttt{imagehash} library. This library
     computes a 256-bit perceptual hash (pHash) for each image. Two images are
     considered duplicates if their Hamming distance falls below a configurable
     threshold (default: 5 bits).
@@ -1256,8 +1301,8 @@ evaluation results.
 The augmentation pipeline applies the transformation strategy defined in
 Section~\ref{sec:augmentation-strategy} to each image in the training set. For
 each original image, the script generates a configurable number of augmented
-copies (default: 10). The original image is also preserved in the output,
-resulting in a total expansion factor of $11\times$ (10 augmented copies plus
+copies (default: 9). The original image is also preserved in the output,
+resulting in a nominal expansion factor of $10\times$ (9 augmented copies plus
 the original).
 
 Listing~\ref{lst:augment} shows the augmentation pipeline definition using
@@ -1305,10 +1350,13 @@ less than 30\,\% visible after a geometric transformation are discarded rather
 than retained with misleading coordinates. This prevents the model from learning
 to associate tiny, clipped fragments with wound stages.
 
-The augmentation of the training set (5,495 images $\times$ 10 copies + 5,495
-originals) produces a total of 53,340 training images. The validation and test
-sets are copied to the output directory without modification to maintain their
-integrity as evaluation benchmarks.
+The augmentation of the training set (5,495 images $\times$ 9 copies + 5,495
+originals) yields a nominal total of 54,950 training images. In practice, the
+\texttt{min\_visibility} filter discards approximately 3\,\% of augmented
+samples whose bounding boxes fall below the 30\,\% visibility threshold after
+geometric transformations, resulting in a final count of 53,340 training images.
+The validation and test sets are copied to the output directory without
+modification to maintain their integrity as evaluation benchmarks.
 
 \section{Dataset Statistics}
 \label{sec:dataset-stats}
@@ -1491,7 +1539,7 @@ Table~\ref{tab:test-cases} lists the test cases applied to the dataset.
     TC-11 & Structural & No duplicate filenames exist within any single split
             directory. \\
     TC-12 & Structural & The augmented training set size is approximately
-            $11 \times$ the original training set size ($\pm 5\,\%$). \\
+            $10 \times$ the original training set size ($\pm 5\,\%$). \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -1618,13 +1666,15 @@ literature for each architecture on pressure ulcer datasets.
     \textbf{Study} & \textbf{Model} & \textbf{Task} &
       \textbf{Dataset} & \textbf{Metric} & \textbf{Year} \\
     \midrule
-    Lau et al.\ \citep{lau2024yolov8}
-      & YOLOv8 & Detection & 2{,}811 & mAP@50 = 90.8\,\% & 2024 \\
+    Chang et al.\ \citep{chang2024diagnosis}
+      & YOLOv8m & Detection & 2{,}800 & mAP@50 = 90.8\,\% & 2024 \\
+    Tusar et al.\ \citep{tusar2026ai}
+      & YOLOv8s & Detection & n/a & mAP@50 = 84.2\,\% & 2026 \\
     Ay et al.\ \citep{ay2022deep}
       & DenseNet-121 & Classif. & 1{,}091 & Acc.\ = 83.6\,\% & 2022 \\
     Ay et al.\ \citep{ay2022deep}
       & EfficientNet-B0 & Classif. & 1{,}091 & Acc.\ = 80.2\,\% & 2022 \\
-    Zahia et al.\ \citep{zahia2020tissue}
+    Zahia et al.\ \citep{zahia2018tissue}
       & Custom CNN & Classif. & 600 & Acc.\ = 91.4\,\% & 2020 \\
     \bottomrule
   \end{tabularx}
@@ -1694,8 +1744,9 @@ four architectures across the defined criteria.
     Pretrained weights
       & COCO & ImageNet & ImageNet & COCO \\
     PU literature result
-      & mAP@50 = 90.8\,\% & Acc.\ = 83.6\,\% & Acc.\ = 80.2\,\%
-      & mAP@50 = 78.3\,\% \\
+      & mAP@50 = 84.2\,\% (s) / 90.8\,\% (m)
+      & Acc.\ = 83.6\,\% & Acc.\ = 80.2\,\%
+      & mAP@50 $\approx$ 78\,\% (est.) \\
     ONNX/TensorRT export
       & Built-in & Manual & Manual & Manual \\
     \bottomrule
@@ -1731,13 +1782,13 @@ Table~\ref{tab:scoring} presents the complete scoring matrix.
     Deployment readiness     & 10\,\% & 10 & 5 & 5 & 4 \\
     \midrule
     \textbf{Weighted score}  & \textbf{100\,\%} & \textbf{10.0} & \textbf{4.3}
-      & \textbf{3.7} & \textbf{6.2} \\
+      & \textbf{4.05} & \textbf{6.1} \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
 YOLOv8 achieves the highest weighted score of 10.0 out of 10.0, followed by
-Faster~R-CNN at 6.2, DenseNet-121 at 4.3, and EfficientNet-B0 at 3.7. The
+Faster~R-CNN at 6.1, DenseNet-121 at 4.3, and EfficientNet-B0 at 4.05. The
 classification-only models receive low overall scores primarily due to their
 inability to localise wounds, which is the most heavily weighted requirement.
 Faster~R-CNN, while capable of detection, is penalised by its lower published
@@ -1780,8 +1831,9 @@ recommended as the architecture for pressure ulcer detection within the NaMeKI
 project. This recommendation is grounded in the following evidence:
 
 \begin{itemize}
-  \item Highest published mAP@50 (90.8\,\%) on comparable pressure ulcer data
-    \citep{lau2024yolov8}.
+  \item Highest published mAP@50 on comparable pressure ulcer data: 90.8\,\%
+    for the Medium variant on a six-class scheme \citep{chang2024diagnosis} and
+    84.2\,\% for the Small variant \citep{tusar2026ai}.
   \item Combined detection and localisation in a single forward pass.
   \item Real-time inference capability exceeding 100 FPS on GPU hardware.
   \item Built-in ONNX and TensorRT export for deployment.
@@ -1843,8 +1895,9 @@ project. The principal contributions are as follows:
     deep learning architectures (YOLOv8, DenseNet-121, EfficientNet-B0,
     Faster~R-CNN) using a weighted scoring matrix identified YOLOv8s (Small,
     11.2\,M parameters) as the recommended model. The recommendation is based on
-    published performance (mAP@50 = 90.8\,\%), combined detection and
-    localisation capability, real-time inference, and deployment readiness.
+    published performance (mAP@50 = 84.2\,\% for the Small variant and
+    90.8\,\% for the Medium variant on a six-class scheme), combined detection
+    and localisation capability, real-time inference, and deployment readiness.
 
   \item \textbf{Class balance:} The final dataset achieves a class imbalance
     ratio of 1.24:1 across the four pressure ulcer stages, which is favourable
@@ -1931,7 +1984,7 @@ directly on the foundations established in this Praxisprojektarbeit:
     reserved test set using mAP@50, mAP@50:95, precision, and recall. Analyse
     per-class performance to identify stages that are difficult to distinguish.
 
-  \item \textbf{Dataset Expansion:} Scale the augmentation from $10\times$ to
+  \item \textbf{Dataset Expansion:} Scale the augmentation from $9\times$ to
     $40$--$60\times$, producing a training set of 300,000+ images. Evaluate
     whether the additional data improves model generalisation.
 
@@ -2096,7 +2149,7 @@ pipeline stages have been completed.
     Validation images                  & 1{,}570 \\
     Test images                        & 785 \\
     \midrule
-    Augmentation factor             & $10\times$ + original \\
+    Augmentation factor             & $9\times$ + original \\
     Training images (post-augmentation) & 53{,}340 \\
     \midrule
     Number of classes               & 4 \\

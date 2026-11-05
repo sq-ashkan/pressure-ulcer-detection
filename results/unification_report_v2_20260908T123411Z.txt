@@ -1,0 +1,36 @@
+DATASET UNIFICATION REPORT (v2)
+======================================================================
+Generated: 2026-09-08T12:34:11+00:00
+Full-frame sources: excluded
+
+Annotation formats read from source:
+  roboflow_fid           box=30     polygon=661    empty=0
+  roboflow_maskrcnn      box=0      polygon=4867   empty=0
+  roboflow_mobile        box=12     polygon=301    empty=0
+  roboflow_woundcare     box=0      polygon=880    empty=0
+
+Localisation audit (before dedup):
+  roboflow_fid           annotations=598    median_area=0.2989   full_frame=0.0%
+  roboflow_maskrcnn      annotations=3081   median_area=0.0748   full_frame=0.0%
+  roboflow_mobile        annotations=225    median_area=0.3479   full_frame=0.0%
+  roboflow_woundcare     annotations=553    median_area=0.0845   full_frame=0.0%
+
+Images per source AFTER deduplication (final contribution):
+  roboflow_fid           train=455    val=75     test=56     total=586
+  roboflow_maskrcnn      train=1367   val=444    test=213    total=2024
+  roboflow_mobile        train=131    val=37     test=11     total=179
+
+Split sizes:
+  train  1953   (70.0%)
+  val    556    (19.9%)
+  test   280    (10.0%)
+
+Class distribution:
+  train  stage1=514  stage2=408  stage3=713  stage4=648
+  val    stage1=157  stage2=119  stage3=218  stage4=144
+  test   stage1=99  stage2=79  stage3=101  stage4=81
+
+Distinct source photographs: 786
+Source photographs spanning >1 split: 0
+Total images: 2789
+Output: /Users/roammer/Documents/github/indie/pressure-ulcer-detection/data/unified

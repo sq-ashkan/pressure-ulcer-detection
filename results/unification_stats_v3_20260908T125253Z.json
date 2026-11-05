@@ -1,0 +1,72 @@
+{
+  "formats": {
+    "roboflow_maskrcnn": {
+      "polygon": 4867
+    },
+    "roboflow_woundcare": {
+      "polygon": 880
+    },
+    "roboflow_fid": {
+      "polygon": 661,
+      "box": 30
+    },
+    "roboflow_mobile": {
+      "polygon": 301,
+      "box": 12
+    }
+  },
+  "per_source": {
+    "roboflow_maskrcnn": {
+      "val": 48,
+      "test": 47,
+      "train": 1780
+    },
+    "roboflow_woundcare": {
+      "train": 318
+    },
+    "roboflow_fid": {
+      "train": 390,
+      "val": 32,
+      "test": 47
+    },
+    "roboflow_mobile": {
+      "train": 155,
+      "test": 30,
+      "val": 17
+    }
+  },
+  "per_split": {
+    "val": 97,
+    "test": 124,
+    "train": 2643
+  },
+  "photographs_per_split": {
+    "val": 97,
+    "test": 124,
+    "train": 499
+  },
+  "per_class": {
+    "val": {
+      "0": 27,
+      "3": 27,
+      "2": 39,
+      "1": 18
+    },
+    "test": {
+      "0": 17,
+      "1": 22,
+      "2": 51,
+      "3": 40
+    },
+    "train": {
+      "2": 917,
+      "3": 851,
+      "0": 736,
+      "1": 640
+    }
+  },
+  "groups": 720,
+  "perceptual_merges": 519,
+  "cross_split_pairs": 9,
+  "total": 2864
+}
