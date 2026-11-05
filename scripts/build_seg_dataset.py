@@ -25,6 +25,10 @@ Label policy (documented in the thesis):
     wounds; only its stage outlines are used.
   * rf_thai_sores carries boxes only and PISeg is the same Roboflow project as
     roboflow_woundcare -- both are excluded.
+  * rf_dekubitus is excluded: every one of its 126 photographs is a photograph of
+    roboflow_maskrcnn annotated a second time, and the two annotations agree poorly
+    (scripts/annotator_agreement.py). Keeping both would put two conflicting labels
+    of the same photograph into training.
   * Negative photographs (other wound types, healthy skin, background) come from
     AZH (classes N, S, D, V, BG -- not P) and FUSeg (diabetic foot ulcers).
 
@@ -77,15 +81,17 @@ AZH_NEG_CLASSES = ("N", "S", "D", "V", "BG")
 # collections cannot merge two different photographs; true cross-source duplicates
 # are still caught by pHash/dHash/dihedral/ORB.
 STEM_FAMILY = {"roboflow_maskrcnn", "roboflow_woundcare", "roboflow_fid", "roboflow_mobile"}
-STAGE_DIR = ROOT / "data" / "seg_stage"
 
 
 def _md5(path: Path) -> str:
     return hashlib.md5(str(path.resolve()).encode()).hexdigest()
 
 
-def stage_for_identity(records):
-    """Return records whose path names encode the identity policy (symlinks)."""
+def stage_for_identity(records, stage_dir: Path):
+    """Return records whose path names encode the identity policy (symlinks).
+    stage_dir is private to one build (derived from --out), so concurrent builds
+    cannot delete each other's links."""
+    STAGE_DIR = stage_dir
     if STAGE_DIR.exists():
         shutil.rmtree(STAGE_DIR)
     STAGE_DIR.mkdir(parents=True)
@@ -233,6 +239,33 @@ def audit(out: Path):
     return cross
 
 
+def drop_flagged(out: Path, cross):
+    """Remove every evaluation image the SIFT audit matched to a training image.
+
+    Grouping already merged most copies; whatever slips through (e.g. strong crops of
+    the same photograph exported by two different projects) must not stay in val, test
+    or external. Files and manifest rows are removed and the removal is recorded."""
+    flagged = {(sp, name) for sp, name, *_ in cross}
+    removed = []
+    for sp, name in sorted(flagged):
+        stem = Path(name).stem
+        for sub, ext in (("images", ".jpg"), ("labels", ".txt"), ("masks", ".png")):
+            f = out / sub / sp / f"{stem}{ext}"
+            if f.exists():
+                f.unlink()
+        removed.append({"split": sp, "name": stem})
+    man = out / "manifest.csv"
+    with open(man) as f:
+        rows = list(csv.DictReader(f))
+    gone = {(r["split"], r["name"]) for r in removed}
+    keep = [r for r in rows if (r["split"], r["name"]) not in gone]
+    with open(man, "w", newline="") as f:
+        wr = csv.DictWriter(f, fieldnames=list(rows[0].keys())); wr.writeheader(); wr.writerows(keep)
+    (out / "test_frozen.txt").write_text("".join(f"{r['name']}\n" for r in keep if r["split"] == "test"))
+    (out / "removed_by_audit.json").write_text(json.dumps(removed, indent=1))
+    return removed
+
+
 def extra_negatives(records, out: Path):
     """All AZH non-PU photos not already in the dataset, minus near-duplicates (pHash)."""
     used = {Path(r[0]).resolve() for r in records}
@@ -267,8 +300,10 @@ def main():
     ap.add_argument("--neg-fuseg", type=int, default=100)
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--out", default=str(OUT))
-    ap.add_argument("--external", default="rf_dekubitus",
+    ap.add_argument("--external", default="",
                     help="comma-separated sources held out completely as an external test")
+    ap.add_argument("--with-dekubitus", action="store_true",
+                    help="include rf_dekubitus (excluded by default, see module docstring)")
     ap.add_argument("--limit", type=int, default=0,
                     help="smoke test: keep only the first N images per source")
     args = ap.parse_args()
@@ -280,9 +315,10 @@ def main():
         recs, d = collect_poly_source(name)
         records += recs; dropped[name] = d
         print(f"  {name:20s} {len(recs):5d} images kept, {d} dropped (DTI/Unstageable)")
-    recs, d = collect_dekubitus()
-    records += recs; dropped["rf_dekubitus"] = d
-    print(f"  {'rf_dekubitus':20s} {len(recs):5d} images kept, {d} dropped (DTI/Unstageable)")
+    if args.with_dekubitus:
+        recs, d = collect_dekubitus()
+        records += recs; dropped["rf_dekubitus"] = d
+        print(f"  {'rf_dekubitus':20s} {len(recs):5d} images kept, {d} dropped (DTI/Unstageable)")
     negs = collect_negatives(args.neg_azh, args.neg_fuseg, args.seed)
     records += negs
     print(f"  negatives: {len(negs)} (AZH {args.neg_azh}, FUSeg {args.neg_fuseg})")
@@ -295,7 +331,7 @@ def main():
     print(f"  readable images: {len(records)}")
 
     print("== Step 2: photograph identity (stem + pHash + dHash + dihedral + ORB)")
-    records = stage_for_identity(records)
+    records = stage_for_identity(records, Path(str(out) + "_stage"))
     groups, _, merged = u.build_groups(records)
     print(f"  {len(records)} images -> {len(groups)} distinct photographs ({merged} perceptual merges)")
 
@@ -323,6 +359,8 @@ def main():
             img, polys, src = records[i]
             name = f"{src}__{img.stem[:80]}__{_md5(img)[:6]}"
             im = cv2.imread(str(img))
+            if im is None:
+                raise RuntimeError(f"cannot read {img} (source {src})")
             h, w = im.shape[:2]
             cv2.imwrite(str(out / "images" / sp / f"{name}.jpg"), im, [cv2.IMWRITE_JPEG_QUALITY, 95])
             (out / "labels" / sp / f"{name}.txt").write_text(
@@ -344,6 +382,8 @@ def main():
 
     print("== Step 4: SIFT leakage audit (val, test, external vs train)")
     cross = audit(out)
+    removed = drop_flagged(out, cross)
+    print(f"  {len(cross)} evaluation images matched a training image -> removed from evaluation")
 
     print("== Step 5: extra negatives for false-positive rates")
     extra = extra_negatives(records, out)

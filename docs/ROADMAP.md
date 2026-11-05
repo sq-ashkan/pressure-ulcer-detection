@@ -52,7 +52,7 @@ by `app/`). Node.js would add a second stack without benefit.
 | F10 | Reproducibility | Config file, seeds, pinned environment, every run logged |
 | F11 | Label quality gate | Rejects implausible labels automatically: whole-frame masks (the PPA Fig. 6.4 defect), tiny regions, out-of-range coordinates, unreadable images |
 | F12 | Model card | Per version: intended use (research prototype, not a medical device), data sources + CC BY 4.0 attribution, metrics with CIs, limitations |
-| F13 | External test | One source never seen in training (rf_dekubitus) measures generalisation to a "new clinic" |
+| F13 | External test | PIID (1,091 photographs, stage label per photo, Ay et al. 2022), minus every photo also in data/seg: sensitivity and stage agreement on data never seen in development (`scripts/external_piid.py`) |
 | F14 | Active learning | Ranks unlabeled photos by model uncertainty so experts label the most informative first |
 | F15 | One-command reproduction | `python -m selftrain reproduce` rebuilds the dataset and re-runs every thesis experiment |
 | F16 | Drift check | Warns when a new batch differs from the existing data (colour, sharpness, resolution; KS tests) |
@@ -88,10 +88,13 @@ Each phase ends with a check; the next phase starts only when the check passes.
 - [ ] **WP1 Segmentation dataset** — `scripts/build_seg_dataset.py`: one image set, two
       label formats (YOLOv8-seg polygons + PNG masks), split by photograph, negatives
       (AZH N/S/D/V/BG, FUSeg), SIFT audit. Sources: maskrcnn, woundcare, fid, mobile,
-      petchs_seg, dekubitus. Excluded: thai_sores (boxes only), PISeg (same project as
-      woundcare). Images with DTI/Unstageable are dropped (outside stage 1–4 scope).
+      petchs_seg. Excluded: thai_sores (boxes only), PISeg (same project as woundcare),
+      rf_dekubitus (all 126 photos are maskrcnn photos annotated a second time; the two
+      annotations agree poorly — reported as a label-noise finding, `scripts/annotator_agreement.py`).
+      Images with DTI/Unstageable are dropped (outside stage 1–4 scope). Evaluation images
+      flagged by the SIFT audit are removed.
 - [ ] **WP2 Model comparison (pre-registered)** — U-Net (ResNet-34 encoder, Dice + CE
-      loss) vs YOLOv8s-seg; same split, 640 px, comparable budget, early stopping on val.
+      loss) vs YOLOv8s-seg; same split, 512 px (FUSeg-challenge resolution), comparable budget, early stopping on val.
       *Primary metric:* binary Dice (ulcer vs background) on the frozen test set.
       *Secondary:* per-stage Dice, IoU, false-positive rate on negatives, inference time.
       Bootstrap 95 % CIs; paired bootstrap for the difference. Winner → WP3.
@@ -179,3 +182,8 @@ One Python program, three ways to run it:
 | 2026-11-05 | Data review | 473 independent photographs in the four original mask sources (unify v3, SIFT audit: 4 twins); PISeg = woundcare duplicate; thai_sores boxes only |
 | 2026-11-05 | WP1 | `build_seg_dataset.py` written, not yet run — paused to agree the plan |
 | 2026-11-05 | Plan | Phases 1–7, dashboard requirements and the 1,0 quality bar agreed with Ashkan |
+| 2026-11-05 22:20 | WP1 build #1 | 923 photographs; SIFT audit: 10 eval twins (removed). Finding: the "external" rf_dekubitus split was 73/76 maskrcnn photographs |
+| 2026-11-05 22:35 | Resolution | 640 px too slow on MPS with two concurrent trainings (~6 h) → both models at 512 px (FUSeg resolution) |
+| 2026-11-05 22:45 | Annotator agreement | rf_dekubitus vs maskrcnn on the same 116 photographs: binary Dice 0.28 [0.25, 0.31], mostly stage 1 — label noise in public data |
+| 2026-11-05 22:50 | WP1 build #2 | rf_dekubitus excluded (redundant, conflicting labels); external test → PIID; rebuild + WP2 trainings chained |
+

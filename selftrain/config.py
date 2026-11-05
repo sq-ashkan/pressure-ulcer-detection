@@ -11,7 +11,7 @@ MODELS = ROOT / "models"
 
 NUM_STAGES = 4                     # stage 1..4 -> mask values 1..4, 0 = background
 STAGE_NAMES = ["stage1", "stage2", "stage3", "stage4"]
-IMG_SIZE = 640                     # both architectures train and predict at 640 px
+IMG_SIZE = 512                     # both architectures train and predict at 512 px (as in the FUSeg challenge)
 SEED = 0
 
 

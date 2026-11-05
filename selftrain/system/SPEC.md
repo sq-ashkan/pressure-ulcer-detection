@@ -132,7 +132,8 @@ Writes `active/ranking.csv` (path, uncertainty, predicted_area, predicted_stage)
 thumbnails with overlays for the top_k. Purpose: label the most informative photos first.
 
 ## 8. Interfaces (F9)
-* CLI `python -m selftrain` (argparse): `init`, `run [--demo]`, `watch [--interval S]`,
+* CLI `python -m selftrain` (argparse; every subcommand accepts `--workspace PATH`,
+  default `./system_ws`): `init`, `run [--demo]`, `watch [--interval S]`,
   `status`, `report --version N`, `rank-unlabeled`, `rollback --to N`, `dashboard [--port]`,
   `reproduce` (F15: re-runs dataset build, comparison, data-growth; prints the numbers).
 * `init --from data/seg --architecture A --weights W` creates the workspace from the

@@ -55,3 +55,7 @@ data/seg_smoke/
 logs/
 results/smoke/
 weights/
+data/seg_smoke_stage/
+
+# Thesis text stays private until graded (a public copy could trigger plagiarism checks)
+docs/thesis/
