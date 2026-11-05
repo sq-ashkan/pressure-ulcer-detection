@@ -47,3 +47,11 @@ app/examples/
 
 # Private correspondence and personal data — never commit (public repo)
 docs/private/
+
+# Built datasets and staging (large, regenerable)
+data/seg/
+data/seg_stage/
+data/seg_smoke/
+logs/
+results/smoke/
+weights/
