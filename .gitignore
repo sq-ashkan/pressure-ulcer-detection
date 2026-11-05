@@ -44,3 +44,6 @@ results/*.csv
 .ipynb_checkpoints/
 _synthetic_backup/
 app/examples/
+
+# Private correspondence and personal data — never commit (public repo)
+docs/private/
