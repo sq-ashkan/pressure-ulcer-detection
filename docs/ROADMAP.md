@@ -192,3 +192,7 @@ One Python program, three ways to run it:
 | 2026-11-06 06:45 | F13 external (PIID) | 1,075 photographs (16 overlapping removed). U-Net sensitivity 0.950 [0.935, 0.961], stage κw 0.62 (over-stages by one); YOLO 0.800, κw 0.80 |
 | 2026-11-06 06:59 | WP4 seed model | U-Net on growth batch 1 (162 photographs): val Dice 0.657 |
 | 2026-11-06 07:05 | WP2 robustness | second training seed for both models started |
+| 2026-11-06 14:54 | WP4 data growth (system) | v0 162 photos Dice 0.715 → v1 313: 0.764 (promoted, +0.050 [+0.004, +0.096]) → v2 458: 0.758 (kept v1) → v3 618: 0.763 (kept v1). Plateau ≈ 300 photographs = measured data ceiling |
+| 2026-11-06 09:49 | WP2 seed 1 | U-Net again: 0.800 vs 0.712, diff +0.088 [+0.040, +0.143], p < 0.001 |
+| 2026-11-06 17:20 | Literature | 116 verified references (Crossref/DataCite/publisher); 3 duplicates removed, 2 years corrected |
+| 2026-11-06 17:30 | Data finding | 27 images in data/seg carry stock-photo names (iStock…) despite CC BY 4.0 labels — excluded from figures, reported as provenance limitation |

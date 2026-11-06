@@ -60,3 +60,4 @@ data/seg_smoke_stage/
 # Thesis text stays private until graded (a public copy could trigger plagiarism checks)
 docs/thesis/
 data/growth/
+system_ws/
