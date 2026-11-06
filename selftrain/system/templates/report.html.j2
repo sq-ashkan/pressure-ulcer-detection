@@ -1,0 +1,221 @@
+{#- Cycle report, standalone HTML (selftrain.system.report.render_html).
+    Autoescaped; inline CSS, figures embedded as base64 PNG data URIs, no external
+    resource, so the file can be opened offline and served by the dashboard.
+    Variables: r (ReportData), figures [{key, caption, width, uri}], max_rows,
+    pdf_note, pdf_name (PDF next to this file, "" if none), card (Markup or None). -#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cycle {{ r.cycle }} report | selftrain</title>
+<style>
+:root { --ink: #333333; --muted: #666666; --line: #d9d9d9; --blue: #0072B2;
+        --orange: #E69F00; --vermillion: #D55E00; --green: #009E73; --grey: #8C8C8C; }
+* { box-sizing: border-box; }
+body { margin: 0 auto; max-width: 1000px; padding: 24px 20px 40px; color: var(--ink);
+       background: #ffffff; font: 15px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+h1 { font-size: 1.6em; margin: 0 0 4px; }
+h2 { font-size: 1.2em; margin: 30px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+.box h2 { margin-top: 0; border-bottom: none; }
+.meta { color: var(--muted); margin: 0 0 14px; }
+.note { padding: 8px 12px; border-left: 4px solid var(--grey); background: #f4f4f4; }
+.note.demo { border-left-color: var(--orange); }
+.box { padding: 14px 18px; border: 2px solid var(--grey); border-radius: 6px; background: #f4f4f4; }
+.box.promoted { border-color: var(--blue); background: #eaf3fa; }
+.box.kept { border-color: var(--orange); background: #fdf4e3; }
+.gate-sentence { font-size: 1.05em; font-weight: 600; }
+.details { color: var(--muted); font-size: .92em; }
+table { width: 100%; border-collapse: collapse; font-size: .92em; margin: 6px 0 4px; }
+th, td { padding: 4px 8px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+thead th { border-bottom: 2px solid var(--ink); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+tr.total td { font-weight: 600; border-top: 2px solid var(--ink); }
+table.key th { width: 55%; font-weight: normal; }
+.status-done { color: var(--green); font-weight: 600; }
+.status-failed { color: var(--vermillion); font-weight: 600; }
+.status-skipped, .status-started { color: var(--muted); }
+.shifted { color: var(--vermillion); font-weight: 600; }
+.small { font-size: .88em; color: var(--muted); }
+.figures { display: flex; flex-wrap: wrap; gap: 18px; }
+figure { margin: 0; }
+figure.half { flex: 1 1 440px; }
+figure.full { flex: 1 1 100%; }
+figure img { display: block; max-width: 100%; height: auto; }
+figcaption { font-size: .88em; color: var(--muted); margin-top: 4px; }
+.card { border-top: 1px solid var(--line); }
+.card table { font-size: .88em; }
+.card pre { overflow-x: auto; background: #f4f4f4; padding: 8px; }
+footer { margin-top: 36px; font-size: .85em; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+<h1>Self-retraining cycle {{ r.cycle }}: report</h1>
+<p class="meta">{{ r.date }} | {{ r.version_line }}{% if pdf_name %} | <a href="{{ pdf_name }}">PDF version</a>{% endif %}</p>
+</header>
+{% if pdf_note %}
+<p class="note">{{ pdf_note }}</p>
+{% endif %}
+{% if r.demo %}
+<p class="note demo">Demo cycle: shortened training on a subset of the images; the numbers are not representative.</p>
+{% endif %}
+
+<section class="box {{ r.outcome }}" id="gate">
+<h2>Gate decision</h2>
+<p class="gate-sentence">{{ r.gate_sentence }}</p>
+{% if r.gate_details %}
+<p class="details">{{ r.gate_details }}</p>
+{% endif %}
+<table class="key">
+{% for label, value in r.key_numbers %}
+<tr><th scope="row">{{ label }}</th><td>{{ value }}</td></tr>
+{% endfor %}
+</table>
+</section>
+
+<section id="steps">
+<h2>Cycle steps</h2>
+{% if r.steps %}
+<table>
+<thead><tr><th>Step</th><th>Status</th><th>Summary</th></tr></thead>
+<tbody>
+{% for name, status, summary in r.steps %}
+<tr><td>{{ name }}</td><td class="status-{{ status }}">{{ status }}</td><td>{{ summary }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p>No step results were recorded for this cycle.</p>
+{% endif %}
+</section>
+
+<section id="data">
+<h2>Data</h2>
+<p>{{ r.pool_line }}{% if r.batches %} Batches of this cycle: {{ r.batches|join(", ") }}.{% endif %}</p>
+{% if r.data_rows %}
+<table>
+<thead><tr><th>Source</th><th class="num">Received</th><th class="num">Rejected</th><th class="num">Added</th><th class="num">Train</th><th class="num">Val</th><th class="num">Photographs</th><th>Licence</th></tr></thead>
+<tbody>
+{% for row in r.data_rows %}
+<tr><td>{{ row.source }}</td><td class="num">{{ row.received|count }}</td><td class="num">{{ row.rejected }}</td><td class="num">{{ row.added }}</td><td class="num">{{ row.train }}</td><td class="num">{{ row.val }}</td><td class="num">{{ row.photographs }}</td><td>{{ row.license }}</td></tr>
+{% endfor %}
+{% if r.data_total %}
+<tr class="total"><td>Total</td><td class="num">{{ r.data_total.received|count }}</td><td class="num">{{ r.data_total.rejected }}</td><td class="num">{{ r.data_total.added }}</td><td class="num">{{ r.data_total.train }}</td><td class="num">{{ r.data_total.val }}</td><td class="num">{{ r.data_total.photographs }}</td><td></td></tr>
+{% endif %}
+</tbody>
+</table>
+<p class="small">Received: labelled images loaded from the batches. Added: images written to the pool, read from the pool manifest (rows added in this cycle); photographs: distinct photographs among them.</p>
+{% endif %}
+</section>
+
+<section id="quality">
+<h2>Quality control</h2>
+{% if r.rejections %}
+<p>{{ r.n_rejected }} image{% if r.n_rejected != 1 %}s{% endif %} rejected, grouped by reason:</p>
+<table>
+<thead><tr><th>Reason</th><th class="num">Images</th><th>Examples</th></tr></thead>
+<tbody>
+{% for row in r.rejections[:max_rows] %}
+<tr><td>{{ row.reason }}</td><td class="num">{{ row.count }}</td><td>{{ row.examples|join(", ") }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% if r.rejections|length > max_rows %}
+<p class="small">{{ r.rejections|length - max_rows }} further reason categories are not shown.</p>
+{% endif %}
+{% else %}
+<p>No image was rejected by quality control.</p>
+{% endif %}
+</section>
+
+<section id="duplicates">
+<h2>Duplicates</h2>
+{% if r.duplicates %}
+<p>{% if r.duplicates|length == 1 %}1 image of this cycle shows{% else %}{{ r.duplicates|length }} images of this cycle show{% endif %} a photograph that is already in the pool or occurs more than once in the cycle:</p>
+<table>
+<thead><tr><th>Image</th><th>Matched photograph</th><th>Split</th><th>Method</th><th>Action</th></tr></thead>
+<tbody>
+{% for d in r.duplicates[:max_rows] %}
+<tr><td>{{ d.image }}</td><td>{{ d.matched }}</td><td>{{ d.split }}</td><td>{{ d.method }}</td><td>{{ d.action }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% if r.duplicates|length > max_rows %}
+<p class="small">{{ r.duplicates|length - max_rows }} further duplicates are not shown.</p>
+{% endif %}
+{% else %}
+<p>No image of this cycle shows a photograph that is already known.</p>
+{% endif %}
+</section>
+
+<section id="drift">
+<h2>Drift</h2>
+{% if r.drift %}
+<p>Two-sample Kolmogorov&ndash;Smirnov test per image feature between the new photographs{% if r.drift.n_new is not none %} (n = {{ r.drift.n_new }}){% endif %} and the pool{% if r.drift.n_reference is not none %} (n = {{ r.drift.n_reference }}){% endif %}. The adjusted p-value is the Bonferroni correction min(1, k&thinsp;p) over the k = {{ r.drift.rows|length }} features; a feature counts as shifted if it is below &alpha; = {{ r.drift.alpha|num }}. Drift is a warning, never a blocker.</p>
+{% if r.drift.rows %}
+<table>
+<thead><tr><th>Feature</th><th class="num">KS D</th><th class="num">p</th><th class="num">p (Bonferroni)</th><th>Shifted</th></tr></thead>
+<tbody>
+{% for row in r.drift.rows %}
+<tr><td>{{ row.feature }}</td><td class="num">{{ row.statistic|num }}</td><td class="num">{{ row.p_value|num(4) }}</td><td class="num">{{ row.p_adjusted|num(4) }}</td><td{% if row.shifted %} class="shifted"{% endif %}>{{ "yes" if row.shifted else "no" }}</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+{% else %}
+<p>No drift test was run in this cycle.</p>
+{% endif %}
+</section>
+
+<section id="metrics">
+<h2>Metrics on the frozen test split</h2>
+{% if r.metric_rows %}
+<table>
+<thead><tr><th>Metric</th><th>{{ r.subject_label }}</th>{% if r.baseline_label %}<th>{{ r.baseline_label }}</th>{% endif %}</tr></thead>
+<tbody>
+{% for m in r.metric_rows %}
+<tr><td>{{ m.label }}</td><td>{{ m.candidate }}</td>{% if r.baseline_label %}<td>{{ m.baseline }}</td>{% endif %}</tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p>No evaluation on the frozen test split is available.</p>
+{% endif %}
+{% if r.gate_details %}
+<p>{{ r.gate_details }}</p>
+{% endif %}
+</section>
+
+{% if figures %}
+<section id="figures">
+<h2>Figures</h2>
+<div class="figures">
+{% for f in figures %}
+<figure class="{{ f.width }}" id="fig-{{ f.key }}"><img src="{{ f.uri }}" alt="{{ f.caption }}"><figcaption><strong>Figure {{ loop.index }}.</strong> {{ f.caption }}</figcaption></figure>
+{% endfor %}
+</div>
+</section>
+{% endif %}
+
+{% if r.notes %}
+<section id="notes">
+<h2>Notes</h2>
+<ul>
+{% for note in r.notes %}
+<li>{{ note }}</li>
+{% endfor %}
+</ul>
+</section>
+{% endif %}
+
+{% if card %}
+<section class="card" id="model-card">
+<h2>Model card of {{ r.subject_label }}</h2>
+{{ card }}
+</section>
+{% endif %}
+
+<footer>Research prototype: not a medical device, no diagnosis. Written by selftrain.system.report.</footer>
+</body>
+</html>

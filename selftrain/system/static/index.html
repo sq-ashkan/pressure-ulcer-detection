@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-retraining pressure-ulcer segmentation</title>
+<link rel="icon" href="data:,">
+<!--
+  selftrain dashboard (selftrain/system/dashboard.py, SPEC section 8).
+  One self-contained file: inline CSS, vanilla JavaScript and inline SVG, no external
+  resources of any kind, so it works offline on a projector.
+  Data: /api/status (polled), /api/events (Server-Sent Events, one per events.jsonl
+  line), /api/versions, /api/upload, /api/run, /api/predict, /api/report/{n}.
+-->
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --sunken: #0f172a;
+    --line: #334155;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --faint: #64748b;
+    --accent: #38bdf8;
+    --accent-ink: #082f49;
+    --waiting: #64748b;
+    --running: #f59e0b;
+    --done: #22c55e;
+    --failed: #ef4444;
+    --radius: 16px;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { font-size: 18px; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text); line-height: 1.45;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 3px;
+  }
+  .wrap { max-width: 1720px; margin: 0 auto; padding: 24px 32px 32px; }
+
+  /* (1) header ---------------------------------------------------------------- */
+  header.top {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 18px 40px; padding-bottom: 22px; margin-bottom: 24px; border-bottom: 1px solid var(--line);
+  }
+  h1 { margin: 0; font-size: 2.05rem; font-weight: 700; letter-spacing: -0.01em; }
+  .sub { margin: 6px 0 0; color: var(--muted); font-size: 1rem; }
+  .kpis { display: flex; flex-wrap: wrap; align-items: stretch; gap: 14px; }
+  .kpi {
+    min-width: 170px; padding: 10px 20px; border-radius: 14px;
+    background: var(--card); border: 1px solid var(--line);
+  }
+  .kpi .label {
+    display: block; color: var(--muted); font-size: .78rem; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+  }
+  .kpi .value { display: block; font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .kpi .note { display: block; color: var(--muted); font-size: .85rem; font-variant-numeric: tabular-nums; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 12px; align-self: center;
+    padding: 12px 22px; border-radius: 999px; background: var(--card); border: 1px solid var(--line);
+    font-size: 1.05rem; font-weight: 650;
+  }
+  .pill .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--waiting); flex: none; }
+  .pill.running { border-color: var(--running); }
+  .pill.running .dot { background: var(--running); animation: blink 1.4s ease-in-out infinite; }
+  .pill.done .dot { background: var(--done); }
+  .pill.failed { border-color: var(--failed); }
+  .pill.failed .dot { background: var(--failed); }
+
+  /* layout -------------------------------------------------------------------- */
+  .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+  .card {
+    min-width: 0; padding: 20px 26px 24px; border-radius: var(--radius);
+    background: var(--card); border: 1px solid var(--line);
+  }
+  .span-12 { grid-column: span 12; }
+  .span-7 { grid-column: span 7; }
+  .span-5 { grid-column: span 5; }
+  @media (max-width: 1150px) { .span-7, .span-5 { grid-column: span 12; } }
+  .card-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; margin-bottom: 14px; }
+  .card-head h2 { margin: 0; font-size: 1.4rem; font-weight: 700; }
+  .meta { color: var(--muted); font-size: .95rem; }
+  .card-head .spacer { flex: 1; }
+  h3 { margin: 22px 0 10px; font-size: 1.05rem; color: var(--muted); font-weight: 650; }
+  .live { font-size: .9rem; font-weight: 600; color: var(--faint); }
+  .live::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 50%; background: var(--faint); }
+  .live.on { color: var(--done); }
+  .live.on::before { background: var(--done); }
+
+  /* (2) the cycle ------------------------------------------------------------- */
+  #pipeline { display: block; width: 100%; height: auto; max-height: 62vh; }
+  .edge { fill: none; stroke: #475569; stroke-width: 2.5; }
+  .edge.done { stroke: var(--done); }
+  .edge.loop { stroke-dasharray: 8 8; }
+  .loop-label { fill: var(--faint); font-size: 14px; letter-spacing: .08em; }
+  .node .disc { fill: var(--sunken); stroke: var(--waiting); stroke-width: 3; transition: fill .4s, stroke .4s; }
+  .node .halo { fill: none; stroke: var(--running); stroke-width: 3; opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .node .glyph { fill: var(--muted); font-size: 24px; font-weight: 700; dominant-baseline: central; }
+  .node .name { fill: var(--text); font-size: 20px; font-weight: 650; }
+  .node .summary { fill: var(--muted); font-size: 15px; }
+  .s-running .disc { stroke: var(--running); fill: rgba(245, 158, 11, .16); animation: glow 1.6s ease-in-out infinite; }
+  .s-running .halo { animation: pulse 1.6s ease-out infinite; }
+  .s-running .glyph { fill: var(--running); }
+  .s-running .summary { fill: #fcd34d; }
+  .s-done .disc { stroke: var(--done); fill: rgba(34, 197, 94, .14); }
+  .s-done .glyph { fill: var(--done); }
+  .s-failed .disc, .s-interrupted .disc { stroke: var(--failed); fill: rgba(239, 68, 68, .16); }
+  .s-failed .glyph, .s-interrupted .glyph { fill: var(--failed); }
+  .s-failed .summary, .s-interrupted .summary { fill: #fca5a5; }
+  .s-skipped .disc { stroke-dasharray: 6 6; }
+  .s-skipped .glyph { fill: var(--faint); }
+  .s-skipped .name { fill: var(--muted); }
+  @keyframes pulse { 0% { opacity: .85; transform: scale(1); } 100% { opacity: 0; transform: scale(1.6); } }
+  @keyframes glow { 0%, 100% { fill: rgba(245, 158, 11, .12); } 50% { fill: rgba(245, 158, 11, .34); } }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+  @media (prefers-reduced-motion: reduce) {
+    .s-running .disc, .s-running .halo, .pill.running .dot { animation: none; }
+    .s-running .halo { opacity: .5; transform: scale(1.25); }
+  }
+  ul.legend { display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 10px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: .9rem; }
+  .lg-dot { display: inline-block; width: 14px; height: 14px; margin-right: 8px; border-radius: 50%; border: 3px solid var(--waiting); vertical-align: -2px; }
+  .lg-dot.running { border-color: var(--running); background: rgba(245, 158, 11, .3); }
+  .lg-dot.done { border-color: var(--done); background: rgba(34, 197, 94, .25); }
+  .lg-dot.failed { border-color: var(--failed); background: rgba(239, 68, 68, .25); }
+  .lg-dot.skipped { border-style: dashed; }
+
+  /* (3) drop zone ------------------------------------------------------------- */
+  .drop {
+    display: block; padding: 40px 24px; border: 2px dashed #475569; border-radius: 16px;
+    background: rgba(15, 23, 42, .55); text-align: center; cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .drop:hover, .drop:focus-visible { border-color: var(--accent); outline: none; }
+  .drop.over { border-color: var(--accent); background: rgba(56, 189, 248, .1); }
+  .drop.compact { padding: 20px 18px; }
+  .drop-icon { width: 56px; height: 56px; color: var(--accent); }
+  .drop-title { margin-top: 8px; font-size: 1.4rem; font-weight: 700; }
+  .drop.compact .drop-title { margin-top: 0; font-size: 1.15rem; }
+  .drop-hint { margin-top: 6px; color: var(--muted); font-size: .95rem; }
+  .progress { height: 8px; margin-top: 18px; border-radius: 4px; background: var(--sunken); overflow: hidden; }
+  .progress .bar { width: 0; height: 100%; background: var(--accent); transition: width .15s; }
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; }
+  .btn {
+    padding: 13px 24px; border-radius: 12px; border: 1px solid #475569; background: var(--sunken);
+    color: var(--text); font: inherit; font-size: 1.05rem; font-weight: 650; cursor: pointer;
+  }
+  .btn:hover:not(:disabled) { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn.ready { box-shadow: 0 0 0 5px rgba(56, 189, 248, .35); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .msg { min-height: 1.45em; margin: 12px 0 0; overflow-wrap: anywhere; }
+  .msg.ok { color: #86efac; }
+  .msg.error { color: #fca5a5; }
+  .inbox-line { margin: 14px 0 0; color: var(--muted); font-size: .95rem; overflow-wrap: anywhere; }
+
+  /* (4) version history ------------------------------------------------------- */
+  .chart-wrap { position: relative; }
+  #chart { display: block; width: 100%; height: auto; }
+  #chart .gridline { stroke: var(--line); stroke-width: 1; }
+  #chart .tick { fill: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  #chart .axis-title { fill: var(--muted); font-size: 13px; }
+  #chart .trend { fill: none; stroke: #475569; stroke-width: 2; stroke-linejoin: round; }
+  #chart .ci { stroke: var(--muted); stroke-width: 2; stroke-linecap: round; }
+  #chart .promoted .ci { stroke: var(--accent); }
+  #chart .dot { fill: var(--card); stroke: var(--muted); stroke-width: 2; }
+  #chart .promoted .dot { fill: var(--accent); stroke: var(--card); }
+  #chart .ring { fill: none; stroke: var(--text); stroke-width: 2; }
+  #chart .cur-label { fill: var(--text); font-size: 12px; font-weight: 650; }
+  #chart .hit { fill: transparent; cursor: pointer; pointer-events: all; }
+  #chart .hit:focus { outline: none; }
+  #chart .empty { fill: var(--muted); font-size: 17px; }
+  .tip {
+    position: absolute; z-index: 2; padding: 8px 12px; border-radius: 8px; pointer-events: none;
+    background: #0b1222; border: 1px solid #475569; box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+    font-size: .9rem; white-space: nowrap; transform: translate(-50%, calc(-100% - 12px));
+  }
+  .chart-legend { display: flex; flex-wrap: wrap; gap: 6px 24px; margin-top: 6px; color: var(--muted); font-size: .9rem; }
+  .chart-legend svg { width: 20px; height: 20px; margin-right: 6px; vertical-align: -5px; }
+  .table-box { max-height: 280px; margin-top: 14px; overflow: auto; }
+  table.versions { width: 100%; border-collapse: collapse; font-size: .9rem; font-variant-numeric: tabular-nums; }
+  table.versions th {
+    position: sticky; top: 0; padding: 6px 10px; background: var(--card); border-bottom: 1px solid var(--line);
+    color: var(--muted); font-weight: 650; text-align: left;
+  }
+  table.versions td { padding: 6px 10px; border-bottom: 1px solid rgba(51, 65, 85, .6); vertical-align: top; }
+  table.versions tr.current td { background: rgba(56, 189, 248, .09); }
+  table.versions td.reason { color: var(--muted); }
+
+  /* (5) try the model --------------------------------------------------------- */
+  .try { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+  @media (max-width: 800px) { .try { grid-template-columns: 1fr; } }
+  .try figure {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 240px; margin: 14px 0 0; border-radius: 12px; background: var(--sunken); overflow: hidden;
+  }
+  .try figure img { display: block; max-width: 100%; max-height: 52vh; }
+  .try figure.empty img { display: none; }
+  .try figcaption { padding: 10px 14px; color: var(--muted); font-size: .9rem; text-align: center; }
+  .facts { display: grid; grid-template-columns: auto 1fr; gap: 12px 18px; margin: 0; }
+  .facts dt { color: var(--muted); }
+  .facts dd { margin: 0; font-size: 1.15rem; font-weight: 650; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .swatch { display: inline-block; width: 16px; height: 16px; margin-right: 10px; border-radius: 4px; vertical-align: -2px; }
+  .stage-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 18px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: .9rem; }
+  .disclaimer { margin: 16px 0 0; color: var(--muted); font-size: .85rem; }
+
+  /* (6) report and live log --------------------------------------------------- */
+  .report-line { margin: 0; font-size: 1.1rem; }
+  .log { max-height: 360px; margin: 0; padding: 0; overflow: auto; list-style: none; font-size: .9rem; }
+  .log li {
+    display: grid; grid-template-columns: 5.4em 6.2em 6.2em minmax(0, 1fr); gap: 10px;
+    padding: 7px 0; border-bottom: 1px solid rgba(51, 65, 85, .6);
+  }
+  .log .time { color: var(--faint); font-variant-numeric: tabular-nums; }
+  .log .step { font-weight: 650; }
+  .log .text { color: var(--muted); overflow-wrap: anywhere; }
+  .badge {
+    justify-self: start; padding: 0 9px; border: 1px solid currentColor; border-radius: 999px;
+    font-size: .78rem; font-weight: 650; line-height: 1.6;
+  }
+  .badge.started { color: var(--running); }
+  .badge.done { color: var(--done); }
+  .badge.failed { color: var(--failed); }
+  .badge.skipped { color: var(--muted); }
+  footer { margin-top: 26px; color: var(--faint); font-size: .85rem; }
+  footer code { color: var(--muted); }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <h1>Self-retraining pressure-ulcer segmentation</h1>
+      <p class="sub">New photographs in, a better model out &mdash; research prototype, not a medical device.</p>
+    </div>
+    <div class="kpis" aria-live="polite">
+      <div class="kpi">
+        <span class="label">Current model</span>
+        <span class="value" id="model-version">&mdash;</span>
+        <span class="note" id="model-arch">loading&hellip;</span>
+      </div>
+      <div class="kpi">
+        <span class="label">Test Dice</span>
+        <span class="value" id="model-dice">&mdash;</span>
+        <span class="note" id="model-ci">frozen test split</span>
+      </div>
+      <div class="pill" id="cycle-pill"><span class="dot"></span><span id="cycle-text">Connecting&hellip;</span></div>
+    </div>
+  </header>
+
+  <main class="grid">
+
+    <section class="card span-12" aria-labelledby="cycle-title">
+      <div class="card-head">
+        <h2 id="cycle-title">The cycle</h2>
+        <span class="meta" id="cycle-meta"></span>
+        <span class="spacer"></span>
+        <span class="live" id="live">offline</span>
+      </div>
+      <svg id="pipeline" viewBox="0 0 1000 420" role="img"
+           aria-label="The ten steps of one cycle, ingest to notify, and the state of each step"></svg>
+      <ul class="legend" aria-label="Step states">
+        <li><span class="lg-dot"></span>waiting</li>
+        <li><span class="lg-dot running"></span>running</li>
+        <li><span class="lg-dot done"></span>done</li>
+        <li><span class="lg-dot failed"></span>failed</li>
+        <li><span class="lg-dot skipped"></span>skipped (nothing to do)</li>
+      </ul>
+    </section>
+
+    <section class="card span-5" aria-labelledby="data-title">
+      <div class="card-head"><h2 id="data-title">Add data</h2></div>
+      <div id="drop" class="drop" tabindex="0" role="button" aria-describedby="drop-hint">
+        <svg class="drop-icon" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M24 31V9M14.5 18.5 24 9l9.5 9.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 29v9a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2v-9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="drop-title">Drop photos or a labelled batch (.zip)</div>
+        <div class="drop-hint" id="drop-hint">or click to choose files &middot; a dropped folder keeps its images/ and labels/ or masks/ &middot; photos without labels are queued for labelling</div>
+        <div class="progress" id="upload-progress" hidden><div class="bar" id="upload-bar"></div></div>
+      </div>
+      <input type="file" id="pick" multiple hidden
+             accept="image/*,.zip,.txt,.json,.yaml,.yml,application/zip">
+      <p class="msg" id="upload-msg" role="status"></p>
+      <div class="actions">
+        <button type="button" class="btn primary" id="run">Run cycle</button>
+        <button type="button" class="btn" id="run-demo">Run demo cycle</button>
+      </div>
+      <p class="msg" id="run-msg" role="status"></p>
+      <p class="inbox-line" id="inbox-line"></p>
+    </section>
+
+    <section class="card span-7" aria-labelledby="history-title">
+      <div class="card-head">
+        <h2 id="history-title">Version history</h2>
+        <span class="meta">test Dice on the frozen test split, 95&nbsp;% bootstrap CI</span>
+      </div>
+      <div class="chart-wrap" id="chart-wrap">
+        <svg id="chart" viewBox="0 0 720 300" role="img" aria-label="Test Dice per model version with 95 % confidence intervals"></svg>
+        <div class="tip" id="tip" hidden></div>
+      </div>
+      <div class="chart-legend" aria-hidden="true">
+        <span><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="#38bdf8" stroke="#1e293b" stroke-width="2"/></svg>promoted</span>
+        <span><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="5.5" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/></svg>not promoted</span>
+        <span><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="#e2e8f0" stroke-width="2"/></svg>current</span>
+        <span><svg viewBox="0 0 20 20"><path d="M10 2v16M6 2h8M6 18h8" stroke="#94a3b8" stroke-width="2" fill="none"/></svg>95&nbsp;% CI</span>
+      </div>
+      <div class="table-box">
+        <table class="versions">
+          <thead><tr><th scope="col">Version</th><th scope="col">Created</th><th scope="col">Train images</th><th scope="col">Test Dice [95&nbsp;% CI]</th><th scope="col">Gate</th></tr></thead>
+          <tbody id="versions-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card span-7" aria-labelledby="try-title">
+      <div class="card-head">
+        <h2 id="try-title">Try the model</h2>
+        <span class="meta">one photo, scored by the current model</span>
+      </div>
+      <div class="try">
+        <div>
+          <div id="try-drop" class="drop compact" tabindex="0" role="button" aria-describedby="try-hint">
+            <div class="drop-title">Drop a photo here</div>
+            <div class="drop-hint" id="try-hint">or click to choose one (JPEG, PNG)</div>
+          </div>
+          <input type="file" id="try-pick" accept="image/*" hidden>
+          <figure id="try-figure" class="empty">
+            <img id="try-img" alt="">
+            <figcaption id="try-caption">The predicted ulcer region appears here, coloured by stage.</figcaption>
+          </figure>
+        </div>
+        <div>
+          <dl class="facts">
+            <dt>Stage</dt><dd id="try-stage">&mdash;</dd>
+            <dt>Area</dt><dd id="try-area">&mdash;</dd>
+            <dt>Confidence</dt><dd id="try-conf">&mdash;</dd>
+            <dt>Model</dt><dd id="try-model">&mdash;</dd>
+          </dl>
+          <ul class="stage-legend" id="stage-legend" aria-label="Stage colours"></ul>
+          <p class="msg" id="try-msg" role="status"></p>
+          <p class="disclaimer">Research prototype: not a medical device, no diagnosis. Stage and area describe what the model predicts, not a clinical assessment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card span-5" aria-labelledby="report-title">
+      <div class="card-head"><h2 id="report-title">Latest report</h2></div>
+      <p class="report-line" id="report-line">No report yet.</p>
+      <h3>Live log</h3>
+      <ol class="log" id="log" aria-live="polite" aria-label="Latest cycle events, newest first"></ol>
+    </section>
+
+  </main>
+
+  <footer>Workspace <code id="ws-path"></code> &middot; selftrain dashboard &middot; works offline</footer>
+</div>
+
+<script>
+"use strict";
+(function () {
+  const STEPS = ["ingest", "quality", "dedupe", "drift", "dataset",
+                 "train", "evaluate", "gate", "report", "notify"];
+  const LABEL = {ingest: "Ingest", quality: "Quality", dedupe: "Dedupe", drift: "Drift",
+                 dataset: "Dataset", train: "Train", evaluate: "Evaluate", gate: "Gate",
+                 report: "Report", notify: "Notify"};
+  const ARCH = {unet: "U-Net", yoloseg: "YOLOv8-seg"};
+  const WORD = {waiting: "waiting", running: "running", done: "done", failed: "failed",
+                skipped: "skipped", interrupted: "interrupted"};
+  const GLYPH = {done: "✓", failed: "✕", skipped: "–", interrupted: "!"};
+  // pipeline geometry (viewBox 1000 x 420): the ten steps as a loop of two rows
+  const COLS = [130, 315, 500, 685, 870], ROWS = [92, 292], R = 34;
+  const CELL = {ingest: [0, 0], quality: [1, 0], dedupe: [2, 0], drift: [3, 0], dataset: [4, 0],
+                train: [4, 1], evaluate: [3, 1], gate: [2, 1], report: [1, 1], notify: [0, 1]};
+  const SUMMARY_CHARS = 24, SUMMARY_LINES = 2, LOG_MAX = 14;
+  const POLL_IDLE_MS = 8000, POLL_BUSY_MS = 2000;
+
+  const $ = (id) => document.getElementById(id);
+  const SVGNS = $("pipeline").namespaceURI;   // the SVG namespace, without spelling out its URI
+
+  const state = {
+    cycle: 0, running: false, demo: false, result: "idle", failedStep: null, started: null,
+    steps: {}, live: false, runnerBusy: false, runnerFinished: null, versionsKey: null,
+    pollTimer: null, soonTimer: null,
+  };
+  const nodes = {}, edgeFrom = {};
+
+  // ------------------------------------------------------------------ helpers
+  function isNum(x) { return typeof x === "number" && isFinite(x); }
+  function fmt(x, digits) { return isNum(x) ? x.toFixed(digits === undefined ? 3 : digits) : "—"; }
+  function plural(n, word, many) { return n + " " + (n === 1 ? word : (many || word + "s")); }
+  function setText(id, text) { $(id).textContent = text; }
+  function message(id, text, kind) { const el = $(id); el.textContent = text || ""; el.className = "msg " + (kind || ""); }
+  function timeOf(iso) {
+    const d = new Date(iso);
+    return isNaN(d.getTime()) ? "" : d.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit", second: "2-digit"});
+  }
+  function detailText(body) {
+    const d = body && body.detail;
+    if (typeof d === "string") return d;
+    if (Array.isArray(d)) return d.map((x) => (x && x.msg) || JSON.stringify(x)).join("; ");
+    return d ? JSON.stringify(d) : "";
+  }
+  function svgEl(tag, attrs, parent, text) {
+    const el = document.createElementNS(SVGNS, tag);
+    Object.keys(attrs || {}).forEach((k) => el.setAttribute(k, String(attrs[k])));
+    if (text !== undefined) el.textContent = text;
+    if (parent) parent.appendChild(el);
+    return el;
+  }
+  // at most `maxLines` lines of at most `width` characters, broken at spaces; "…" if cut
+  function wrapText(text, width, maxLines) {
+    const words = String(text || "").trim().split(/\s+/).filter(Boolean);
+    const lines = [];
+    let cur = "", i = 0;
+    for (; i < words.length; i++) {
+      const w = words[i].length > width ? words[i].slice(0, width - 1) + "…" : words[i];
+      const next = cur ? cur + " " + w : w;
+      if (next.length <= width) { cur = next; continue; }
+      lines.push(cur);
+      cur = w;
+      if (lines.length === maxLines) { cur = ""; break; }
+    }
+    if (cur) lines.push(cur);
+    if (i < words.length && lines.length) {
+      const last = lines[lines.length - 1].slice(0, width - 1).replace(/[\s.,;:]+$/, "");
+      lines[lines.length - 1] = last + "…";
+    }
+    return lines;
+  }
+
+  // ------------------------------------------------------------------ (2) pipeline
+  function center(name) { const c = CELL[name]; return [COLS[c[0]], ROWS[c[1]]]; }
+  function edgePath(a, b) {
+    const [x1, y1] = center(a), [x2, y2] = center(b);
+    if (y1 === y2) {
+      const dir = Math.sign(x2 - x1);
+      return `M${x1 + dir * (R + 8)},${y1} L${x2 - dir * (R + 10)},${y2}`;
+    }
+    return `M${x1 + R + 6},${y1} C${x1 + R + 72},${y1} ${x2 + R + 72},${y2} ${x2 + R + 10},${y2}`;
+  }
+  function loopPath() {
+    const [x1, y1] = center("notify"), [x2, y2] = center("ingest");
+    return `M${x1 - R - 6},${y1} C${x1 - R - 72},${y1} ${x2 - R - 72},${y2} ${x2 - R - 10},${y2}`;
+  }
+  function buildPipeline() {
+    const root = $("pipeline");
+    const defs = svgEl("defs", {}, root);
+    [["arrow", "#475569"], ["arrow-done", "#22c55e"]].forEach(([id, colour]) => {
+      const m = svgEl("marker", {id: id, viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 12,
+                                 markerHeight: 12, markerUnits: "userSpaceOnUse", orient: "auto"}, defs);
+      svgEl("path", {d: "M0,0 L10,5 L0,10 z", fill: colour}, m);
+    });
+    const edges = svgEl("g", {"aria-hidden": "true"}, root);
+    for (let i = 0; i < STEPS.length - 1; i++) {
+      edgeFrom[STEPS[i]] = svgEl("path", {class: "edge", d: edgePath(STEPS[i], STEPS[i + 1]),
+                                          "marker-end": "url(#arrow)"}, edges);
+    }
+    svgEl("path", {class: "edge loop", d: loopPath(), "marker-end": "url(#arrow)"}, edges);
+    const ly = (ROWS[0] + ROWS[1]) / 2;
+    svgEl("text", {class: "loop-label", x: 20, y: ly, "text-anchor": "middle",
+                   transform: `rotate(-90 20 ${ly})`}, edges, "next cycle");
+    const layer = svgEl("g", {}, root);
+    STEPS.forEach((name, i) => {
+      const [cx, cy] = center(name);
+      const g = svgEl("g", {class: "node s-waiting"}, layer);
+      const title = svgEl("title", {}, g, LABEL[name]);
+      svgEl("circle", {class: "halo", cx: cx, cy: cy, r: R}, g);
+      svgEl("circle", {class: "disc", cx: cx, cy: cy, r: R}, g);
+      const glyph = svgEl("text", {class: "glyph", x: cx, y: cy, "text-anchor": "middle"}, g, String(i + 1));
+      svgEl("text", {class: "name", x: cx, y: cy + R + 30, "text-anchor": "middle"}, g, LABEL[name]);
+      const summary = svgEl("text", {class: "summary", x: cx, y: cy + R + 54, "text-anchor": "middle"}, g);
+      nodes[name] = {g: g, title: title, glyph: glyph, summary: summary, x: cx, index: i + 1};
+    });
+  }
+  // what a node shows: a "started" step pulses only while its cycle is running
+  function visual(status) {
+    if (status === "started") return state.running ? "running" : "interrupted";
+    return (status === "done" || status === "failed" || status === "skipped") ? status : "waiting";
+  }
+  function renderStep(name) {
+    const n = nodes[name], st = state.steps[name], vs = visual(st.status);
+    n.g.setAttribute("class", "node s-" + vs);
+    n.glyph.textContent = GLYPH[vs] || String(n.index);
+    const text = st.summary || (vs === "running" ? "running…" : "");
+    n.summary.textContent = "";
+    wrapText(text, SUMMARY_CHARS, SUMMARY_LINES).forEach((line, k) => {
+      svgEl("tspan", {x: n.x, dy: k === 0 ? 0 : 19}, n.summary, line);
+    });
+    n.title.textContent = `${LABEL[name]}: ${WORD[vs]}` + (st.summary ? ` — ${st.summary}` : "");
+    const edge = edgeFrom[name];
+    if (edge) {
+      edge.setAttribute("class", vs === "done" ? "edge done" : "edge");
+      edge.setAttribute("marker-end", vs === "done" ? "url(#arrow-done)" : "url(#arrow)");
+    }
+  }
+  function renderSteps() { STEPS.forEach(renderStep); }
+  function resetSteps() { STEPS.forEach((s) => { state.steps[s] = {status: "waiting", summary: ""}; }); }
+
+  // ------------------------------------------------------------------ events (SSE)
+  function applyEvent(ev) {
+    if (!ev || typeof ev !== "object" || STEPS.indexOf(ev.step) < 0 || !Number.isInteger(ev.cycle)) return;
+    if (ev.cycle < state.cycle) return;                    // an older cycle (history replay)
+    if (ev.cycle > state.cycle) {                          // a new cycle has started
+      state.cycle = ev.cycle; state.running = true; state.result = "running";
+      state.failedStep = null; state.started = ev.ts || null;
+      resetSteps(); renderSteps(); refreshSoon();
+    }
+    state.steps[ev.step] = {status: String(ev.status || ""), summary: String(ev.summary || "")};
+    if (ev.step === "notify" && ev.status !== "started") { state.running = false; refreshSoon(); }
+    if (ev.status === "failed" || ((ev.step === "gate" || ev.step === "report") && ev.status === "done")) refreshSoon();
+    renderStep(ev.step);
+    renderPill();
+    renderButtons();
+    addLog(ev);
+  }
+  function addLog(ev) {
+    const list = $("log"), li = document.createElement("li");
+    [["time", timeOf(ev.ts)], ["step", LABEL[ev.step] || ev.step],
+     ["badge " + String(ev.status), String(ev.status)], ["text", String(ev.summary || "")]]
+      .forEach(([cls, text]) => { const s = document.createElement("span"); s.className = cls; s.textContent = text; li.appendChild(s); });
+    list.insertBefore(li, list.firstChild);
+    while (list.children.length > LOG_MAX) list.removeChild(list.lastChild);
+  }
+  function setLive(on) {
+    state.live = on;
+    const el = $("live");
+    el.className = on ? "live on" : "live";
+    el.textContent = on ? "live" : "reconnecting…";
+  }
+  function connectEvents() {
+    if (!window.EventSource) { setText("live", "no live updates in this browser"); return; }
+    const source = new EventSource("/api/events");     // reconnects by itself (Last-Event-ID)
+    source.onopen = () => setLive(true);
+    source.onerror = () => setLive(false);
+    source.onmessage = (m) => {
+      let ev = null;
+      try { ev = JSON.parse(m.data); } catch (err) { return; }
+      applyEvent(ev);
+    };
+  }
+
+  // ------------------------------------------------------------------ status
+  function refreshSoon() {
+    clearTimeout(state.soonTimer);
+    state.soonTimer = setTimeout(() => { refreshStatus(false); }, 400);
+  }
+  function schedulePoll() {
+    clearTimeout(state.pollTimer);
+    const ms = (state.runnerBusy || state.running) ? POLL_BUSY_MS : POLL_IDLE_MS;
+    state.pollTimer = setTimeout(async () => { await refreshStatus(false); schedulePoll(); }, ms);
+  }
+  async function refreshStatus(initial) {
+    let st;
+    try {
+      const r = await fetch("/api/status", {cache: "no-store"});
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      st = await r.json();
+    } catch (err) {
+      $("cycle-pill").className = "pill failed";
+      setText("cycle-text", "Dashboard server not reachable");
+      return false;
+    }
+    const runner = st.runner || {};
+    if (!initial && !runner.busy && runner.finished && runner.finished !== state.runnerFinished) announce(runner);
+    state.runnerFinished = runner.finished || null;
+    state.runnerBusy = !!runner.busy;
+    if (Number.isInteger(st.cycle)) {
+      // events are the live source of step states; status.json is adopted when it is
+      // newer, on the first load, or while the event stream is down
+      if (initial || st.cycle > state.cycle || (st.cycle === state.cycle && !state.live)) {
+        state.cycle = st.cycle;
+        STEPS.forEach((s) => {
+          const x = (st.steps || {})[s] || {};
+          state.steps[s] = {status: x.status || "waiting", summary: x.summary || ""};
+        });
+      }
+      if (st.cycle >= state.cycle) {
+        state.running = !!st.running; state.demo = !!st.demo; state.result = st.result || "idle";
+        state.failedStep = st.failed_step || null; state.started = st.started || null;
+      }
+    }
+    renderSteps(); renderPill(); renderButtons();
+    renderModel(st.model, st.registry_error);
+    renderInbox(st.inbox);
+    renderReport(st.latest_report);
+    setText("ws-path", st.workspace || "");
+    const key = JSON.stringify([st.current_model,
+      (st.versions || []).map((v) => [v.version, v.gate ? v.gate.promoted : null])]);
+    if (key !== state.versionsKey) { state.versionsKey = key; refreshVersions(); }
+    return true;
+  }
+  function announce(runner) {
+    const res = runner.result || {};
+    if (runner.error) message("run-msg", "The cycle could not run: " + runner.error, "error");
+    else if (res.status === "idle") message("run-msg", "The inbox is empty: drop a batch first.", "error");
+    else if (res.status === "done") message("run-msg", `Cycle ${res.cycle} finished.`, "ok");
+    else if (res.status === "failed") message("run-msg", `Cycle ${res.cycle} failed at step ${res.failed_step || "?"}` + (res.error ? ": " + res.error : "."), "error");
+    else if (res.status) message("run-msg", `Cycle ${res.cycle} ended: ${res.status}.`, "");
+  }
+  function renderPill() {
+    let cls = "idle", text;
+    if (state.running) { cls = "running"; text = `Cycle ${state.cycle} running`; }
+    else if (state.runnerBusy) { cls = "running"; text = "Starting a cycle…"; }
+    else if (!state.cycle) text = "No cycle yet";
+    else if (state.result === "done") { cls = "done"; text = `Cycle ${state.cycle} done`; }
+    else if (state.result === "failed") { cls = "failed"; text = `Cycle ${state.cycle} failed` + (state.failedStep ? ` at ${state.failedStep}` : ""); }
+    else if (state.result === "interrupted") { cls = "failed"; text = `Cycle ${state.cycle} interrupted`; }
+    else text = `Cycle ${state.cycle}`;
+    if (state.demo && state.cycle) text += " · demo";
+    $("cycle-pill").className = "pill " + cls;
+    setText("cycle-text", text);
+    setText("cycle-meta", state.cycle ? `cycle ${state.cycle}` + (state.started ? ` · started ${timeOf(state.started)}` : "")
+                                      : "no cycle has run in this workspace yet");
+  }
+  function renderButtons() {
+    const busy = state.runnerBusy || state.running;
+    $("run").disabled = busy;
+    $("run-demo").disabled = busy;
+  }
+  function renderModel(m, error) {
+    if (!m) {
+      setText("model-version", "none");
+      setText("model-arch", error ? "registry unreadable" : "no model registered");
+      setText("model-dice", "—");
+      setText("model-ci", "frozen test split");
+      return;
+    }
+    setText("model-version", "v" + m.version);
+    setText("model-arch", (ARCH[m.architecture] || m.architecture) + " · " + plural(m.train_images, "training image"));
+    setText("model-dice", fmt(m.dice_mean));
+    setText("model-ci", m.dice_ci95 ? `95 % CI ${fmt(m.dice_ci95[0])}–${fmt(m.dice_ci95[1])}` : "frozen test split");
+  }
+  function renderInbox(inbox) {
+    const pending = (inbox && inbox.pending) || [], unlabeled = (inbox && inbox.unlabeled) || 0;
+    let text = pending.length
+      ? `Inbox: ${plural(pending.length, "batch", "batches")} waiting (${pending.slice(0, 3).join(", ")}${pending.length > 3 ? ", …" : ""})`
+      : "Inbox: empty";
+    if (unlabeled) text += ` · ${plural(unlabeled, "unlabelled photo")} queued for labelling`;
+    setText("inbox-line", text);
+  }
+  function renderReport(rep) {
+    const box = $("report-line");
+    box.textContent = "";
+    if (!rep) { box.textContent = "No report yet: every cycle writes one at its report step."; return; }
+    const strong = document.createElement("strong");
+    strong.textContent = `Cycle ${rep.cycle}: `;
+    box.appendChild(strong);
+    let first = true;
+    [["html", "open the report"], ["pdf", "PDF"]].forEach(([key, label]) => {
+      if (!rep[key]) return;
+      if (!first) box.appendChild(document.createTextNode(" · "));
+      const a = document.createElement("a");
+      a.href = rep[key]; a.target = "_blank"; a.rel = "noopener"; a.textContent = label;
+      box.appendChild(a);
+      first = false;
+    });
+  }
+
+  // ------------------------------------------------------------------ (4) version history
+  async function refreshVersions() {
+    try {
+      const r = await fetch("/api/versions", {cache: "no-store"});
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const data = await r.json();
+      drawChart(data);
+      renderTable(data);
+    } catch (err) {
+      const root = $("chart");
+      root.textContent = "";
+      svgEl("text", {class: "empty", x: 360, y: 150, "text-anchor": "middle"}, root, "Version history unavailable");
+    }
+  }
+  function showTip(target, text) {
+    const tip = $("tip"), a = target.getBoundingClientRect(), b = $("chart-wrap").getBoundingClientRect();
+    tip.textContent = text;
+    tip.hidden = false;
+    tip.style.left = (a.left + a.width / 2 - b.left) + "px";
+    tip.style.top = (a.top + a.height / 2 - b.top - 6) + "px";
+  }
+  function hideTip() { $("tip").hidden = true; }
+  function drawChart(data) {
+    const root = $("chart");
+    root.textContent = "";
+    hideTip();
+    const W = 720, H = 300, M = {l: 64, r: 20, t: 32, b: 52};
+    const pw = W - M.l - M.r, ph = H - M.t - M.b;
+    const vs = (data && data.versions) || [];
+    const scored = vs.filter((v) => isNum(v.dice_mean));
+    if (!scored.length) {
+      svgEl("text", {class: "empty", x: W / 2, y: H / 2, "text-anchor": "middle"}, root,
+            vs.length ? "No test Dice recorded yet" : "No model versions yet");
+      return;
+    }
+    const low = (v) => (v.dice_ci95 ? v.dice_ci95[0] : v.dice_mean);
+    const high = (v) => (v.dice_ci95 ? v.dice_ci95[1] : v.dice_mean);
+    let lo = Math.max(0, Math.floor((Math.min(...scored.map(low)) - 0.02) * 20) / 20);
+    let hi = Math.min(1, Math.ceil((Math.max(...scored.map(high)) + 0.02) * 20) / 20);
+    if (hi - lo < 0.2) { lo = Math.max(0, (lo + hi) / 2 - 0.1); hi = Math.min(1, lo + 0.2); lo = Math.max(0, hi - 0.2); }
+    const tick = hi - lo > 0.5 ? 0.1 : 0.05;
+    const X = (i) => M.l + (i + 0.5) * pw / vs.length;
+    const Y = (d) => M.t + (hi - d) / (hi - lo) * ph;
+    for (let k = Math.ceil(lo / tick - 1e-6); k * tick <= hi + 1e-6; k++) {
+      const y = Y(k * tick);
+      svgEl("line", {class: "gridline", x1: M.l, x2: W - M.r, y1: y, y2: y}, root);
+      svgEl("text", {class: "tick", x: M.l - 10, y: y, "text-anchor": "end", "dominant-baseline": "central"}, root, (k * tick).toFixed(2));
+    }
+    const midY = M.t + ph / 2;
+    svgEl("text", {class: "axis-title", x: 16, y: midY, "text-anchor": "middle", transform: `rotate(-90 16 ${midY})`}, root, "Test Dice");
+    const every = Math.max(1, Math.ceil(vs.length / 12));
+    vs.forEach((v, i) => {
+      if (i % every === 0 || i === vs.length - 1) svgEl("text", {class: "tick", x: X(i), y: H - M.b + 24, "text-anchor": "middle"}, root, "v" + v.version);
+    });
+    svgEl("text", {class: "axis-title", x: M.l + pw / 2, y: H - 8, "text-anchor": "middle"}, root, "Model version");
+    const points = [];
+    vs.forEach((v, i) => { if (isNum(v.dice_mean)) points.push(X(i).toFixed(1) + "," + Y(v.dice_mean).toFixed(1)); });
+    if (points.length > 1) svgEl("polyline", {class: "trend", points: points.join(" ")}, root);
+    vs.forEach((v, i) => {
+      if (!isNum(v.dice_mean)) return;
+      const x = X(i), y = Y(v.dice_mean), ci = v.dice_ci95;
+      const g = svgEl("g", {class: "mark" + (v.promoted ? " promoted" : "") + (v.current ? " current" : "")}, root);
+      if (ci) {
+        svgEl("line", {class: "ci", x1: x, x2: x, y1: Y(ci[0]), y2: Y(ci[1])}, g);
+        ci.forEach((c) => svgEl("line", {class: "ci", x1: x - 7, x2: x + 7, y1: Y(c), y2: Y(c)}, g));
+      }
+      if (v.current) {
+        svgEl("circle", {class: "ring", cx: x, cy: y, r: 13}, g);
+        svgEl("text", {class: "cur-label", x: x, y: Math.min(ci ? Y(ci[1]) : y - 13, y - 13) - 9, "text-anchor": "middle"}, g, "current");
+      }
+      svgEl("circle", {class: "dot", cx: x, cy: y, r: v.promoted ? 7 : 6}, g);
+      const text = `v${v.version}: test Dice ${fmt(v.dice_mean)}` + (ci ? ` [${fmt(ci[0])}, ${fmt(ci[1])}]` : "")
+                 + (v.promoted ? " · promoted" : " · not promoted") + (v.current ? " · current" : "");
+      const hit = svgEl("circle", {class: "hit", cx: x, cy: y, r: 20, tabindex: 0, role: "img", "aria-label": text}, g);
+      hit.addEventListener("mouseenter", () => showTip(hit, text));
+      hit.addEventListener("focus", () => showTip(hit, text));
+      hit.addEventListener("mouseleave", hideTip);
+      hit.addEventListener("blur", hideTip);
+    });
+  }
+  function renderTable(data) {
+    const body = $("versions-body");
+    body.textContent = "";
+    const vs = ((data && data.versions) || []).slice().reverse();
+    if (!vs.length) {
+      const tr = document.createElement("tr"), td = document.createElement("td");
+      td.colSpan = 5; td.textContent = "No model versions yet.";
+      tr.appendChild(td); body.appendChild(tr);
+      return;
+    }
+    vs.forEach((v) => {
+      const tr = document.createElement("tr");
+      if (v.current) tr.className = "current";
+      const ci = v.dice_ci95, gate = v.gate || {};
+      [["v" + v.version + (v.current ? " (current)" : ""), ""],
+       [String(v.created || "").slice(0, 10), ""],
+       [String(v.train_images), ""],
+       [isNum(v.dice_mean) ? fmt(v.dice_mean) + (ci ? ` [${fmt(ci[0])}, ${fmt(ci[1])}]` : "") : "—", ""],
+       [(v.promoted ? "promoted" : "not promoted") + (gate.reason ? ": " + gate.reason : ""), "reason"]]
+        .forEach(([text, cls]) => { const td = document.createElement("td"); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); });
+      body.appendChild(tr);
+    });
+  }
+
+  // ------------------------------------------------------------------ (3) upload and run
+  function droppedEntries(dt) {          // must run inside the drop handler (synchronously)
+    const out = [];
+    Array.from((dt && dt.items) || []).forEach((item) => {
+      if (item.kind !== "file" || !item.webkitGetAsEntry) return;
+      const entry = item.webkitGetAsEntry();
+      if (entry) out.push(entry);
+    });
+    return out;
+  }
+  function readAll(reader) {
+    return new Promise((resolve, reject) => {
+      const all = [];
+      const next = () => reader.readEntries((batch) => {
+        if (!batch.length) resolve(all); else { all.push(...batch); next(); }
+      }, reject);
+      next();
+    });
+  }
+  async function walk(entry, out) {
+    if (entry.isFile) {
+      const file = await new Promise((resolve, reject) => entry.file(resolve, reject));
+      out.push({file: file, path: entry.fullPath.replace(/^\/+/, "") || file.name});
+    } else if (entry.isDirectory) {
+      for (const child of await readAll(entry.createReader())) await walk(child, out);
+    }
+  }
+  async function collect(entries, files) {
+    if (!entries.length) return files.map((f) => ({file: f, path: f.name}));
+    const out = [];
+    for (const entry of entries) await walk(entry, out);
+    return out;
+  }
+  function upload(list) {
+    if (!list.length) { message("upload-msg", "Nothing to upload.", "error"); return; }
+    const form = new FormData();
+    list.forEach((x) => form.append("files", x.file, x.path));
+    const xhr = new XMLHttpRequest(), progress = $("upload-progress"), bar = $("upload-bar");
+    progress.hidden = false;
+    bar.style.width = "0%";
+    message("upload-msg", `Uploading ${plural(list.length, "file")}…`, "");
+    xhr.upload.onprogress = (e) => { if (e.lengthComputable) bar.style.width = (100 * e.loaded / e.total).toFixed(1) + "%"; };
+    xhr.onload = () => {
+      progress.hidden = true;
+      let body = {};
+      try { body = JSON.parse(xhr.responseText); } catch (err) { body = {}; }
+      if (xhr.status !== 201) {
+        message("upload-msg", "Upload refused: " + (detailText(body) || "HTTP " + xhr.status), "error");
+        return;
+      }
+      const batches = (body.batches || []).map((b) => `${b.name} (${plural(b.images, "image")}` + (b.labels ? `, ${plural(b.labels, "label file")}` : "") + ")");
+      let text = "Added to the inbox: " + batches.join("; ") + ".";
+      const ignored = body.ignored || [];
+      if (ignored.length) text += ` Ignored ${plural(ignored.length, "file")}: ` + ignored.slice(0, 3).map((x) => `${x.name} (${x.reason})`).join(", ") + (ignored.length > 3 ? ", …" : "") + ".";
+      message("upload-msg", text, "ok");
+      ["run", "run-demo"].forEach((id) => $(id).classList.add("ready"));
+      refreshStatus(false);
+    };
+    xhr.onerror = () => { progress.hidden = true; message("upload-msg", "Upload failed: the dashboard server is not reachable.", "error"); };
+    xhr.open("POST", "/api/upload");
+    xhr.send(form);
+  }
+  function wireDropZone(zone, input, onFiles, onDrop) {
+    zone.addEventListener("click", () => input.click());
+    zone.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); input.click(); } });
+    ["dragenter", "dragover"].forEach((t) => zone.addEventListener(t, (e) => { e.preventDefault(); zone.classList.add("over"); }));
+    ["dragleave", "dragend"].forEach((t) => zone.addEventListener(t, () => zone.classList.remove("over")));
+    zone.addEventListener("drop", (e) => { e.preventDefault(); zone.classList.remove("over"); onDrop(e.dataTransfer); });
+    input.addEventListener("change", () => { const files = Array.from(input.files || []); input.value = ""; onFiles(files); });
+  }
+  function wireUpload() {
+    wireDropZone($("drop"), $("pick"),
+      (files) => upload(files.map((f) => ({file: f, path: f.webkitRelativePath || f.name}))),
+      (dt) => {
+        const entries = droppedEntries(dt), files = Array.from((dt && dt.files) || []);
+        collect(entries, files).then(upload, (err) => message("upload-msg", "Could not read the dropped files: " + err, "error"));
+      });
+    $("run").addEventListener("click", () => startRun(false));
+    $("run-demo").addEventListener("click", () => startRun(true));
+  }
+  async function startRun(demo) {
+    ["run", "run-demo"].forEach((id) => { $(id).disabled = true; $(id).classList.remove("ready"); });
+    let r, body = {};
+    try {
+      r = await fetch("/api/run?demo=" + (demo ? 1 : 0), {method: "POST"});
+      body = await r.json().catch(() => ({}));
+    } catch (err) {
+      message("run-msg", "The dashboard server is not reachable.", "error");
+      renderButtons();
+      return;
+    }
+    if (r.status === 202) {
+      state.runnerBusy = true;
+      message("run-msg", demo ? "Demo cycle started: a few epochs on a subset of the training images." : "Cycle started.", "ok");
+    } else {
+      message("run-msg", detailText(body) || `The cycle could not be started (HTTP ${r.status}).`, "error");
+    }
+    renderPill();
+    renderButtons();
+    await refreshStatus(false);
+    schedulePoll();
+  }
+
+  // ------------------------------------------------------------------ (5) try the model
+  function wireTry() {
+    const pick = (files) => { if (files.length) predict(files[0]); };
+    wireDropZone($("try-drop"), $("try-pick"), pick, (dt) => pick(Array.from((dt && dt.files) || [])));
+  }
+  async function predict(file) {
+    message("try-msg", `Analysing ${file.name}…`, "");
+    const form = new FormData();
+    form.append("file", file, file.name);
+    let r, body = {};
+    try {
+      r = await fetch("/api/predict", {method: "POST", body: form});
+      body = await r.json().catch(() => ({}));
+    } catch (err) {
+      message("try-msg", "The dashboard server is not reachable.", "error");
+      return;
+    }
+    if (!r.ok) { message("try-msg", detailText(body) || `Prediction failed (HTTP ${r.status}).`, "error"); return; }
+    showPrediction(body, file.name);
+  }
+  function showPrediction(p, name) {
+    const colours = p.stage_colours || {};
+    const img = $("try-img");
+    img.src = "data:image/png;base64," + p.overlay_png;
+    img.alt = `${name} with the predicted ulcer region` + (p.stage ? `, stage ${p.stage}` : ": none found");
+    $("try-figure").classList.remove("empty");
+    setText("try-caption", name);
+    const stage = $("try-stage");
+    stage.textContent = "";
+    if (p.stage) {
+      const sw = document.createElement("span");
+      sw.className = "swatch";
+      sw.style.background = colours[String(p.stage)] || "#94a3b8";
+      stage.appendChild(sw);
+      stage.appendChild(document.createTextNode("Stage " + p.stage));
+    } else {
+      stage.textContent = "No ulcer region found";
+    }
+    setText("try-area", p.positive ? `${(100 * p.area).toFixed(2)} % of the photo · ${plural(p.regions, "region")}` : "—");
+    setText("try-conf", isNum(p.confidence) ? `${p.confidence.toFixed(2)} (mean over the region)` : `— (highest ${fmt(p.max_confidence, 2)})`);
+    setText("try-model", `v${p.version} · ${ARCH[p.architecture] || p.architecture} · threshold ${fmt(p.threshold, 2)}`);
+    const legend = $("stage-legend");
+    legend.textContent = "";
+    Object.keys(colours).forEach((k) => {
+      const li = document.createElement("li"), sw = document.createElement("span");
+      sw.className = "swatch";
+      sw.style.background = colours[k];
+      li.appendChild(sw);
+      li.appendChild(document.createTextNode("Stage " + k));
+      legend.appendChild(li);
+    });
+    message("try-msg", "", "");
+  }
+
+  // ------------------------------------------------------------------ start
+  async function init() {
+    resetSteps();
+    buildPipeline();
+    renderSteps();
+    wireUpload();
+    wireTry();
+    // a file dropped next to a drop zone must not make the browser leave the dashboard
+    window.addEventListener("dragover", (e) => e.preventDefault());
+    window.addEventListener("drop", (e) => e.preventDefault());
+    await refreshStatus(true);
+    connectEvents();
+    schedulePoll();
+  }
+  init();
+})();
+</script>
+</body>
+</html>

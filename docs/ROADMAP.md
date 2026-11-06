@@ -187,3 +187,8 @@ One Python program, three ways to run it:
 | 2026-11-05 22:45 | Annotator agreement | rf_dekubitus vs maskrcnn on the same 116 photographs: binary Dice 0.28 [0.25, 0.31], mostly stage 1 — label noise in public data |
 | 2026-11-05 22:50 | WP1 build #2 | rf_dekubitus excluded (redundant, conflicting labels); external test → PIID; rebuild + WP2 trainings chained |
 
+| 2026-11-06 02:35 | WP2 trainings | U-Net 80 epochs (best val Dice 0.745 @ thr 0.5); YOLOv8s-seg selected epoch 46 (val Dice 0.591 @ conf 0.25) |
+| 2026-11-06 07:00 | WP2 comparison | **U-Net wins**: test Dice 0.785 [0.735, 0.833] vs 0.719 [0.657, 0.781]; paired diff +0.065 [+0.002, +0.125], p = 0.039 (n = 91). FP rate on other wound types high (U-Net: surgical 0.57, venous 0.49) |
+| 2026-11-06 06:45 | F13 external (PIID) | 1,075 photographs (16 overlapping removed). U-Net sensitivity 0.950 [0.935, 0.961], stage κw 0.62 (over-stages by one); YOLO 0.800, κw 0.80 |
+| 2026-11-06 06:59 | WP4 seed model | U-Net on growth batch 1 (162 photographs): val Dice 0.657 |
+| 2026-11-06 07:05 | WP2 robustness | second training seed for both models started |

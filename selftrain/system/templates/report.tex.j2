@@ -1,0 +1,269 @@
+((= Cycle report, LaTeX source (selftrain.system.report.render_latex).
+    Jinja delimiters are parentheses (see report.render_latex), so LaTeX braces need no
+    escaping. Every inserted value is escaped by the finalize hook (report.latex_escape)
+    unless it is a report.Latex string. Inserted values never stand in math mode,
+    because the escaped text may contain text-mode commands.
+    Variables: r (ReportData), rows (figure layout rows of FigureFile), max_rows
+    (rows of a long table), pdf_note, card (model card as Latex or None),
+    card_truncated. =))
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\definecolor{ink}{HTML}{333333}
+\definecolor{promotedframe}{HTML}{0072B2}
+\definecolor{promotedfill}{HTML}{EAF3FA}
+\definecolor{keptframe}{HTML}{E69F00}
+\definecolor{keptfill}{HTML}{FDF4E3}
+\definecolor{noneframe}{HTML}{8C8C8C}
+\definecolor{nonefill}{HTML}{F2F2F2}
+((* if r.outcome == "promoted" *))
+\colorlet{outcomeframe}{promotedframe}\colorlet{outcomefill}{promotedfill}
+((* elif r.outcome == "kept" *))
+\colorlet{outcomeframe}{keptframe}\colorlet{outcomefill}{keptfill}
+((* else *))
+\colorlet{outcomeframe}{noneframe}\colorlet{outcomefill}{nonefill}
+((* endif *))
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\fboxsep}{6pt}
+\newsavebox{\gatebox}
+\makeatletter
+\setlength{\@fptop}{0pt}                % pages of floats start at the top
+\makeatother
+\pagestyle{plain}
+
+\begin{document}
+\color{ink}
+
+{\LARGE\bfseries Self-retraining cycle ((( r.cycle ))): report\par}
+\smallskip
+{\small ((( r.date ))) \textbar{} ((( r.version_line )))\par}
+((* if r.demo *))
+\smallskip
+\fbox{\small Demo cycle: shortened training on a subset of the images; the numbers are not representative.}\par
+((* endif *))
+((* if pdf_note *))
+\smallskip
+{\small\emph{((( pdf_note )))}\par}
+((* endif *))
+\medskip
+
+((= the box content is set in advance, so it may contain paragraphs =))
+\begin{lrbox}{\gatebox}
+\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+\setlength{\parskip}{4pt}
+\textbf{Gate decision.} ((( r.gate_sentence )))
+((* if r.gate_details *))
+
+{\footnotesize ((( r.gate_details )))\par}
+((* endif *))
+\end{minipage}
+\end{lrbox}
+\noindent\fcolorbox{outcomeframe}{outcomefill}{\usebox{\gatebox}}
+
+\medskip
+{\small
+\begin{tabularx}{\linewidth}{@{}LP{0.42\linewidth}@{}}
+\toprule
+((* for label, value in r.key_numbers *))
+((( label ))) & ((( value ))) \\
+((* endfor *))
+\bottomrule
+\end{tabularx}\par}
+
+\section*{Cycle steps}
+((* if r.steps *))
+{\small
+\begin{tabularx}{\linewidth}{@{}llL@{}}
+\toprule
+Step & Status & Summary \\
+\midrule
+((* for name, status, summary in r.steps *))
+((( name ))) & ((( status ))) & ((( summary|breakable ))) \\
+((* endfor *))
+\bottomrule
+\end{tabularx}\par}
+((* else *))
+No step results were recorded for this cycle.
+((* endif *))
+
+\section*{Data}
+((( r.pool_line )))
+((* if r.batches *))
+Batches of this cycle: ((( r.batches|join(", ")|breakable ))).
+((* endif *))
+((* if r.data_rows *))
+
+{\small
+\begin{tabularx}{\linewidth}{@{}LrrrrrrP{0.2\linewidth}@{}}
+\toprule
+Source & Received & Rejected & Added & Train & Val & Photographs & Licence \\
+\midrule
+((* for row in r.data_rows *))
+((( row.source|breakable ))) & ((( row.received|count ))) & ((( row.rejected ))) & ((( row.added ))) & ((( row.train ))) & ((( row.val ))) & ((( row.photographs ))) & ((( row.license ))) \\
+((* endfor *))
+((* if r.data_total *))
+\midrule
+Total & ((( r.data_total.received|count ))) & ((( r.data_total.rejected ))) & ((( r.data_total.added ))) & ((( r.data_total.train ))) & ((( r.data_total.val ))) & ((( r.data_total.photographs ))) & \\
+((* endif *))
+\bottomrule
+\end{tabularx}\par}
+{\footnotesize Received: labelled images loaded from the batches. Added: images written to the pool, read from the pool manifest (rows added in this cycle); photographs: distinct photographs among them.\par}
+((* endif *))
+
+\section*{Quality control}
+((* if r.rejections *))
+((( r.n_rejected ))) image((* if r.n_rejected != 1 *))s((* endif *)) rejected, grouped by reason:
+
+{\small
+\begin{tabularx}{\linewidth}{@{}LrP{0.45\linewidth}@{}}
+\toprule
+Reason & Images & Examples \\
+\midrule
+((* for row in r.rejections[:max_rows] *))
+((( row.reason ))) & ((( row.count ))) & ((( row.examples|join(", ")|breakable ))) \\
+((* endfor *))
+\bottomrule
+\end{tabularx}\par}
+((* if r.rejections|length > max_rows *))
+{\footnotesize ((( r.rejections|length - max_rows ))) further reason categories are listed in the HTML report.\par}
+((* endif *))
+((* else *))
+No image was rejected by quality control.
+((* endif *))
+
+\section*{Duplicates}
+((* if r.duplicates *))
+((* if r.duplicates|length == 1 *))1 image of this cycle shows((* else *))((( r.duplicates|length ))) images of this cycle show((* endif *)) a photograph that is already in the pool or occurs more than once in the cycle:
+
+{\small
+\begin{tabularx}{\linewidth}{@{}LLlL@{}}
+\toprule
+Image & Matched photograph & Split & Action \\
+\midrule
+((* for d in r.duplicates[:max_rows] *))
+((( d.image|breakable ))) & ((( d.matched|breakable ))) & ((( d.split ))) & ((( d.action ))) \\
+((* endfor *))
+\bottomrule
+\end{tabularx}\par}
+((* if r.duplicates|length > max_rows *))
+{\footnotesize ((( r.duplicates|length - max_rows ))) further duplicates are listed in the HTML report.\par}
+((* endif *))
+((* else *))
+No image of this cycle shows a photograph that is already known.
+((* endif *))
+
+\section*{Drift}
+((* if r.drift *))
+Two-sample Kolmogorov--Smirnov test per image feature between the new photographs((* if r.drift.n_new is not none *)) (n = ((( r.drift.n_new ))))((* endif *)) and the pool((* if r.drift.n_reference is not none *)) (n = ((( r.drift.n_reference ))))((* endif *)). The adjusted p-value is the Bonferroni correction min(1, k p) over the k = ((( r.drift.rows|length ))) features; a feature counts as shifted if it is below $\alpha$ = ((( r.drift.alpha|num ))). Drift is a warning, never a blocker.
+
+((* if r.drift.rows *))
+{\small
+\begin{tabularx}{\linewidth}{@{}Lrrrl@{}}
+\toprule
+Feature & KS $D$ & $p$ & $p$ (Bonferroni) & Shifted \\
+\midrule
+((* for row in r.drift.rows *))
+((( row.feature ))) & ((( row.statistic|num ))) & ((( row.p_value|num(4) ))) & ((( row.p_adjusted|num(4) ))) & ((* if row.shifted *))\textbf{yes}((* else *))no((* endif *)) \\
+((* endfor *))
+\bottomrule
+\end{tabularx}\par}
+((* endif *))
+((* else *))
+No drift test was run in this cycle.
+((* endif *))
+
+\section*{Metrics on the frozen test split}
+((* if r.metric_rows *))
+{\small
+((* if r.baseline_label *))
+\begin{tabularx}{\linewidth}{@{}LP{0.24\linewidth}P{0.24\linewidth}@{}}
+\toprule
+Metric & ((( r.subject_label ))) & ((( r.baseline_label ))) \\
+\midrule
+((* for m in r.metric_rows *))
+((( m.label ))) & ((( m.candidate ))) & ((( m.baseline ))) \\
+((* endfor *))
+((* else *))
+\begin{tabularx}{\linewidth}{@{}LP{0.3\linewidth}@{}}
+\toprule
+Metric & ((( r.subject_label ))) \\
+\midrule
+((* for m in r.metric_rows *))
+((( m.label ))) & ((( m.candidate ))) \\
+((* endfor *))
+((* endif *))
+\bottomrule
+\end{tabularx}\par}
+((* else *))
+No evaluation on the frozen test split is available.
+((* endif *))
+((* if r.gate_details *))
+
+((( r.gate_details )))
+((* endif *))
+((* if rows *))
+
+\clearpage
+\section*{Figures}
+((* for row in rows *))
+\begin{figure}[!htb]
+\centering
+((* for fig in row *))
+((* if fig.width == "half" *))
+\begin{minipage}[t]{0.485\linewidth}
+\centering
+\includegraphics[width=\linewidth]{((( fig.latex_name )))}
+\caption{((( fig.caption )))}
+\label{((( fig.label )))}
+\end{minipage}%
+((* if not loop.last *))
+\hfill
+((* endif *))
+((* else *))
+\includegraphics[width=\linewidth]{((( fig.latex_name )))}
+\caption{((( fig.caption )))}
+\label{((( fig.label )))}
+((* endif *))
+((* endfor *))
+\end{figure}
+((* endfor *))
+((* endif *))
+((* if r.notes *))
+
+\section*{Notes}
+\begin{itemize}[nosep,leftmargin=*]
+((* for note in r.notes *))
+\item ((( note )))
+((* endfor *))
+\end{itemize}
+((* endif *))
+((* if card *))
+
+\clearpage
+\section*{Appendix: model card of ((( r.subject_label )))}
+{\small
+((( card )))
+\par}
+((* if card_truncated *))
+\emph{The model card continues in the HTML report and in models/v((( r.subject )))/model\_card.md.}
+((* endif *))
+((* endif *))
+
+\vfill
+{\footnotesize Research prototype: not a medical device, no diagnosis. Written by selftrain.system.report.\par}
+\end{document}

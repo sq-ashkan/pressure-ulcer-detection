@@ -58,13 +58,19 @@ A batch folder may contain any of:
 
 `ingest.scan_inbox(ws) -> list[Batch]`; `ingest.load_batch(batch) -> list[Record]` where
 `Record = dataclass(path: Path, polygons: list[tuple[int, np.ndarray]], source: str,
-license: str, batch: str)` — polygons: (stage 0-3, Nx2 normalised float32).
+license: str, batch: str, issue: str | None = None)` — polygons: (stage 0-3, Nx2 normalised
+float32). A region of a source class that the class map does not cover keeps the stage code
+`quality.unknown_stage(c) = -1 - c`, so quality rejects the image as `unknown_class` naming c.
+`issue` is set (with empty polygons) when ingest cannot use an image's label; it holds a
+rejection reason of `quality.REASONS` (malformed_label, unreadable_mask, size_mismatch,
+box_label, dropped_class), and quality rejects the record with exactly that reason.
 
 ## 3. Cycle steps (`selftrain.system.steps`) — each `step(ctx: CycleContext) -> StepResult`
 
 `CycleContext`: ws, cfg, cycle id, demo flag, records (list[Record]), accepted,
 rejected (list[(Record, reason)]), groups, dataset_version, model_version, metrics,
-artifacts dict, `emit(step, status, message, **data)`.
+artifacts dict, `emit(step, status, message, /, **data)` (the three event fields are
+positional-only, so event data may use any key, e.g. the drift report's own `status`).
 `StepResult`: ok: bool, summary: str (one line for the dashboard), data: dict.
 
 1. **ingest** — load all batches; record count per batch.
@@ -99,7 +105,8 @@ artifacts dict, `emit(step, status, message, **data)`.
 10. **notify** — Telegram via `scripts/notify_telegram.py` functions (silent), PDF attached.
 
 `selftrain.system.cycle.run_cycle(ws, demo=False, emit=None) -> dict` runs the steps in
-order, stops at the first failing step (status `failed`), always writes status.json.
+order, stops at the first failing step (status `failed`), always writes status.json; the
+listener `emit(step, status, message, /, **data)` is called after every event.
 
 ## 4. Events (dashboard contract)
 
