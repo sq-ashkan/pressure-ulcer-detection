@@ -754,6 +754,12 @@
       tr.appendChild(td); body.appendChild(tr);
       return;
     }
+    // The gate's reason already starts with its verdict ("not promoted: ..."); show the verdict once.
+    const gateText = (promoted, reason) => {
+      const verdict = promoted ? "promoted" : "not promoted";
+      const rest = String(reason || "").replace(/^(not )?promoted:\s*/i, "");
+      return rest ? verdict + ": " + rest : verdict;
+    };
     vs.forEach((v) => {
       const tr = document.createElement("tr");
       if (v.current) tr.className = "current";
@@ -762,7 +768,7 @@
        [String(v.created || "").slice(0, 10), ""],
        [String(v.train_images), ""],
        [isNum(v.dice_mean) ? fmt(v.dice_mean) + (ci ? ` [${fmt(ci[0])}, ${fmt(ci[1])}]` : "") : "—", ""],
-       [(v.promoted ? "promoted" : "not promoted") + (gate.reason ? ": " + gate.reason : ""), "reason"]]
+       [gateText(v.promoted, gate.reason), "reason"]]
         .forEach(([text, cls]) => { const td = document.createElement("td"); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); });
       body.appendChild(tr);
     });
