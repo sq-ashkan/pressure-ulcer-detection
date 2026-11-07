@@ -1,0 +1,6 @@
+# Full test-suite run, 2026-11-07 20:20 CET, command: SELFTRAIN_DEVICE=cpu .venv/bin/python -m pytest tests -q -rs
+SKIPPED [1] tests/test_pipeline.py:224: no trained weights yet
+SKIPPED [1] tests/test_pipeline.py:236: no trained weights yet
+SKIPPED [1] tests/test_pipeline.py:244: no trained weights yet
+SKIPPED [1] tests/test_pipeline.py:250: no trained weights yet
+317 passed, 4 skipped, 1 warning in 159.72s (0:02:39)
