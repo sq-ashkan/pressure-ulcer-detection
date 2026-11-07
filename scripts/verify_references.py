@@ -3,7 +3,7 @@
 For every entry with a DOI the Crossref record is fetched and compared field by field:
 title (normalised similarity >= 0.90), family name of the first author, year, volume,
 issue, first page, and container title (journal/booktitle, similarity >= 0.6).
-Entries without DOI must have a reachable URL (HTTP 200 after redirects) or be a
+Entries without DOI must have a reachable URL (HTTP 2xx after redirects) or be a
 book/report/thesis with publisher/institution/school. Every finding is reported;
 nothing is changed automatically.
 
@@ -126,8 +126,10 @@ def check_doi(e):
 def check_url(e):
     try:
         st, _ = get(e["url"], accept="text/html,*/*")
-        return [] if st == 200 else [f"URL {e['url']}: HTTP {st}"]
+        return [] if 200 <= st < 300 else [f"URL {e['url']}: HTTP {st}"]
     except urllib.error.HTTPError as ex:
+        if ex.code in (401, 403, 429):  # bot protection: the page must be checked in a browser
+            return [f"URL {e['url']}: HTTP {ex.code} (blocked for scripts; check in a browser)"]
         return [f"URL {e['url']}: HTTP {ex.code}"]
     except Exception as ex:
         return [f"URL {e['url']}: {ex}"]
