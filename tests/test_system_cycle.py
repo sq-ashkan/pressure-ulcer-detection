@@ -865,3 +865,19 @@ def test_refresh_status_mirrors_the_registry(ws: Workspace) -> None:
     status = cycle.refresh_status(ws)
     assert status["current_model"] == 0 and [v["version"] for v in status["versions"]] == [0]
     assert read_status(ws)["current_model"] == 0 and status["result"] == "idle"
+
+
+def test_reproduce_lists_only_existing_scripts_in_order() -> None:
+    from selftrain.__main__ import ROOT
+    scripts = [step.script for step in THESIS_PIPELINE]
+    assert [s for s in scripts if not (ROOT / s).is_file()] == []
+    order = ["scripts/build_seg_dataset.py", "scripts/train_model.py", "scripts/compare_models.py",
+             "scripts/external_piid.py", "scripts/annotator_agreement.py",
+             "scripts/data_growth.sh", "scripts/learning_curve.py",
+             "scripts/leakage_sensitivity.py", "scripts/make_figures.py"]
+    firsts = [scripts.index(s) for s in order]
+    assert firsts == sorted(firsts)
+    seeds = {step.args[step.args.index("--seed") + 1] for step in THESIS_PIPELINE
+             if "--seed" in step.args}
+    assert seeds == {"0", "1", "2"}
+    assert sum(s == "scripts/compare_models.py" for s in scripts) == 3

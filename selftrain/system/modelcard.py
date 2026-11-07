@@ -17,7 +17,11 @@ Method (section: where its content comes from)
   was when the model's dataset version D was built (the current pool manifest if the
   snapshot is missing). Per source: images per split, distinct photographs, the licence
   recorded at ingest, and title and URL of the thesis sources (workspace.KNOWN_SOURCES),
-  since CC BY 4.0 requires attribution. Labelled regions per stage are counted in the
+  since CC BY 4.0 requires attribution. Sources are the original public collections:
+  an image that arrived in an inbox batch (source e.g. growth_batch2) is counted under
+  the known source named in its image name (pool names "<batch>__<source>__..."; the
+  growth batches are images of data/seg, whose names start with "<source>__"), with
+  that source's licence (original_sources). Labelled regions per stage are counted in the
   YOLO label files of datasets/v{D}: one polygon line is one region, class c is stage
   c + 1, and a label file without polygons belongs to an ulcer-free photograph.
 * Training configuration: the training run directory -- models/v{N}/train, or for a
@@ -66,7 +70,8 @@ from .workspace import (KNOWN_SOURCES, SPLITS, UNSTATED_LICENSE, Workspace, atom
 __all__ = [
     "CARD_NAME", "NA", "WOUND_TYPES", "card_path", "dataset_manifest", "file_sha256",
     "find_train_dir", "fmt_ci", "fmt_estimate", "fmt_value", "label_statistics", "lineage",
-    "load_evaluation", "markdown_table", "render", "source_rows", "write",
+    "load_evaluation", "markdown_table", "original_source", "original_sources", "render",
+    "source_rows", "write",
 ]
 
 CARD_NAME = "model_card.md"
@@ -271,6 +276,34 @@ def dataset_manifest(ws: Workspace, dataset_version: int) -> tuple[pd.DataFrame,
                     f"taken when dataset v{dataset_version} was built")
     return ws.read_manifest(), (f"{_code('pool/manifest.csv')}, the current pool (the "
                                 f"snapshot of dataset v{dataset_version} is missing)")
+
+
+def original_source(name: str, source: str) -> str:
+    """The original public source of an image: `source` itself if it is a known thesis
+    source (workspace.KNOWN_SOURCES), otherwise the first "__"-separated token of the
+    image `name` that is a known source (an inbox batch such as growth_batch2 holds
+    images of data/seg, whose names start with "<source>__"); `source` if none is."""
+    if source in KNOWN_SOURCES:
+        return source
+    for token in str(name).split("__"):
+        if token in KNOWN_SOURCES:
+            return token
+    return source
+
+
+def original_sources(manifest: pd.DataFrame) -> pd.DataFrame:
+    """Copy of `manifest` whose ``source`` column holds the original source of every image
+    (original_source); a re-attributed image gets the licence of its known source."""
+    if manifest.empty:
+        return manifest
+    out = manifest.copy()
+    resolved = [original_source(n, s) for n, s in zip(out["name"], out["source"].astype(str))]
+    changed = [r != s for r, s in zip(resolved, out["source"].astype(str))]
+    out["source"] = resolved
+    if "license" in out.columns:
+        out["license"] = [KNOWN_SOURCES[r].license if c else lic
+                          for r, c, lic in zip(resolved, changed, out["license"])]
+    return out
 
 
 def source_rows(manifest: pd.DataFrame) -> list[dict[str, Any]]:
@@ -789,6 +822,7 @@ def render(ws: Workspace, version: int, *, generated: str | None = None) -> str:
     rec = _record(reg, version)
     evaluation = load_evaluation(ws, rec.version)
     manifest, origin = dataset_manifest(ws, rec.dataset_version)
+    manifest = original_sources(manifest)
     labels = label_statistics(ws.dataset_dir(rec.dataset_version))
     sections = [
         _section_details(ws, reg, rec, generated or utc_now_iso()),

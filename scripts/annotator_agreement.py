@@ -17,6 +17,19 @@ Method
   3. Agreement: binary Dice/IoU of "wound" (any class incl. DTI/Unstageable) between the
      two annotators; for pairs where both mark a stage 1-4 wound, agreement of the
      dominant stage and Cohen's kappa; bootstrap 95 % CIs.
+  4. Extras (reviewer request), all over distinct photographs:
+     - cohen_kappa_ci95: percentile bootstrap of Cohen's kappa (2000 resamples, seed 0;
+       resamples with an undefined kappa -- a single category in both raters -- are
+       dropped, their count is reported as cohen_kappa_bootstrap_undefined);
+     - pabak = (k*p_o - 1)/(k - 1) with k = 4 stage categories (prevalence- and
+       bias-adjusted kappa, Byrt et al. 1993);
+     - gwet_ac1 = (p_o - p_e)/(1 - p_e), p_e = sum_k pi_k (1 - pi_k)/(k - 1), pi_k the mean
+       of both raters' marginal proportions of stage k (Gwet 2008); both with bootstrap CIs;
+     - binary_dice_by_stage: Dice mean, bootstrap CI and n per stratum, where the stratum is
+       "stage_<s>" when both annotators give the same dominant stage s, "discordant" when
+       they differ, "no_stage" when either has no stage 1-4 pixels; plus the same split by
+       the rf_dekubitus annotator's stage alone (binary_dice_by_dekubitus_stage).
+Run:    SELFTRAIN_DEVICE=cpu .venv/bin/python scripts/annotator_agreement.py
 Output: results/annotator_agreement.json, results/annotator_agreement_pairs.csv
 """
 import csv
@@ -73,6 +86,58 @@ def raster_partner(lbl: Path, table, h: int, w: int) -> np.ndarray:
 def dominant(m: np.ndarray) -> int:
     c = np.bincount(m.ravel(), minlength=10)[1:5]
     return int(c.argmax() + 1) if c.sum() else 0
+
+
+K_STAGES = 4
+
+
+def _po_pe_ac1(a, b, k: int = K_STAGES):
+    a, b = np.asarray(a), np.asarray(b)
+    po = float(np.mean(a == b))
+    pi = np.array([(np.mean(a == c) + np.mean(b == c)) / 2 for c in range(1, k + 1)])
+    pe = float((pi * (1 - pi)).sum() / (k - 1))
+    return po, (po - pe) / (1 - pe) if pe < 1 else float("nan")
+
+
+def stage_extras(st, b: int = 2000, seed: int = 0):
+    """Bootstrap CI of Cohen's kappa, PABAK and Gwet's AC1 for the dominant-stage pairs."""
+    a = np.array([x["stage_dek"] for x in st]); c = np.array([x["stage_partner"] for x in st])
+    if len(st) < 2:
+        return {}
+    po, ac1 = _po_pe_ac1(a, c)
+    pabak = (K_STAGES * po - 1) / (K_STAGES - 1)
+    rng = np.random.default_rng(seed)
+    ks, pb, ac = [], [], []
+    for _ in range(b):
+        i = rng.integers(0, len(a), len(a))
+        with np.errstate(all="ignore"):
+            k = cohen_kappa_score(a[i], c[i]) if len(set(a[i]) | set(c[i])) > 1 else float("nan")
+        ks.append(k)
+        p, g = _po_pe_ac1(a[i], c[i])
+        pb.append((K_STAGES * p - 1) / (K_STAGES - 1)); ac.append(g)
+    ks = np.array(ks, float)
+    q = lambda v: [float(np.nanquantile(v, 0.025)), float(np.nanquantile(v, 0.975))]
+    return {"cohen_kappa_ci95": q(ks), "cohen_kappa_bootstrap_undefined": int(np.isnan(ks).sum()),
+            "pabak": float(pabak), "pabak_ci95": q(np.array(pb)), "pabak_categories": K_STAGES,
+            "gwet_ac1": float(ac1), "gwet_ac1_ci95": q(np.array(ac, float))}
+
+
+def dice_strata(uniq, key):
+    groups = {}
+    for x in uniq:
+        groups.setdefault(key(x), []).append(x["dice"])
+    out = {}
+    for g in sorted(groups):
+        m, ci = bootstrap_ci(groups[g])
+        out[g] = {"n": len(groups[g]), "dice_mean": m, "dice_ci95": list(ci),
+                  "dice_median": float(np.median(groups[g]))}
+    return out
+
+
+def pair_stratum(x):
+    if not x["stage_dek"] or not x["stage_partner"]:
+        return "no_stage"
+    return f"stage_{x['stage_dek']}" if x["stage_dek"] == x["stage_partner"] else "discordant"
 
 
 def main():
@@ -136,6 +201,9 @@ def main():
            "stage_pairs": len(st), "dominant_stage_agreement": agree, "cohen_kappa": kappa,
            "stage_confusion": {f"{a}->{b}": sum(1 for x in st if x["stage_dek"] == a and x["stage_partner"] == b)
                                for a in range(1, 5) for b in range(1, 5)}}
+    res.update(stage_extras(st))
+    res["binary_dice_by_stage"] = dice_strata(uniq, pair_stratum)
+    res["binary_dice_by_dekubitus_stage"] = dice_strata(uniq, lambda x: f"stage_{x['stage_dek']}")
     out = ROOT / "results"
     (out / "annotator_agreement.json").write_text(json.dumps(res, indent=2))
     with open(out / "annotator_agreement_pairs.csv", "w", newline="") as f:

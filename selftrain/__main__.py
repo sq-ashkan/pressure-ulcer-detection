@@ -261,16 +261,18 @@ def find_cycle_summary(ws: Workspace, version: int) -> Path | None:
 
 
 def cmd_report(args: argparse.Namespace) -> int:
-    """report --version N: re-render the cycle report from its stored summary; for a
-    version without a cycle (init's v0) the model card is rewritten instead."""
+    """report --version N: rewrite the model card of the version from the stored files
+    (nothing is retrained), then re-render the cycle report from its stored summary, so
+    the report embeds the new card; a version without a cycle (init's v0) has only the
+    card."""
     from .system import modelcard, registry
     from .system.steps import workspace_relative
     ws = open_workspace(args)
     registry.get_version(ws, args.version)              # KeyError if not registered
+    card = Path(modelcard.write(ws, args.version))
+    registry.update_version(ws, args.version, model_card=workspace_relative(ws, card))
     summary_path = find_cycle_summary(ws, args.version)
     if summary_path is None:
-        card = Path(modelcard.write(ws, args.version))
-        registry.update_version(ws, args.version, model_card=workspace_relative(ws, card))
         print(f"model v{args.version} was not produced by a cycle (registered by init): "
               f"no cycle report; model card: {card}")
         return 0
@@ -278,6 +280,7 @@ def cmd_report(args: argparse.Namespace) -> int:
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     paths = report.write_report(ws, summary)
     print(f"report of cycle {summary.get('cycle')} (model v{args.version}):")
+    print(f"  model card: {card}")
     for key in ("html", "pdf"):
         if paths.get(key):
             print(f"  {key}: {paths[key]}")
@@ -333,25 +336,51 @@ class PipelineStep:
     args: tuple[str, ...] = ()
 
     def command(self, python: str = sys.executable) -> list[str]:
-        """argv of the step."""
-        return [python, self.script, *self.args]
+        """argv of the step (a shell script, *.sh, is run with bash)."""
+        runner = "bash" if self.script.endswith(".sh") else python
+        return [runner, self.script, *self.args]
+
+
+def _seed_dir(seed: int) -> str:
+    """Run directory of a comparison seed: runs/compare (seed 0), runs/compare_seed{N}."""
+    return "runs/compare" if seed == 0 else f"runs/compare_seed{seed}"
+
+
+def _comparison_steps(seeds: tuple[int, ...] = (0, 1, 2)) -> tuple[PipelineStep, ...]:
+    """Training of both models and the pre-registered comparison, per seed (seed 0 writes
+    results/comparison, seed N results/comparison_seed{N})."""
+    steps: list[PipelineStep] = []
+    for seed in seeds:
+        run = _seed_dir(seed)
+        for model in ("unet", "yoloseg"):
+            steps.append(PipelineStep(f"train {model}, seed {seed} (WP2)", "scripts/train_model.py",
+                                      ("--model", model, "--seed", str(seed),
+                                       "--out", f"{run}/{model}")))
+    for seed in seeds:
+        run = _seed_dir(seed)
+        out = "results/comparison" if seed == 0 else f"results/comparison_seed{seed}"
+        steps.append(PipelineStep(f"pre-registered model comparison, seed {seed} (WP2)",
+                                  "scripts/compare_models.py",
+                                  ("--unet", f"{run}/unet/best.pt",
+                                   "--yolo", f"{run}/yoloseg/weights/selected.pt", "--out", out)))
+    return tuple(steps)
 
 
 THESIS_PIPELINE: tuple[PipelineStep, ...] = (
     PipelineStep("segmentation dataset data/seg (WP1)", "scripts/build_seg_dataset.py"),
-    PipelineStep("inter-annotator agreement (label-noise finding)",
-                 "scripts/annotator_agreement.py"),
-    PipelineStep("train U-Net (WP2)", "scripts/train_model.py",
-                 ("--model", "unet", "--out", "runs/compare/unet")),
-    PipelineStep("train YOLOv8-seg (WP2)", "scripts/train_model.py",
-                 ("--model", "yoloseg", "--out", "runs/compare/yoloseg")),
-    PipelineStep("pre-registered model comparison (WP2)", "scripts/compare_models.py"),
+    *_comparison_steps(),
     PipelineStep("external test on PIID, U-Net (F13)", "scripts/external_piid.py",
                  ("--model", "unet", "--weights", "runs/compare/unet/best.pt")),
     PipelineStep("external test on PIID, YOLOv8-seg (F13)", "scripts/external_piid.py",
                  ("--model", "yoloseg", "--weights", "runs/compare/yoloseg/weights/selected.pt")),
-    PipelineStep("data-growth demonstration: four cycles of the system (WP4)",
-                 "scripts/data_growth.py"),
+    PipelineStep("inter-annotator agreement (label-noise finding)",
+                 "scripts/annotator_agreement.py"),
+    PipelineStep("data growth: growth batches, selftrain init and three system cycles (WP4)",
+                 "scripts/data_growth.sh"),
+    PipelineStep("learning curve (25/50/75 % of train, seeds 0-2)", "scripts/learning_curve.py"),
+    PipelineStep("leakage sensitivity (cross-source near-duplicates)",
+                 "scripts/leakage_sensitivity.py"),
+    PipelineStep("thesis figures and number macros", "scripts/make_figures.py"),
 )
 """The thesis experiments in dependency order (docs/ROADMAP.md, WP1-WP4)."""
 
@@ -475,7 +504,7 @@ def build_parser() -> argparse.ArgumentParser:
     p = add("status", cmd_status, "show the last cycle, the current model and all versions")
     p.add_argument("--json", action="store_true", help="print status.json as JSON")
 
-    p = add("report", cmd_report, "re-render the report of the cycle that produced a model version")
+    p = add("report", cmd_report, "rewrite the model card of a version and re-render its cycle report")
     p.add_argument("--version", type=int, required=True, metavar="N", help="model version")
 
     p = add("rank-unlabeled", cmd_rank_unlabeled,
