@@ -186,7 +186,10 @@ def piid():
     for ax, m in zip(axes, ("unet", "yoloseg")):
         cm = np.array(json.load(open(RES / "external" / f"external_piid_{m}.json"))["confusion_rows_piid_stage_cols_pred0to4"])
         rown = cm / cm.sum(1, keepdims=True)
-        ax.imshow(rown, cmap="Blues", vmin=0, vmax=1)
+        # pcolormesh keeps the matrix a vector graphic (imshow would embed a raster image)
+        ax.pcolormesh(np.arange(cm.shape[1] + 1) - 0.5, np.arange(cm.shape[0] + 1) - 0.5, rown,
+                      cmap="Blues", vmin=0, vmax=1, edgecolors="face", linewidth=0)
+        ax.set_xlim(-0.5, cm.shape[1] - 0.5); ax.set_ylim(cm.shape[0] - 0.5, -0.5); ax.set_aspect("equal")
         for i in range(cm.shape[0]):
             for j in range(cm.shape[1]):
                 ax.text(j, i, cm[i, j], ha="center", va="center", fontsize=7,
