@@ -100,5 +100,46 @@
       "p_value": 0.0,
       "unet_fpr": 0.4884
     }
+  },
+  "comparison_seed2": {
+    "all": {
+      "n_pos": 91,
+      "n_neg": 45,
+      "unet_dice": 0.7753,
+      "yolo_dice": 0.6726,
+      "mean_diff": 0.1026,
+      "ci95": [
+        0.0362,
+        0.1739
+      ],
+      "p_value": 0.003,
+      "unet_fpr": 0.4889
+    },
+    "without_true_copy": {
+      "n_pos": 90,
+      "n_neg": 45,
+      "unet_dice": 0.7801,
+      "yolo_dice": 0.6801,
+      "mean_diff": 0.1,
+      "ci95": [
+        0.0288,
+        0.1712
+      ],
+      "p_value": 0.003,
+      "unet_fpr": 0.4889
+    },
+    "without_all_flagged": {
+      "n_pos": 89,
+      "n_neg": 43,
+      "unet_dice": 0.7823,
+      "yolo_dice": 0.6775,
+      "mean_diff": 0.1047,
+      "ci95": [
+        0.0392,
+        0.1772
+      ],
+      "p_value": 0.002,
+      "unet_fpr": 0.5116
+    }
   }
 }

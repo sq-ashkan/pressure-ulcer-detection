@@ -1,113 +1,450 @@
 {
-  "counting_rule": "non-blank lines not starting with '#' in .py files (docstrings count as code)",
+  "counting_rule": "non-blank lines not starting with '#' (docstrings count as code)",
+  "origin_rule": "git origin: 'inherited' = file present at commit ae20d18 and `git diff ae20d18 -- file` empty; 'inherited_modified' = present at ae20d18 but changed since (added/removed lines from git diff --numstat against the working tree); 'thesis' = added after ae20d18",
+  "base_commit": "ae20d18c54f0397e0cf1dbcdc8b76f24f00db984",
   "areas": {
-    "inherited_practical_project": {
-      "files": 17,
-      "lines": 3038,
-      "per_file": {
-        "app/detector.py": 126,
-        "app/main.py": 155,
-        "scripts/augment_dataset.py": 184,
-        "scripts/augment_fast.py": 209,
-        "scripts/augment_multiround.py": 186,
-        "scripts/convert_masks_to_bbox.py": 60,
-        "scripts/deduplicate.py": 71,
-        "scripts/download_all.py": 98,
-        "scripts/download_extra.py": 140,
-        "scripts/download_github.py": 51,
-        "scripts/download_roboflow.py": 87,
-        "scripts/eda.py": 211,
-        "scripts/generate_dataset.py": 211,
-        "scripts/train_yolo.py": 117,
-        "scripts/unify_dataset.py": 332,
-        "scripts/unify_dataset_v2.py": 337,
-        "scripts/unify_dataset_v3.py": 463
-      }
-    },
-    "thesis_selftrain_library": {
+    "selftrain_library": {
       "files": 9,
-      "lines": 1017,
+      "lines": 1042,
+      "by_origin": {
+        "inherited": {
+          "files": 0,
+          "lines": 0
+        },
+        "inherited_modified": {
+          "files": 0,
+          "lines": 0,
+          "added_lines": 0,
+          "removed_lines": 0
+        },
+        "thesis": {
+          "files": 9,
+          "lines": 1042
+        }
+      },
       "per_file": {
-        "selftrain/__init__.py": 11,
-        "selftrain/__main__.py": 466,
-        "selftrain/config.py": 45,
-        "selftrain/data.py": 47,
-        "selftrain/evaluate.py": 136,
-        "selftrain/letterbox.py": 26,
-        "selftrain/metrics.py": 71,
-        "selftrain/unet.py": 127,
-        "selftrain/yoloseg.py": 88
+        "selftrain/__init__.py": {
+          "origin": "thesis",
+          "lines": 11
+        },
+        "selftrain/__main__.py": {
+          "origin": "thesis",
+          "lines": 491
+        },
+        "selftrain/config.py": {
+          "origin": "thesis",
+          "lines": 45
+        },
+        "selftrain/data.py": {
+          "origin": "thesis",
+          "lines": 47
+        },
+        "selftrain/evaluate.py": {
+          "origin": "thesis",
+          "lines": 136
+        },
+        "selftrain/letterbox.py": {
+          "origin": "thesis",
+          "lines": 26
+        },
+        "selftrain/metrics.py": {
+          "origin": "thesis",
+          "lines": 71
+        },
+        "selftrain/unet.py": {
+          "origin": "thesis",
+          "lines": 127
+        },
+        "selftrain/yoloseg.py": {
+          "origin": "thesis",
+          "lines": 88
+        }
       }
     },
-    "thesis_selftrain_system": {
+    "selftrain_system": {
       "files": 15,
       "lines": 8552,
+      "by_origin": {
+        "inherited": {
+          "files": 0,
+          "lines": 0
+        },
+        "inherited_modified": {
+          "files": 0,
+          "lines": 0,
+          "added_lines": 0,
+          "removed_lines": 0
+        },
+        "thesis": {
+          "files": 15,
+          "lines": 8552
+        }
+      },
       "per_file": {
-        "selftrain/system/__init__.py": 28,
-        "selftrain/system/active.py": 157,
-        "selftrain/system/cycle.py": 398,
-        "selftrain/system/dashboard.py": 869,
-        "selftrain/system/dataset.py": 497,
-        "selftrain/system/dedupe.py": 459,
-        "selftrain/system/drift.py": 229,
-        "selftrain/system/gate.py": 135,
-        "selftrain/system/ingest.py": 1116,
-        "selftrain/system/modelcard.py": 751,
-        "selftrain/system/quality.py": 362,
-        "selftrain/system/registry.py": 355,
-        "selftrain/system/report.py": 2012,
-        "selftrain/system/steps.py": 653,
-        "selftrain/system/workspace.py": 531
+        "selftrain/system/__init__.py": {
+          "origin": "thesis",
+          "lines": 28
+        },
+        "selftrain/system/active.py": {
+          "origin": "thesis",
+          "lines": 157
+        },
+        "selftrain/system/cycle.py": {
+          "origin": "thesis",
+          "lines": 398
+        },
+        "selftrain/system/dashboard.py": {
+          "origin": "thesis",
+          "lines": 869
+        },
+        "selftrain/system/dataset.py": {
+          "origin": "thesis",
+          "lines": 497
+        },
+        "selftrain/system/dedupe.py": {
+          "origin": "thesis",
+          "lines": 459
+        },
+        "selftrain/system/drift.py": {
+          "origin": "thesis",
+          "lines": 229
+        },
+        "selftrain/system/gate.py": {
+          "origin": "thesis",
+          "lines": 135
+        },
+        "selftrain/system/ingest.py": {
+          "origin": "thesis",
+          "lines": 1116
+        },
+        "selftrain/system/modelcard.py": {
+          "origin": "thesis",
+          "lines": 751
+        },
+        "selftrain/system/quality.py": {
+          "origin": "thesis",
+          "lines": 362
+        },
+        "selftrain/system/registry.py": {
+          "origin": "thesis",
+          "lines": 355
+        },
+        "selftrain/system/report.py": {
+          "origin": "thesis",
+          "lines": 2012
+        },
+        "selftrain/system/steps.py": {
+          "origin": "thesis",
+          "lines": 653
+        },
+        "selftrain/system/workspace.py": {
+          "origin": "thesis",
+          "lines": 531
+        }
       }
     },
-    "thesis_other_scripts": {
-      "files": 23,
-      "lines": 2746,
+    "scripts": {
+      "files": 43,
+      "lines": 6037,
+      "by_origin": {
+        "inherited": {
+          "files": 17,
+          "lines": 3059
+        },
+        "inherited_modified": {
+          "files": 0,
+          "lines": 0,
+          "added_lines": 0,
+          "removed_lines": 0
+        },
+        "thesis": {
+          "files": 26,
+          "lines": 2978
+        }
+      },
       "per_file": {
-        "scripts/annotator_agreement.py": 187,
-        "scripts/build_seg_dataset.py": 366,
-        "scripts/check_thesis.py": 228,
-        "scripts/citation_contexts.py": 44,
-        "scripts/compare_models.py": 71,
-        "scripts/engineering_evidence.py": 201,
-        "scripts/evaluate.py": 219,
-        "scripts/external_piid.py": 99,
-        "scripts/external_piid_extra.py": 81,
-        "scripts/fetch_weights.py": 30,
-        "scripts/gate_power.py": 113,
-        "scripts/leakage_sensitivity.py": 65,
-        "scripts/learning_curve.py": 69,
-        "scripts/make_figures.py": 198,
-        "scripts/make_growth_batches.py": 65,
-        "scripts/make_qualitative.py": 56,
-        "scripts/make_sample_grids.py": 164,
-        "scripts/notify_telegram.py": 104,
-        "scripts/provenance_check.py": 106,
-        "scripts/source_overlap.py": 42,
-        "scripts/test_imports.py": 59,
-        "scripts/train_model.py": 34,
-        "scripts/verify_references.py": 145
+        "scripts/annotator_agreement.py": {
+          "origin": "thesis",
+          "lines": 187
+        },
+        "scripts/augment_dataset.py": {
+          "origin": "inherited",
+          "lines": 184
+        },
+        "scripts/augment_fast.py": {
+          "origin": "inherited",
+          "lines": 209
+        },
+        "scripts/augment_multiround.py": {
+          "origin": "inherited",
+          "lines": 186
+        },
+        "scripts/build_seg_dataset.py": {
+          "origin": "thesis",
+          "lines": 366
+        },
+        "scripts/check_thesis.py": {
+          "origin": "thesis",
+          "lines": 228
+        },
+        "scripts/citation_contexts.py": {
+          "origin": "thesis",
+          "lines": 44
+        },
+        "scripts/compare_models.py": {
+          "origin": "thesis",
+          "lines": 71
+        },
+        "scripts/comparison_robustness.py": {
+          "origin": "thesis",
+          "lines": 92
+        },
+        "scripts/convert_masks_to_bbox.py": {
+          "origin": "inherited",
+          "lines": 60
+        },
+        "scripts/data_growth.sh": {
+          "origin": "thesis",
+          "lines": 16
+        },
+        "scripts/deduplicate.py": {
+          "origin": "inherited",
+          "lines": 71
+        },
+        "scripts/download_all.py": {
+          "origin": "inherited",
+          "lines": 98
+        },
+        "scripts/download_extra.py": {
+          "origin": "thesis",
+          "lines": 140
+        },
+        "scripts/download_github.py": {
+          "origin": "inherited",
+          "lines": 51
+        },
+        "scripts/download_roboflow.py": {
+          "origin": "inherited",
+          "lines": 87
+        },
+        "scripts/drift_positive_control.py": {
+          "origin": "thesis",
+          "lines": 67
+        },
+        "scripts/eda.py": {
+          "origin": "inherited",
+          "lines": 211
+        },
+        "scripts/engineering_evidence.py": {
+          "origin": "thesis",
+          "lines": 242
+        },
+        "scripts/evaluate.py": {
+          "origin": "inherited",
+          "lines": 219
+        },
+        "scripts/external_piid.py": {
+          "origin": "thesis",
+          "lines": 99
+        },
+        "scripts/external_piid_extra.py": {
+          "origin": "thesis",
+          "lines": 113
+        },
+        "scripts/failure_analysis.py": {
+          "origin": "thesis",
+          "lines": 42
+        },
+        "scripts/fetch_weights.py": {
+          "origin": "thesis",
+          "lines": 30
+        },
+        "scripts/gate_power.py": {
+          "origin": "thesis",
+          "lines": 134
+        },
+        "scripts/generate_dataset.py": {
+          "origin": "inherited",
+          "lines": 211
+        },
+        "scripts/leakage_sensitivity.py": {
+          "origin": "thesis",
+          "lines": 67
+        },
+        "scripts/learning_curve.py": {
+          "origin": "thesis",
+          "lines": 69
+        },
+        "scripts/learning_curve_fit.py": {
+          "origin": "thesis",
+          "lines": 87
+        },
+        "scripts/make_figures.py": {
+          "origin": "thesis",
+          "lines": 287
+        },
+        "scripts/make_growth_batches.py": {
+          "origin": "thesis",
+          "lines": 65
+        },
+        "scripts/make_qualitative.py": {
+          "origin": "thesis",
+          "lines": 86
+        },
+        "scripts/make_sample_grids.py": {
+          "origin": "inherited",
+          "lines": 164
+        },
+        "scripts/notify_telegram.py": {
+          "origin": "thesis",
+          "lines": 104
+        },
+        "scripts/provenance_check.py": {
+          "origin": "thesis",
+          "lines": 121
+        },
+        "scripts/source_overlap.py": {
+          "origin": "thesis",
+          "lines": 42
+        },
+        "scripts/test_imports.py": {
+          "origin": "inherited",
+          "lines": 59
+        },
+        "scripts/train_model.py": {
+          "origin": "thesis",
+          "lines": 34
+        },
+        "scripts/train_yolo.py": {
+          "origin": "inherited",
+          "lines": 117
+        },
+        "scripts/unify_dataset.py": {
+          "origin": "inherited",
+          "lines": 332
+        },
+        "scripts/unify_dataset_v2.py": {
+          "origin": "inherited",
+          "lines": 337
+        },
+        "scripts/unify_dataset_v3.py": {
+          "origin": "inherited",
+          "lines": 463
+        },
+        "scripts/verify_references.py": {
+          "origin": "thesis",
+          "lines": 145
+        }
       }
     },
-    "thesis_tests": {
-      "files": 8,
-      "lines": 4061,
+    "tests": {
+      "files": 9,
+      "lines": 4134,
+      "by_origin": {
+        "inherited": {
+          "files": 1,
+          "lines": 197
+        },
+        "inherited_modified": {
+          "files": 0,
+          "lines": 0,
+          "added_lines": 0,
+          "removed_lines": 0
+        },
+        "thesis": {
+          "files": 8,
+          "lines": 3937
+        }
+      },
       "per_file": {
-        "tests/test_pipeline.py": 197,
-        "tests/test_system_cycle.py": 689,
-        "tests/test_system_dashboard.py": 331,
-        "tests/test_system_dataset.py": 601,
-        "tests/test_system_e2e.py": 257,
-        "tests/test_system_ingest.py": 767,
-        "tests/test_system_report.py": 490,
-        "tests/test_system_workspace.py": 729
+        "tests/test_pipeline.py": {
+          "origin": "inherited",
+          "lines": 197
+        },
+        "tests/test_seg_dataset.py": {
+          "origin": "thesis",
+          "lines": 59
+        },
+        "tests/test_system_cycle.py": {
+          "origin": "thesis",
+          "lines": 703
+        },
+        "tests/test_system_dashboard.py": {
+          "origin": "thesis",
+          "lines": 331
+        },
+        "tests/test_system_dataset.py": {
+          "origin": "thesis",
+          "lines": 601
+        },
+        "tests/test_system_e2e.py": {
+          "origin": "thesis",
+          "lines": 257
+        },
+        "tests/test_system_ingest.py": {
+          "origin": "thesis",
+          "lines": 767
+        },
+        "tests/test_system_report.py": {
+          "origin": "thesis",
+          "lines": 490
+        },
+        "tests/test_system_workspace.py": {
+          "origin": "thesis",
+          "lines": 729
+        }
+      }
+    },
+    "app": {
+      "files": 2,
+      "lines": 281,
+      "by_origin": {
+        "inherited": {
+          "files": 2,
+          "lines": 281
+        },
+        "inherited_modified": {
+          "files": 0,
+          "lines": 0,
+          "added_lines": 0,
+          "removed_lines": 0
+        },
+        "thesis": {
+          "files": 0,
+          "lines": 0
+        }
+      },
+      "per_file": {
+        "app/detector.py": {
+          "origin": "inherited",
+          "lines": 126
+        },
+        "app/main.py": {
+          "origin": "inherited",
+          "lines": 155
+        }
       }
     }
   },
   "totals": {
-    "inherited": 3038,
-    "thesis": 16376,
-    "thesis_share": 0.844
+    "inherited": {
+      "files": 20,
+      "lines": 3537
+    },
+    "inherited_modified": {
+      "files": 0,
+      "lines": 0,
+      "added_lines": 0,
+      "removed_lines": 0
+    },
+    "thesis": {
+      "files": 58,
+      "lines": 16509
+    },
+    "files": 78,
+    "lines": 20046,
+    "thesis_share_of_lines": 0.824,
+    "thesis_plus_added_share": 0.824
   },
   "non_python_dashboard_assets": {
     "files": 3,

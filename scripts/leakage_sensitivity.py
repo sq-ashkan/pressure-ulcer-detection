@@ -12,7 +12,8 @@ recoloured copy of the training photograph roboflow_maskrcnn/woundcare "Chronic-
 inliers); every other inspected pair shows different photographs (false matches of dHash <= 8 and of
 the pixel correlation on low-texture skin images). This script records the matches and recomputes the
 paired comparison without the copied test photograph and, as a bound, without all 4 flagged test
-photographs. Output: results/leakage_sensitivity.json
+photographs, for each of the three comparison seeds (results/comparison, _seed1, _seed2).
+Output: results/leakage_sensitivity.json
 """
 from __future__ import annotations
 
@@ -70,7 +71,8 @@ def comparison(run: str) -> dict:
 
 def main() -> None:
     res = {"frozen_matches": matches(), "visual_inspection": INSPECTION,
-           "comparison_seed0": comparison("comparison"), "comparison_seed1": comparison("comparison_seed1")}
+           "comparison_seed0": comparison("comparison"), "comparison_seed1": comparison("comparison_seed1"),
+           "comparison_seed2": comparison("comparison_seed2")}
     (REPO / "results/leakage_sensitivity.json").write_text(json.dumps(res, indent=2))
     print(json.dumps(res, indent=1))
 

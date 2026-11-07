@@ -2,6 +2,8 @@
 
 Command line (CPU only, deterministic; GPU jobs may be running):
     SELFTRAIN_DEVICE=cpu .venv/bin/python scripts/engineering_evidence.py
+    SELFTRAIN_DEVICE=cpu .venv/bin/python scripts/engineering_evidence.py --inventory-only
+        (rewrites only results/code_inventory.json)
 
 Outputs:
     results/model_complexity.json       parameters and GFLOPs at 512x512 of the comparison
@@ -11,8 +13,10 @@ Outputs:
     results/preregistration_record.json commits that added/changed the evaluation protocol in
                                         docs/ROADMAP.md, SHA-256 of the current protocol section,
                                         time of the first test evaluation
-    results/code_inventory.json         non-blank, non-comment Python lines per area
-                                        (inherited practical project vs. written for the thesis)
+    results/code_inventory.json         non-blank, non-comment lines per area (selftrain library,
+                                        selftrain/system, scripts, tests, app) and git origin:
+                                        inherited / inherited_modified (added lines) / thesis,
+                                        relative to commit ae20d18 (end of the practical project)
 
 GFLOPs are counted with thop (multiply-accumulates x 2), the same convention as
 ultralytics' own model.info(); one 1x3x512x512 input, inference mode.
@@ -195,9 +199,15 @@ def preregistration():
 
 
 # ---------------------------------------------------------------- (d) code inventory
-INHERITED = ["scripts/download_*.py", "scripts/unify_dataset*.py", "scripts/augment*.py",
-             "scripts/deduplicate.py", "scripts/eda.py", "scripts/generate_dataset.py",
-             "scripts/convert_masks_to_bbox.py", "scripts/train_yolo.py", "app/**/*.py"]
+BASE_COMMIT = "ae20d18"      # last commit of the inherited practical project (2026-11-05)
+AREAS = {                    # area -> glob patterns (repository-relative)
+    "selftrain_library": ["selftrain/*.py"],
+    "selftrain_system": ["selftrain/system/**/*.py"],
+    "scripts": ["scripts/*.py", "scripts/*.sh"],
+    "tests": ["tests/**/*.py"],
+    "app": ["app/**/*.py"],
+}
+ORIGINS = ("inherited", "inherited_modified", "thesis")
 
 
 def sloc(p):
@@ -208,29 +218,57 @@ def sloc(p):
 def files(patterns):
     out = set()
     for pat in patterns:
-        out |= {Path(p) for p in glob.glob(str(ROOT / pat), recursive=True) if "__pycache__" not in p}
+        out |= {Path(p) for p in glob.glob(str(ROOT / pat), recursive=True)
+                if "__pycache__" not in p and Path(p).is_file()}
     return sorted(out)
 
 
+def git_origin(path):
+    """Origin of a file by git history: 'inherited' (present at BASE_COMMIT, working tree
+    identical: `git diff BASE_COMMIT -- file` empty), 'inherited_modified' (present but
+    changed; added/removed lines from `git diff --numstat`), 'thesis' (absent at BASE_COMMIT)."""
+    r = rel(path)
+    present = subprocess.run(["git", "cat-file", "-e", f"{BASE_COMMIT}:{r}"], cwd=ROOT,
+                             capture_output=True).returncode == 0
+    if not present:
+        return "thesis", 0, 0
+    num = git("diff", "--numstat", BASE_COMMIT, "--", r).split()
+    if not num:
+        return "inherited", 0, 0
+    return "inherited_modified", int(num[0]), int(num[1])
+
+
 def code_inventory():
-    inherited = files(INHERITED)
-    areas = {
-        "inherited_practical_project": inherited,
-        "thesis_selftrain_library": [p for p in files(["selftrain/*.py"])],
-        "thesis_selftrain_system": files(["selftrain/system/**/*.py"]),
-        "thesis_other_scripts": [p for p in files(["scripts/*.py"]) if p not in inherited],
-        "thesis_tests": files(["tests/**/*.py"]),
-    }
-    out = {"counting_rule": "non-blank lines not starting with '#' in .py files (docstrings count as code)",
+    out = {"counting_rule": "non-blank lines not starting with '#' (docstrings count as code)",
+           "origin_rule": (f"git origin: 'inherited' = file present at commit {BASE_COMMIT} and "
+                           f"`git diff {BASE_COMMIT} -- file` empty; 'inherited_modified' = present "
+                           f"at {BASE_COMMIT} but changed since (added/removed lines from git diff "
+                           f"--numstat against the working tree); 'thesis' = added after {BASE_COMMIT}"),
+           "base_commit": git("rev-parse", BASE_COMMIT).strip(),
            "areas": {}}
-    for name, fs in areas.items():
-        per = {rel(p): sloc(p) for p in fs}
-        out["areas"][name] = {"files": len(per), "lines": sum(per.values()), "per_file": per}
-    thesis = sum(v["lines"] for k, v in out["areas"].items() if k.startswith("thesis_"))
-    inh = out["areas"]["inherited_practical_project"]["lines"]
-    out["totals"] = {"inherited": inh, "thesis": thesis,
-                     "thesis_share": round(thesis / (thesis + inh), 3)}
-    web = [p for p in files(["selftrain/system/templates/**/*", "selftrain/system/static/**/*"]) if p.is_file()]
+    tot = {o: {"files": 0, "lines": 0} for o in ORIGINS}
+    tot["inherited_modified"].update(added_lines=0, removed_lines=0)
+    for area, pats in AREAS.items():
+        a = {o: {"files": 0, "lines": 0} for o in ORIGINS}
+        a["inherited_modified"].update(added_lines=0, removed_lines=0)
+        per = {}
+        for p in files(pats):
+            origin, add, rem = git_origin(p)
+            n = sloc(p)
+            per[rel(p)] = {"origin": origin, "lines": n,
+                           **({"added_lines": add, "removed_lines": rem} if origin == "inherited_modified" else {})}
+            for d in (a[origin], tot[origin]):
+                d["files"] += 1; d["lines"] += n
+                if origin == "inherited_modified":
+                    d["added_lines"] += add; d["removed_lines"] += rem
+        out["areas"][area] = {"files": len(per), "lines": sum(v["lines"] for v in per.values()),
+                              "by_origin": a, "per_file": per}
+    all_lines = sum(v["lines"] for v in tot.values())
+    out["totals"] = {**tot, "files": sum(v["files"] for v in tot.values()), "lines": all_lines,
+                     "thesis_share_of_lines": round(tot["thesis"]["lines"] / all_lines, 3),
+                     "thesis_plus_added_share": round((tot["thesis"]["lines"] + tot["inherited_modified"]["added_lines"])
+                                                      / all_lines, 3)}
+    web = [p for p in files(["selftrain/system/templates/**/*", "selftrain/system/static/**/*"])]
     out["non_python_dashboard_assets"] = {"files": len(web), "nonblank_lines": sum(
         sum(1 for l in open(p, encoding="utf-8", errors="replace") if l.strip()) for p in web)}
     dump("code_inventory.json", out)
@@ -238,6 +276,11 @@ def code_inventory():
 
 
 if __name__ == "__main__":
+    if "--inventory-only" in sys.argv[1:]:
+        k = code_inventory()
+        print(json.dumps({a: v["by_origin"] for a, v in k["areas"].items()}, indent=1))
+        print(json.dumps(k["totals"], indent=1))
+        sys.exit(0)
     c = model_complexity(); t = training_configs(); p = preregistration(); k = code_inventory()
     print(json.dumps({"complexity": {m: c[m] for m in ("unet", "yoloseg")},
                       "epochs": {m: t[m]["epochs_trained"] for m in t},

@@ -1,0 +1,154 @@
+{
+  "method": "selftrain.system.drift.drift_report (KS per feature, Bonferroni over 6 features)",
+  "alpha": 0.01,
+  "sample_size": 100,
+  "seed": 0,
+  "reference": {
+    "description": "data/seg train split, one image per photograph",
+    "n": 650
+  },
+  "batches": {
+    "piid": {
+      "pool_size": 1091,
+      "n_new": 100,
+      "n_reference": 650,
+      "drift": true,
+      "shifted": [
+        "lightness",
+        "colourfulness",
+        "sharpness",
+        "log_resolution"
+      ],
+      "n_shifted": 4,
+      "summary": "drift in 4 of 6 features: lightness higher, colourfulness lower, sharpness lower, log_resolution lower (100 new vs 650 reference photographs; KS, Bonferroni alpha 0.01)",
+      "alpha_per_test": 0.0016666666666666668,
+      "features": {
+        "lightness": {
+          "ks_statistic": 0.2123076923076923,
+          "p_value": 0.000674681901041778,
+          "p_adjusted": 0.004048091406250668,
+          "shifted": true,
+          "new_median": 50.51809883117676,
+          "reference_median": 49.08445739746094,
+          "direction": "higher"
+        },
+        "red_green": {
+          "ks_statistic": 0.13384615384615384,
+          "p_value": 0.08228030836057051,
+          "p_adjusted": 0.4936818501634231,
+          "shifted": false,
+          "new_median": 10.193589210510254,
+          "reference_median": 10.95214557647705,
+          "direction": "lower"
+        },
+        "yellow_blue": {
+          "ks_statistic": 0.08153846153846153,
+          "p_value": 0.5855850713838736,
+          "p_adjusted": 1.0,
+          "shifted": false,
+          "new_median": 8.009640216827393,
+          "reference_median": 7.447381019592285,
+          "direction": "higher"
+        },
+        "colourfulness": {
+          "ks_statistic": 0.25384615384615383,
+          "p_value": 2.1448333777877985e-05,
+          "p_adjusted": 0.00012869000266726793,
+          "shifted": true,
+          "new_median": 30.142921247919247,
+          "reference_median": 36.70485842034044,
+          "direction": "lower"
+        },
+        "sharpness": {
+          "ks_statistic": 0.7646153846153846,
+          "p_value": 7.491387240094412e-52,
+          "p_adjusted": 4.494832344056647e-51,
+          "shifted": true,
+          "new_median": 5.062053674599156,
+          "reference_median": 90.9379968510184,
+          "direction": "lower"
+        },
+        "log_resolution": {
+          "ks_statistic": 0.9015384615384615,
+          "p_value": 2.586290464399609e-80,
+          "p_adjusted": 1.5517742786397653e-79,
+          "shifted": true,
+          "new_median": 4.7004960366683255,
+          "reference_median": 5.612359947967774,
+          "direction": "lower"
+        }
+      }
+    },
+    "azh_extra_negatives": {
+      "pool_size": 646,
+      "n_new": 100,
+      "n_reference": 650,
+      "drift": true,
+      "shifted": [
+        "lightness",
+        "yellow_blue",
+        "sharpness",
+        "log_resolution"
+      ],
+      "n_shifted": 4,
+      "summary": "drift in 4 of 6 features: lightness higher, yellow_blue higher, sharpness lower, log_resolution lower (100 new vs 650 reference photographs; KS, Bonferroni alpha 0.01)",
+      "alpha_per_test": 0.0016666666666666668,
+      "features": {
+        "lightness": {
+          "ks_statistic": 0.24769230769230768,
+          "p_value": 3.722214539692842e-05,
+          "p_adjusted": 0.00022333287238157054,
+          "shifted": true,
+          "new_median": 58.55988883972168,
+          "reference_median": 49.08445739746094,
+          "direction": "higher"
+        },
+        "red_green": {
+          "ks_statistic": 0.09538461538461539,
+          "p_value": 0.38726697942627836,
+          "p_adjusted": 1.0,
+          "shifted": false,
+          "new_median": 10.797333240509033,
+          "reference_median": 10.95214557647705,
+          "direction": "lower"
+        },
+        "yellow_blue": {
+          "ks_statistic": 0.3046153846153846,
+          "p_value": 1.3151583849238189e-07,
+          "p_adjusted": 7.890950309542913e-07,
+          "shifted": true,
+          "new_median": 12.526224613189697,
+          "reference_median": 7.447381019592285,
+          "direction": "higher"
+        },
+        "colourfulness": {
+          "ks_statistic": 0.11615384615384615,
+          "p_value": 0.17944844115894096,
+          "p_adjusted": 1.0,
+          "shifted": false,
+          "new_median": 37.680111711185255,
+          "reference_median": 36.70485842034044,
+          "direction": "higher"
+        },
+        "sharpness": {
+          "ks_statistic": 0.5953846153846154,
+          "p_value": 1.85304738246821e-29,
+          "p_adjusted": 1.111828429480926e-28,
+          "shifted": true,
+          "new_median": 6.77474021762464,
+          "reference_median": 90.9379968510184,
+          "direction": "lower"
+        },
+        "log_resolution": {
+          "ks_statistic": 0.7953846153846154,
+          "p_value": 4.043594047617854e-57,
+          "p_adjusted": 2.4261564285707125e-56,
+          "shifted": true,
+          "new_median": 4.447956498450614,
+          "reference_median": 5.612359947967774,
+          "direction": "lower"
+        }
+      }
+    }
+  }
+}

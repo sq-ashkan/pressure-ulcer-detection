@@ -1,0 +1,353 @@
+{
+  "run": "results/comparison (seed 0)",
+  "n_ulcer": 91,
+  "n_ulcer_free": 45,
+  "models": {
+    "unet": {
+      "test_dice_ulcer": 0.7848407641081044,
+      "ulcer_photographs_dice0": 4,
+      "ulcer_photographs_no_prediction": 3,
+      "dominant_stage_accuracy_all_ulcer": {
+        "k": 59,
+        "n": 91,
+        "rate": 0.6483516483516484,
+        "wilson_ci95": [
+          0.5460564927584927,
+          0.7386287086721032
+        ]
+      },
+      "dominant_stage_accuracy_marked": {
+        "k": 59,
+        "n": 88,
+        "rate": 0.6704545454545454,
+        "wilson_ci95": [
+          0.5669262781891273,
+          0.759723083320254
+        ]
+      },
+      "dominant_stage_accuracy_marked_matches_evaluation_json": true,
+      "per_source": {
+        "neg_azh": {
+          "sensitivity": null,
+          "false_positive_rate": {
+            "k": 13,
+            "n": 26,
+            "rate": 0.5,
+            "wilson_ci95": [
+              0.32060306315002074,
+              0.6793969368499793
+            ]
+          }
+        },
+        "neg_fuseg": {
+          "sensitivity": null,
+          "false_positive_rate": {
+            "k": 8,
+            "n": 13,
+            "rate": 0.6153846153846154,
+            "wilson_ci95": [
+              0.35522480972268555,
+              0.8229055341876319
+            ]
+          }
+        },
+        "rf_petchs_seg": {
+          "sensitivity": {
+            "k": 20,
+            "n": 20,
+            "rate": 1.0,
+            "wilson_ci95": [
+              0.8388698745050667,
+              1.0
+            ]
+          },
+          "false_positive_rate": null
+        },
+        "roboflow_fid": {
+          "sensitivity": {
+            "k": 22,
+            "n": 25,
+            "rate": 0.88,
+            "wilson_ci95": [
+              0.7004380781662651,
+              0.9583325864293191
+            ]
+          },
+          "false_positive_rate": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "wilson_ci95": [
+              0.0,
+              0.6576280471103807
+            ]
+          }
+        },
+        "roboflow_maskrcnn": {
+          "sensitivity": {
+            "k": 44,
+            "n": 44,
+            "rate": 1.0,
+            "wilson_ci95": [
+              0.9197016822179859,
+              0.9999999999999999
+            ]
+          },
+          "false_positive_rate": null
+        },
+        "roboflow_mobile": {
+          "sensitivity": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "wilson_ci95": [
+              0.34237195288961925,
+              1.0
+            ]
+          },
+          "false_positive_rate": {
+            "k": 1,
+            "n": 4,
+            "rate": 0.25,
+            "wilson_ci95": [
+              0.045586062644636216,
+              0.6993639475573634
+            ]
+          }
+        }
+      },
+      "extra_negatives_fpr": {
+        "healthy skin (N)": {
+          "n": 83,
+          "false_positive_rate": 0.20481927710843373,
+          "ci95": [
+            0.13199762324683004,
+            0.3037566696266315
+          ]
+        },
+        "diabetic (D)": {
+          "n": 145,
+          "false_positive_rate": 0.2,
+          "ci95": [
+            0.14301624652479306,
+            0.2724697466384086
+          ]
+        },
+        "venous (V)": {
+          "n": 200,
+          "false_positive_rate": 0.485,
+          "ci95": [
+            0.4166726249238525,
+            0.5538927552536972
+          ]
+        },
+        "surgical (S)": {
+          "n": 136,
+          "false_positive_rate": 0.5735294117647058,
+          "ci95": [
+            0.48951358871276107,
+            0.6535053698803899
+          ]
+        },
+        "background (BG)": {
+          "n": 82,
+          "false_positive_rate": 0.036585365853658534,
+          "ci95": [
+            0.012519346180045791,
+            0.10212902943271071
+          ]
+        },
+        "all": {
+          "n": 646,
+          "false_positive_rate": 0.34674922600619196,
+          "ci95": [
+            0.31105079953029874,
+            0.3842595653340006
+          ]
+        }
+      }
+    },
+    "yoloseg": {
+      "test_dice_ulcer": 0.7193786081364123,
+      "ulcer_photographs_dice0": 12,
+      "ulcer_photographs_no_prediction": 11,
+      "dominant_stage_accuracy_all_ulcer": {
+        "k": 46,
+        "n": 91,
+        "rate": 0.5054945054945055,
+        "wilson_ci95": [
+          0.40464797119502816,
+          0.6058959251542531
+        ]
+      },
+      "dominant_stage_accuracy_marked": {
+        "k": 46,
+        "n": 80,
+        "rate": 0.575,
+        "wilson_ci95": [
+          0.46569091970838705,
+          0.6774361198519266
+        ]
+      },
+      "dominant_stage_accuracy_marked_matches_evaluation_json": true,
+      "per_source": {
+        "neg_azh": {
+          "sensitivity": null,
+          "false_positive_rate": {
+            "k": 21,
+            "n": 26,
+            "rate": 0.8076923076923077,
+            "wilson_ci95": [
+              0.6212336384535001,
+              0.9149306422821174
+            ]
+          }
+        },
+        "neg_fuseg": {
+          "sensitivity": null,
+          "false_positive_rate": {
+            "k": 8,
+            "n": 13,
+            "rate": 0.6153846153846154,
+            "wilson_ci95": [
+              0.35522480972268555,
+              0.8229055341876319
+            ]
+          }
+        },
+        "rf_petchs_seg": {
+          "sensitivity": {
+            "k": 17,
+            "n": 20,
+            "rate": 0.85,
+            "wilson_ci95": [
+              0.6395767041130426,
+              0.9476322080405041
+            ]
+          },
+          "false_positive_rate": null
+        },
+        "roboflow_fid": {
+          "sensitivity": {
+            "k": 18,
+            "n": 25,
+            "rate": 0.72,
+            "wilson_ci95": [
+              0.5242302810344169,
+              0.8571632616261843
+            ]
+          },
+          "false_positive_rate": {
+            "k": 0,
+            "n": 2,
+            "rate": 0.0,
+            "wilson_ci95": [
+              0.0,
+              0.6576280471103807
+            ]
+          }
+        },
+        "roboflow_maskrcnn": {
+          "sensitivity": {
+            "k": 43,
+            "n": 44,
+            "rate": 0.9772727272727273,
+            "wilson_ci95": [
+              0.8819202086846235,
+              0.9959768516143629
+            ]
+          },
+          "false_positive_rate": null
+        },
+        "roboflow_mobile": {
+          "sensitivity": {
+            "k": 2,
+            "n": 2,
+            "rate": 1.0,
+            "wilson_ci95": [
+              0.34237195288961925,
+              1.0
+            ]
+          },
+          "false_positive_rate": {
+            "k": 2,
+            "n": 4,
+            "rate": 0.5,
+            "wilson_ci95": [
+              0.15003570882017148,
+              0.8499642911798285
+            ]
+          }
+        }
+      },
+      "extra_negatives_fpr": {
+        "healthy skin (N)": {
+          "n": 83,
+          "false_positive_rate": 0.13253012048192772,
+          "ci95": [
+            0.07564228787871974,
+            0.22192938284130387
+          ]
+        },
+        "diabetic (D)": {
+          "n": 145,
+          "false_positive_rate": 0.5310344827586206,
+          "ci95": [
+            0.45005692704969014,
+            0.6104100391748062
+          ]
+        },
+        "venous (V)": {
+          "n": 200,
+          "false_positive_rate": 0.685,
+          "ci95": [
+            0.617649158589664,
+            0.7453778192205573
+          ]
+        },
+        "surgical (S)": {
+          "n": 136,
+          "false_positive_rate": 0.6397058823529411,
+          "ci95": [
+            0.5562041769620194,
+            0.7155318443649676
+          ]
+        },
+        "background (BG)": {
+          "n": 82,
+          "false_positive_rate": 0.2073170731707317,
+          "ci95": [
+            0.13366280607539827,
+            0.3071677469431848
+          ]
+        },
+        "all": {
+          "n": 646,
+          "false_positive_rate": 0.5092879256965944,
+          "ci95": [
+            0.4707961663348826,
+            0.5476698721581903
+          ]
+        }
+      }
+    }
+  },
+  "paired_difference_unet_minus_yoloseg": {
+    "n": 91,
+    "mean_diff": 0.06546215597169229,
+    "median_diff": 0.012836985145144642,
+    "n_nonzero": 89,
+    "bootstrap_lower95_over_seeds": {
+      "seeds": "0..199",
+      "resamples": 2000,
+      "min": -0.00023780141076354316,
+      "max": 0.008944715165116125,
+      "n_above_0": 199
+    },
+    "wilcoxon_signed_rank": {
+      "statistic": 1523.0,
+      "p_value": 0.04978749484757277,
+      "zero_method": "wilcox (zero differences dropped)"
+    }
+  }
+}

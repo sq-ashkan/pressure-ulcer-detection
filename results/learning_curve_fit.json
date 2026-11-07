@@ -1,0 +1,123 @@
+{
+  "model": "test Dice = a + b * log2(training photographs), OLS over 12 runs",
+  "response": "mean per-image Dice over the 91 ulcer test photographs",
+  "runs": [
+    {
+      "run": "results/learning_curve/f25_s0",
+      "photographs": 162,
+      "seed": 0,
+      "dice_ulcer_photographs": 0.6762134133632436,
+      "dice_mean_evaluation_json": 0.6762134133632436
+    },
+    {
+      "run": "results/learning_curve/f25_s1",
+      "photographs": 162,
+      "seed": 1,
+      "dice_ulcer_photographs": 0.7539243456733056,
+      "dice_mean_evaluation_json": 0.7539243456733056
+    },
+    {
+      "run": "results/learning_curve/f25_s2",
+      "photographs": 162,
+      "seed": 2,
+      "dice_ulcer_photographs": 0.7107209237494976,
+      "dice_mean_evaluation_json": 0.7107209237494976
+    },
+    {
+      "run": "results/learning_curve/f50_s0",
+      "photographs": 325,
+      "seed": 0,
+      "dice_ulcer_photographs": 0.7405005021144843,
+      "dice_mean_evaluation_json": 0.7405005021144843
+    },
+    {
+      "run": "results/learning_curve/f50_s1",
+      "photographs": 325,
+      "seed": 1,
+      "dice_ulcer_photographs": 0.7633831085376912,
+      "dice_mean_evaluation_json": 0.7633831085376912
+    },
+    {
+      "run": "results/learning_curve/f50_s2",
+      "photographs": 325,
+      "seed": 2,
+      "dice_ulcer_photographs": 0.7501646903542339,
+      "dice_mean_evaluation_json": 0.7501646903542339
+    },
+    {
+      "run": "results/learning_curve/f75_s0",
+      "photographs": 488,
+      "seed": 0,
+      "dice_ulcer_photographs": 0.798222752890672,
+      "dice_mean_evaluation_json": 0.798222752890672
+    },
+    {
+      "run": "results/learning_curve/f75_s1",
+      "photographs": 488,
+      "seed": 1,
+      "dice_ulcer_photographs": 0.7748483877131733,
+      "dice_mean_evaluation_json": 0.7748483877131733
+    },
+    {
+      "run": "results/learning_curve/f75_s2",
+      "photographs": 488,
+      "seed": 2,
+      "dice_ulcer_photographs": 0.7340559317699702,
+      "dice_mean_evaluation_json": 0.7340559317699702
+    },
+    {
+      "run": "results/comparison",
+      "photographs": 650,
+      "seed": 0,
+      "dice_ulcer_photographs": 0.7848407641081044,
+      "dice_mean_evaluation_json": 0.7848407641081044
+    },
+    {
+      "run": "results/comparison_seed1",
+      "photographs": 650,
+      "seed": 1,
+      "dice_ulcer_photographs": 0.7996579785668777,
+      "dice_mean_evaluation_json": 0.7996579785668777
+    },
+    {
+      "run": "results/comparison_seed2",
+      "photographs": 650,
+      "seed": 2,
+      "dice_ulcer_photographs": 0.7752820491278666,
+      "dice_mean_evaluation_json": 0.7752820491278666
+    }
+  ],
+  "mean_by_size": {
+    "162": 0.7136195609286823,
+    "325": 0.7513494336688032,
+    "488": 0.7690423574579386,
+    "650": 0.7865935972676162
+  },
+  "intercept_a": 0.45082205000598474,
+  "slope_b_per_doubling": 0.035846471544469474,
+  "slope_b_ci95": [
+    0.010022134795950764,
+    0.0620172731197994
+  ],
+  "r_squared": 0.6042612240294107,
+  "extrapolation_1300_photographs": {
+    "label": "EXTRAPOLATION beyond the observed range 162-650 photographs (log-linear model assumed to continue); not a measurement",
+    "dice": 0.8216285589166611,
+    "ci95": [
+      0.761201162582947,
+      0.8808155940715618
+    ]
+  },
+  "cross_check_evaluation_json": {
+    "response": "unet_evaluation.json test.dice_mean",
+    "identical_to_primary": true,
+    "intercept_a": 0.45082205000598474,
+    "slope_b_per_doubling": 0.035846471544469474,
+    "dice_at_1300_extrapolated": 0.8216285589166611
+  },
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 0,
+    "method": "percentile; test photographs (shared across runs) and seed runs within each size resampled jointly with replacement"
+  }
+}

@@ -65,5 +65,39 @@
         0.8199621089333883
       ]
     }
+  },
+  "detected_by_both": {
+    "n": 834,
+    "quadratic_kappa": {
+      "unet": {
+        "kappa": 0.6760525893749808,
+        "ci95": [
+          0.6357694786668661,
+          0.7134623496484819
+        ]
+      },
+      "yoloseg": {
+        "kappa": 0.8001436589644052,
+        "ci95": [
+          0.7757711902865015,
+          0.8221404361466265
+        ]
+      }
+    },
+    "kappa_diff_unet_minus_yoloseg": {
+      "diff": -0.1240910695894244,
+      "ci95": [
+        -0.16100516056240968,
+        -0.08830732663788046
+      ]
+    },
+    "mcnemar_exact_stage_correct": {
+      "both_correct": 342,
+      "only_unet_correct": 95,
+      "only_yoloseg_correct": 149,
+      "both_wrong": 248,
+      "p_value": 0.0006607446132025457,
+      "method": "exact two-sided binomial test of b vs c (p = 0.5)"
+    }
   }
 }

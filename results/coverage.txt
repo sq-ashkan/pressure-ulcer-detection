@@ -1,0 +1,46 @@
+............ssss........................................................ [ 22%]
+........................................................................ [ 44%]
+........................................................................ [ 67%]
+........................................................................ [ 89%]
+.................................                                        [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/anyio/pytest_plugin.py:14
+  /Users/private/Documents/pressure-ulcer-detection/.venv/lib/python3.12/site-packages/anyio/pytest_plugin.py:14: PytestRemovedIn10Warning: _pytest.python.CallSpec2 has been renamed to CallSpec.
+  The CallSpec2 alias will be removed in pytest 10.
+  Update imports to use CallSpec instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#callspec2-renamed
+    from _pytest.python import CallSpec2
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+______________ coverage: platform darwin, python 3.12.13-final-0 _______________
+
+Name                            Stmts   Miss Branch BrPart  Cover
+-----------------------------------------------------------------
+selftrain/__init__.py               1      0      0      0   100%
+selftrain/__main__.py             335    115     96     37    57%
+selftrain/config.py                43      0      0      0   100%
+selftrain/data.py                  35      2      4      1    92%
+selftrain/evaluate.py             105      2     26      3    96%
+selftrain/letterbox.py             21      1      2      1    91%
+selftrain/metrics.py               57      2      8      2    94%
+selftrain/system/__init__.py        6      0      0      0   100%
+selftrain/system/active.py        106      6     28      7    90%
+selftrain/system/cycle.py         284     25     70      9    90%
+selftrain/system/dashboard.py     605     67    152     27    86%
+selftrain/system/dataset.py       304     15    118     18    92%
+selftrain/system/dedupe.py        286      5     86      5    97%
+selftrain/system/drift.py         122     18     32     11    79%
+selftrain/system/gate.py           67      0     20      0   100%
+selftrain/system/ingest.py        754     50    298     35    92%
+selftrain/system/modelcard.py     395     24    138     20    91%
+selftrain/system/quality.py       217     26     80     12    86%
+selftrain/system/registry.py      233      6     74      7    96%
+selftrain/system/report.py       1424     94    492    100    90%
+selftrain/system/steps.py         379     50    112     32    82%
+selftrain/system/workspace.py     335      7    108      5    97%
+selftrain/unet.py                 106      7     12      2    91%
+selftrain/yoloseg.py               69     69     14      0     0%
+-----------------------------------------------------------------
+TOTAL                            6289    591   1970    334    88%
+317 passed, 4 skipped, 1 warning in 177.73s (0:02:57)

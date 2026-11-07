@@ -1,8 +1,20 @@
 """Qualitative comparison figure: frozen-test photographs with the ground-truth outline
 (white) and the predicted ulcer regions of U-Net and YOLOv8-seg (colour = stage).
 Cases chosen by U-Net per-image Dice: best, median, worst ulcer photograph, and the
-ulcer-free photograph with the largest false-positive area. Photographs: public
-datasets under CC BY 4.0 (sources in the dataset catalogue, appendix)."""
+ulcer-free photograph with the largest false-positive area.
+
+Only photographs that may be reproduced are shown: test images of the five Roboflow
+sources published under CC BY 4.0 (CC_BY_SOURCES; not neg_azh, neg_fuseg or PIID, which
+state no licence), minus every image named in results/provenance_check.json (OCR found a
+copyright mark or stock/clinic watermark) and stock-photo file names. The false-positive
+case is therefore the CC BY ulcer-free photograph with the largest predicted area.
+
+Command line (CPU, deterministic):
+    SELFTRAIN_DEVICE=cpu .venv/bin/python scripts/make_qualitative.py
+Outputs:
+    docs/thesis/figures/qualitative_examples.pdf
+    docs/thesis/generated/qualitative_cases.txt   case, image name, source, U-Net Dice
+"""
 import csv
 import json
 import sys
@@ -19,6 +31,7 @@ sys.path.insert(0, str(ROOT))
 from selftrain.unet import UNetPredictor  # noqa: E402
 from selftrain.yoloseg import YOLOPredictor  # noqa: E402
 
+CC_BY_SOURCES = ("roboflow_maskrcnn", "roboflow_woundcare", "roboflow_fid", "roboflow_mobile", "rf_petchs_seg")
 STAGE_RGB = {1: (86, 180, 233), 2: (0, 158, 115), 3: (230, 159, 0), 4: (213, 94, 0)}
 
 
@@ -33,10 +46,33 @@ def overlay(img, sem, gt):
     return cv2.cvtColor(out, cv2.COLOR_BGR2RGB)
 
 
+def provenance_flagged():
+    """Image names (without extension) mentioned anywhere in results/provenance_check.json."""
+    names = set()
+
+    def walk(x):
+        if isinstance(x, dict):
+            for v in x.values():
+                walk(v)
+        elif isinstance(x, list):
+            for v in x:
+                walk(v)
+        elif isinstance(x, str) and Path(x).suffix.lower() in (".jpg", ".jpeg", ".png"):
+            names.add(Path(x).stem)
+    walk(json.load(open(ROOT / "results/provenance_check.json")))
+    return names
+
+
+def source(name):
+    return name.split("__", 1)[0]
+
+
 def main():
     stock = ("istock", "shutterstock", "gettyimages", "adobestock", "dreamstime", "123rf", "alamy", "depositphotos")
+    flagged = provenance_flagged()
     rows = [r for r in csv.DictReader(open(ROOT / "results/comparison/unet_test_per_image.csv"))
-            if not any(k in r["name"].lower() for k in stock)]   # stock photos: no reuse licence
+            if not any(k in r["name"].lower() for k in stock)   # stock photos: no reuse licence
+            and source(r["name"]) in CC_BY_SOURCES and r["name"] not in flagged]
     pos = sorted([r for r in rows if r["gt_positive"] == "True"], key=lambda r: float(r["dice"]))
     neg = sorted([r for r in rows if r["gt_positive"] == "False"], key=lambda r: -float(r["pred_area"]))
     cases = [("best", pos[-1]), ("median", pos[len(pos) // 2]), ("worst", pos[0]), ("false positive", neg[0])]
@@ -57,8 +93,9 @@ def main():
     fig.tight_layout(rect=(0, 0.03, 1, 1))
     fig.savefig(ROOT / "docs/thesis/figures/qualitative_examples.pdf", dpi=300)
     (ROOT / "docs/thesis/generated/qualitative_cases.txt").write_text(
-        "\n".join(f"{t}: {r['name']} (U-Net Dice {float(r['dice']):.3f})" for t, r in cases) + "\n")
-    print("ok")
+        "\n".join(f"{t}: {r['name']} (source {source(r['name'])}, CC BY 4.0; U-Net Dice {float(r['dice']):.3f}, "
+                  f"predicted area {float(r['pred_area']):.4f} of the image)" for t, r in cases) + "\n")
+    print(f"ok: {len(rows)} eligible test images, {len(flagged)} provenance-flagged names excluded")
 
 
 if __name__ == "__main__":

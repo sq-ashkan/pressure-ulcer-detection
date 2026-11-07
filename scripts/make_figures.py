@@ -4,6 +4,9 @@ Every number printed in the thesis comes from a macro written here, so text and
 results cannot drift apart (thesis rule: no hand-copied numbers).
 
   python scripts/make_figures.py      -> docs/thesis/figures/*.pdf, docs/thesis/generated/*.tex
+
+dataset_distribution.pdf is drawn from data/seg/manifest.csv (post-audit dataset) and the
+YOLO labels data/seg/labels/<split>/<name>.txt (class c = stage c + 1).
 """
 import csv
 import json
@@ -134,6 +137,50 @@ def dataset_macros():
     for sp in ("val", "test"):
         mac(f"dsPhotos{sp.capitalize()}Audited", len({r["photograph"] for r in man if r["split"] == sp}), "{}")
         mac(f"dsImages{sp.capitalize()}Audited", sum(1 for r in man if r["split"] == sp), "{}")
+
+
+def fig_dataset_distribution():
+    """(a) photographs per split, stacked by source; (b) photographs with at least one
+    stage-k region per split. Unit: photograph (manifest column 'photograph'). A photograph
+    whose images come from several sources is counted once, under the source holding most
+    of its images (ties: alphabetical), so the bars sum to the distinct photographs."""
+    from collections import Counter, defaultdict
+    man = list(csv.DictReader(open(ROOT / "data" / "seg" / "manifest.csv")))
+    splits = ("train", "val", "test")
+    src_of, split_of, stages = defaultdict(Counter), {}, defaultdict(set)
+    for r in man:
+        ph = r["photograph"]
+        src_of[ph][r["source"]] += 1
+        split_of[ph] = r["split"]
+        lab = ROOT / "data" / "seg" / "labels" / r["split"] / f"{r['name']}.txt"
+        if lab.exists():
+            for line in lab.read_text().splitlines():
+                if line.strip():
+                    stages[ph].add(int(line.split()[0]) + 1)
+    owner = {ph: sorted(c.items(), key=lambda kv: (-kv[1], kv[0]))[0][0] for ph, c in src_of.items()}
+    sources = sorted(set(owner.values()))
+    count = Counter((split_of[ph], owner[ph]) for ph in owner)
+    fig, axes = plt.subplots(1, 2, figsize=(W, 2.6))
+    x = np.arange(len(splits)); bottom = np.zeros(len(splits))
+    for i, s in enumerate(sources):
+        v = np.array([count[(sp, s)] for sp in splits])
+        axes[0].bar(x, v, 0.6, bottom=bottom, color=OKABE[i % len(OKABE)], label=s)
+        bottom += v
+    for xi, tot in zip(x, bottom):
+        axes[0].text(xi, tot + 8, f"{int(tot)}", ha="center", fontsize=7)
+    axes[0].set_xticks(x, splits); axes[0].set_ylabel("photographs")
+    axes[0].set_title(f"(a) photographs per split and source (n = {len(owner)})")
+    axes[0].legend(fontsize=6, frameon=False, loc="upper right")
+    width = 0.2
+    for k in (1, 2, 3, 4):
+        v = [sum(1 for ph in owner if split_of[ph] == sp and k in stages[ph]) for sp in splits]
+        axes[1].bar(x + (k - 2.5) * width, v, width, color=OKABE[k - 1], label=f"stage {k}")
+    axes[1].set_xticks(x, splits); axes[1].set_ylabel("photographs")
+    axes[1].set_title("(b) photographs with a stage-k region")
+    axes[1].legend(fontsize=6, frameon=False)
+    fig.tight_layout()
+    save(fig, "dataset_distribution")
+    return {sp: {s: count[(sp, s)] for s in sources} for sp in splits}
 
 
 def comparison_macros(summary, evals):
@@ -277,7 +324,7 @@ def main():
     summary = json.load(open(RES / "comparison" / "summary.json"))
     evals = {m: json.load(open(RES / "comparison" / f"{m}_evaluation.json")) for m in ("unet", "yoloseg")}
     fig_dice_distribution(); fig_stage_dice(summary); fig_false_positives(evals)
-    fig_threshold_curves(evals); fig_training_curves()
+    fig_threshold_curves(evals); fig_training_curves(); fig_dataset_distribution()
     dataset_macros(); comparison_macros(summary, evals)
     growth(); piid(); agreement(); seed1(); seed2()
     write_macros()

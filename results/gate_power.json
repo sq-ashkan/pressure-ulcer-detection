@@ -1,5 +1,35 @@
 {
   "gate_rule": "promote iff mean(d) > 0 and lower 95 % percentile-bootstrap bound > -0.02 (selftrain.system.gate.decide, B = 2000, bootstrap seed 0)",
+  "gate_rule_interpretation": "lo ~ mean(d) - 1.96*SE, so the gate promotes iff mean(d) > max(0, 1.96*SE - delta) with delta = margin = 0.02. For delta < 1.96*SE (see margin_below_1.96se per comparison) the rule acts as a lenient superiority test: promote iff mean(d) > 1.96*SE - delta, not as a non-inferiority test.",
+  "gate_actual_comparisons": {
+    "growth_v1_vs_v0": {
+      "n": 91,
+      "mean_diff": 0.04955267218874372,
+      "sd_diff": 0.23948429685382572,
+      "se_mean_diff": 0.025104775702487613,
+      "se_at_n91": 0.025104775702487613,
+      "promotion_threshold_on_mean_approx": 0.02920536037687572,
+      "margin_below_1.96se": true
+    },
+    "growth_v2_vs_v1": {
+      "n": 91,
+      "mean_diff": -0.005923482197939424,
+      "sd_diff": 0.20149173906707338,
+      "se_mean_diff": 0.02112207347887424,
+      "se_at_n91": 0.02112207347887424,
+      "promotion_threshold_on_mean_approx": 0.021399264018593513,
+      "margin_below_1.96se": true
+    },
+    "growth_v3_vs_v1": {
+      "n": 91,
+      "mean_diff": -0.001263800647281006,
+      "sd_diff": 0.22576552203970687,
+      "se_mean_diff": 0.023666657340883277,
+      "se_at_n91": 0.023666657340883277,
+      "promotion_threshold_on_mean_approx": 0.026386648388131224,
+      "margin_below_1.96se": true
+    }
+  },
   "bootstrap_p_value_formula": "selftrain.metrics.paired_bootstrap: d = a - b; means_j = mean of d resampled with replacement (j = 1..B, B = 2000, seed 0); p = min(1, 2 * min(mean(means_j <= 0), mean(means_j >= 0))). This is the two-sided percentile-bootstrap p-value (share of the bootstrap distribution, not centred under H0, on the far side of 0); its resolution is 1/B = 0.0005 and it is not used by the gate decision.",
   "se_paired_mean_diff": {
     "unet_vs_yoloseg_seed0": {
@@ -7,47 +37,59 @@
       "mean_diff": 0.06546215597169229,
       "sd_diff": 0.30503928529635926,
       "se_mean_diff": 0.031976805738066466,
-      "se_at_n91": 0.031976805738066466
+      "se_at_n91": 0.031976805738066466,
+      "promotion_threshold_on_mean_approx": 0.04267453924661027,
+      "margin_below_1.96se": true
     },
     "unet_seed1_vs_seed0": {
       "n": 91,
       "mean_diff": 0.014817214458773043,
       "sd_diff": 0.16927925071928834,
       "se_mean_diff": 0.017745287170067785,
-      "se_at_n91": 0.017745287170067785
+      "se_at_n91": 0.017745287170067785,
+      "promotion_threshold_on_mean_approx": 0.014780762853332855,
+      "margin_below_1.96se": true
     },
     "unet_shifted_copy_+0.02": {
       "n": 91,
       "mean_diff": 0.020000000000000014,
       "sd_diff": 2.01606414914487e-17,
       "se_mean_diff": 2.113409477407243e-18,
-      "se_at_n91": 2.113409477407243e-18
+      "se_at_n91": 2.113409477407243e-18,
+      "promotion_threshold_on_mean_approx": 0.0,
+      "margin_below_1.96se": false
     },
     "growth_v1_vs_v0": {
       "n": 91,
       "mean_diff": 0.04955267218874372,
       "sd_diff": 0.23948429685382572,
       "se_mean_diff": 0.025104775702487613,
-      "se_at_n91": 0.025104775702487613
+      "se_at_n91": 0.025104775702487613,
+      "promotion_threshold_on_mean_approx": 0.02920536037687572,
+      "margin_below_1.96se": true
     },
     "growth_v2_vs_v1": {
       "n": 91,
       "mean_diff": -0.005923482197939424,
       "sd_diff": 0.20149173906707338,
       "se_mean_diff": 0.02112207347887424,
-      "se_at_n91": 0.02112207347887424
+      "se_at_n91": 0.02112207347887424,
+      "promotion_threshold_on_mean_approx": 0.021399264018593513,
+      "margin_below_1.96se": true
     },
-    "growth_v3_vs_v2": {
+    "growth_v3_vs_v1": {
       "n": 91,
-      "mean_diff": 0.004659681550658411,
-      "sd_diff": 0.15091882475661347,
-      "se_mean_diff": 0.015820591556825036,
-      "se_at_n91": 0.015820591556825036
+      "mean_diff": -0.001263800647281006,
+      "sd_diff": 0.22576552203970687,
+      "se_mean_diff": 0.023666657340883277,
+      "se_at_n91": 0.023666657340883277,
+      "promotion_threshold_on_mean_approx": 0.026386648388131224,
+      "margin_below_1.96se": true
     }
   },
   "note_shifted_copy": "a shifted copy has d constant, so sd(d) = SE = 0: the SE is set by the per-image disagreement of two models, not by the Dice level",
   "power_simulation": {
-    "n_sim_per_delta": 200,
+    "n_sim_per_delta": 1000,
     "deltas": [
       0.0,
       0.01,
@@ -64,49 +106,223 @@
         "base_sd_diff": 0.23948429685382572,
         "n": 91,
         "p_promote": {
-          "0.00": 0.115,
-          "0.01": 0.25,
-          "0.02": 0.405,
-          "0.03": 0.565,
-          "0.04": 0.645,
-          "0.05": 0.83,
-          "0.06": 0.86
+          "0.00": 0.142,
+          "0.01": 0.264,
+          "0.02": 0.377,
+          "0.03": 0.504,
+          "0.04": 0.663,
+          "0.05": 0.782,
+          "0.06": 0.894
         },
-        "type1_rate_delta0": 0.115,
+        "p_promote_monte_carlo": {
+          "0.00": {
+            "promoted": 142,
+            "mc_se": 0.011037934589405754,
+            "wilson_ci95": [
+              0.12173369457141411,
+              0.16500636481644151
+            ]
+          },
+          "0.01": {
+            "promoted": 264,
+            "mc_se": 0.013939296969359681,
+            "wilson_ci95": [
+              0.2376195013277309,
+              0.2921867948050455
+            ]
+          },
+          "0.02": {
+            "promoted": 377,
+            "mc_se": 0.01532550162311172,
+            "wilson_ci95": [
+              0.3474865616414689,
+              0.40745485541078325
+            ]
+          },
+          "0.03": {
+            "promoted": 504,
+            "mc_se": 0.01581088232832058,
+            "wilson_ci95": [
+              0.473054712603807,
+              0.534914672207502
+            ]
+          },
+          "0.04": {
+            "promoted": 663,
+            "mc_se": 0.014947608504372864,
+            "wilson_ci95": [
+              0.6331283628721408,
+              0.6916240681886959
+            ]
+          },
+          "0.05": {
+            "promoted": 782,
+            "mc_se": 0.013056645817360598,
+            "wilson_ci95": [
+              0.7553560144909894,
+              0.8064856147062864
+            ]
+          },
+          "0.06": {
+            "promoted": 894,
+            "mc_se": 0.009734680272099335,
+            "wilson_ci95": [
+              0.8733891741189649,
+              0.9115952297949595
+            ]
+          }
+        },
+        "type1_rate_delta0": 0.142,
         "min_delta_grid_p50": 0.03,
-        "min_delta_grid_p80": 0.05
-      },
-      "unet_vs_yoloseg_seed0": {
-        "base_sd_diff": 0.30503928529635926,
-        "n": 91,
-        "p_promote": {
-          "0.00": 0.09,
-          "0.01": 0.155,
-          "0.02": 0.255,
-          "0.03": 0.435,
-          "0.04": 0.525,
-          "0.05": 0.66,
-          "0.06": 0.76
-        },
-        "type1_rate_delta0": 0.09,
-        "min_delta_grid_p50": 0.04,
-        "min_delta_grid_p80": null
+        "min_delta_grid_p80": 0.06
       },
       "unet_seed1_vs_seed0": {
         "base_sd_diff": 0.16927925071928834,
         "n": 91,
         "p_promote": {
-          "0.00": 0.235,
-          "0.01": 0.365,
-          "0.02": 0.67,
-          "0.03": 0.84,
-          "0.04": 0.895,
-          "0.05": 0.995,
-          "0.06": 0.995
+          "0.00": 0.231,
+          "0.01": 0.435,
+          "0.02": 0.644,
+          "0.03": 0.866,
+          "0.04": 0.959,
+          "0.05": 0.985,
+          "0.06": 0.996
         },
-        "type1_rate_delta0": 0.235,
+        "p_promote_monte_carlo": {
+          "0.00": {
+            "promoted": 231,
+            "mc_se": 0.013328128150644412,
+            "wilson_ci95": [
+              0.20593602321985893,
+              0.2581228482196192
+            ]
+          },
+          "0.01": {
+            "promoted": 435,
+            "mc_se": 0.0156772127624779,
+            "wilson_ci95": [
+              0.40457925418599516,
+              0.46591824263023573
+            ]
+          },
+          "0.02": {
+            "promoted": 644,
+            "mc_se": 0.015141466243399283,
+            "wilson_ci95": [
+              0.6138233673784835,
+              0.673074485828636
+            ]
+          },
+          "0.03": {
+            "promoted": 866,
+            "mc_se": 0.010772372069326236,
+            "wilson_ci95": [
+              0.8434794492074035,
+              0.8857192610273587
+            ]
+          },
+          "0.04": {
+            "promoted": 959,
+            "mc_se": 0.006270486424512857,
+            "wilson_ci95": [
+              0.9448517110985959,
+              0.9696351959990976
+            ]
+          },
+          "0.05": {
+            "promoted": 985,
+            "mc_se": 0.0038438262187565153,
+            "wilson_ci95": [
+              0.9753988052083976,
+              0.9908891031628037
+            ]
+          },
+          "0.06": {
+            "promoted": 996,
+            "mc_se": 0.0019959959919799443,
+            "wilson_ci95": [
+              0.9897602795701941,
+              0.9984434370321067
+            ]
+          }
+        },
+        "type1_rate_delta0": 0.231,
         "min_delta_grid_p50": 0.02,
         "min_delta_grid_p80": 0.03
+      },
+      "unet_vs_yoloseg_seed0": {
+        "base_sd_diff": 0.30503928529635926,
+        "n": 91,
+        "p_promote": {
+          "0.00": 0.074,
+          "0.01": 0.139,
+          "0.02": 0.246,
+          "0.03": 0.355,
+          "0.04": 0.506,
+          "0.05": 0.651,
+          "0.06": 0.753
+        },
+        "p_promote_monte_carlo": {
+          "0.00": {
+            "promoted": 74,
+            "mc_se": 0.00827792244467173,
+            "wilson_ci95": [
+              0.05935475135620055,
+              0.09190576623940419
+            ]
+          },
+          "0.01": {
+            "promoted": 139,
+            "mc_se": 0.010939789760319894,
+            "wilson_ci95": [
+              0.11893604544071834,
+              0.1618269753386557
+            ]
+          },
+          "0.02": {
+            "promoted": 246,
+            "mc_se": 0.013619251080731275,
+            "wilson_ci95": [
+              0.22031170020858673,
+              0.2736323642732997
+            ]
+          },
+          "0.03": {
+            "promoted": 355,
+            "mc_se": 0.015131919904625453,
+            "wilson_ci95": [
+              0.3259479413468977,
+              0.38516185924315555
+            ]
+          },
+          "0.04": {
+            "promoted": 506,
+            "mc_se": 0.015810249839898167,
+            "wilson_ci95": [
+              0.47504829137433036,
+              0.5369057858426329
+            ]
+          },
+          "0.05": {
+            "promoted": 651,
+            "mc_se": 0.01507312177354114,
+            "wilson_ci95": [
+              0.6209297417330122,
+              0.679914534893898
+            ]
+          },
+          "0.06": {
+            "promoted": 753,
+            "mc_se": 0.013637851736985557,
+            "wilson_ci95": [
+              0.7253352383897212,
+              0.7787283509255652
+            ]
+          }
+        },
+        "type1_rate_delta0": 0.074,
+        "min_delta_grid_p50": 0.04,
+        "min_delta_grid_p80": null
       }
     }
   },
@@ -125,10 +341,17 @@
         "test_dice_mean_summary": 0.7996579785668777,
         "test_dice_mean_positive_images": 0.7996579785668777,
         "n_positive": 91
+      },
+      "seed2": {
+        "summary": "results/comparison_seed2/summary.json",
+        "threshold": 0.65,
+        "test_dice_mean_summary": 0.7752820491278666,
+        "test_dice_mean_positive_images": 0.7752820491278666,
+        "n_positive": 91
       }
     },
-    "range_positive_images": 0.014817214458773265,
-    "range_summary_dice_mean": 0.014817214458773265,
-    "seed2_present": false
+    "range_positive_images": 0.024375929439011124,
+    "range_summary_dice_mean": 0.024375929439011124,
+    "seed2_present": true
   }
 }

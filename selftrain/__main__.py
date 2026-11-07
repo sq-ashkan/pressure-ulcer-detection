@@ -22,6 +22,7 @@ already running, invalid input), 2 command-line usage error.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import logging
 import shlex
@@ -378,8 +379,22 @@ THESIS_PIPELINE: tuple[PipelineStep, ...] = (
     PipelineStep("data growth: growth batches, selftrain init and three system cycles (WP4)",
                  "scripts/data_growth.sh"),
     PipelineStep("learning curve (25/50/75 % of train, seeds 0-2)", "scripts/learning_curve.py"),
+    # review evidence (each script documents its command line and outputs)
+    PipelineStep("source overlap of the photographs (data/seg/manifest.csv)",
+                 "scripts/source_overlap.py"),
+    PipelineStep("provenance check: OCR of copyright marks and watermarks",
+                 "scripts/provenance_check.py"),
+    PipelineStep("PIID: stage accuracy over all photographs, share marked (F13)",
+                 "scripts/external_piid_extra.py"),
+    PipelineStep("power of the promotion gate", "scripts/gate_power.py"),
+    PipelineStep("learning-curve fit", "scripts/learning_curve_fit.py"),
+    PipelineStep("robustness of the model comparison over the seeds",
+                 "scripts/comparison_robustness.py"),
+    PipelineStep("failure analysis of the test photographs", "scripts/failure_analysis.py"),
     PipelineStep("leakage sensitivity (cross-source near-duplicates)",
                  "scripts/leakage_sensitivity.py"),
+    PipelineStep("engineering evidence: model size, training settings, code inventory",
+                 "scripts/engineering_evidence.py"),
     PipelineStep("thesis figures and number macros", "scripts/make_figures.py"),
 )
 """The thesis experiments in dependency order (docs/ROADMAP.md, WP1-WP4)."""
@@ -397,10 +412,14 @@ def pipeline_numbers(root: Path = ROOT) -> list[str]:
     """Headline numbers of the result files the pipeline writes (those present)."""
     res = Path(root) / "results"
     lines = []
-    stats = _read_result(res / "seg_dataset_stats.json")
-    if stats:
-        lines.append(f"dataset: {stats.get('photographs')} photographs; images per split "
-                     f"{stats.get('images_per_split')}")
+    manifest = Path(root) / "data" / "seg" / "manifest.csv"
+    if manifest.is_file():                     # post-audit dataset, as evaluated
+        with open(manifest, newline="", encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+        per_split = {sp: len({r["photograph"] for r in rows if r["split"] == sp})
+                     for sp in ("train", "val", "test")}
+        lines.append(f"dataset (data/seg/manifest.csv): {len({r['photograph'] for r in rows})} "
+                     f"photographs, {len(rows)} images; photographs per split {per_split}")
     agree = _read_result(res / "annotator_agreement.json")
     if agree:
         lines.append(f"annotator agreement ({agree.get('matched_photographs')} photographs): "
@@ -417,13 +436,20 @@ def pipeline_numbers(root: Path = ROOT) -> list[str]:
                 lines.append(f"  {model}: test Dice {_fmt(test.get('dice_mean'))} "
                              f"{_ci(test.get('dice_ci95'))}, FPR "
                              f"{_fmt(test.get('false_positive_rate'), '.3f')}")
+    extra = _read_result(res / "external" / "piid_extra.json") or {}
     for model in ("unet", "yoloseg"):
         ext = _read_result(res / "external" / f"external_piid_{model}.json")
-        if ext:
-            lines.append(f"PIID external test ({model}, n = {ext.get('external_n')}): "
-                         f"sensitivity {_fmt(ext.get('sensitivity'))}, stage accuracy "
-                         f"{_fmt(ext.get('stage_accuracy_detected'))}, quadratic kappa "
-                         f"{_fmt(ext.get('quadratic_kappa'))}")
+        m = (extra.get("models") or {}).get(model) or {}
+        if ext or m:
+            ext = ext or {}
+            n = extra.get("piid_n", ext.get("external_n"))
+            marked = m.get("photographs_marked")
+            share = marked / n if isinstance(marked, int) and n else None
+            lines.append(f"PIID external test ({model}, n = {n}): share marked {_fmt(share)} "
+                         f"({marked}/{n}), stage accuracy over all photographs "
+                         f"{_fmt(m.get('stage_accuracy_all'))} {_ci(m.get('stage_accuracy_all_ci95'))}, "
+                         f"quadratic kappa (marked) "
+                         f"{_fmt(m.get('quadratic_kappa_detected', ext.get('quadratic_kappa')))}")
     return lines
 
 
