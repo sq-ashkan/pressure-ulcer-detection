@@ -1,0 +1,44 @@
+DATASET UNIFICATION REPORT (v3)
+======================================================================
+Generated: 2026-11-05T17:34:20+00:00
+Full-frame sources: excluded
+Perceptual hash: phash size=8 (64-bit) threshold=5
+
+Annotation formats read from source:
+  roboflow_fid           box=30     polygon=661    empty=0
+  roboflow_maskrcnn      box=0      polygon=4867   empty=0
+  roboflow_mobile        box=12     polygon=301    empty=0
+  roboflow_woundcare     box=0      polygon=880    empty=0
+
+Images per source (final contribution; a source may reach zero if its photographs duplicate another source):
+  roboflow_fid           train=439    val=32     test=21     total=492
+  roboflow_maskrcnn      train=1861   val=35     test=46     total=1942
+  roboflow_mobile        train=157    val=4      test=4      total=165
+  roboflow_woundcare     train=340    val=0      test=0      total=340
+
+Split sizes (images / independent photographs):
+  train  images=2797   (95.2%)  photographs=331
+  val    images=71     ( 2.4%)  photographs=71
+  test   images=71     ( 2.4%)  photographs=71
+
+Class distribution (annotation instances):
+  train  stage1=732  stage2=692  stage3=1000  stage4=869
+  val    stage1=15  stage2=6  stage3=35  stage4=23
+  test   stage1=23  stage2=11  stage3=27  stage4=22
+
+Identity and leakage:
+  distinct photographs (stem + perceptual): 473
+  merges made by perceptual identity alone: 201
+  eval images with a train twin (SIFT+RANSAC audit, >=25 inliers): 4
+
+Total images: 2939
+Output: /Users/private/Documents/pressure-ulcer-detection/data/unified
+
+Known limitations:
+  * roboflow_fid declares only [NonPU, Stage3, Stage4]; some of its
+    photographs are filed under Stage1/Stage2 names but carry Stage3/
+    Stage4 class ids. data.yaml is treated as authoritative.
+  * Validation and test hold one image per photograph, so their sizes
+    equal the number of independent observations.
+  * Sources whose annotations span the whole frame are excluded by
+    default; they carry no localisation signal.

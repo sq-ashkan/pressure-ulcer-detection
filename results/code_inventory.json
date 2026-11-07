@@ -1,0 +1,116 @@
+{
+  "counting_rule": "non-blank lines not starting with '#' in .py files (docstrings count as code)",
+  "areas": {
+    "inherited_practical_project": {
+      "files": 17,
+      "lines": 3038,
+      "per_file": {
+        "app/detector.py": 126,
+        "app/main.py": 155,
+        "scripts/augment_dataset.py": 184,
+        "scripts/augment_fast.py": 209,
+        "scripts/augment_multiround.py": 186,
+        "scripts/convert_masks_to_bbox.py": 60,
+        "scripts/deduplicate.py": 71,
+        "scripts/download_all.py": 98,
+        "scripts/download_extra.py": 140,
+        "scripts/download_github.py": 51,
+        "scripts/download_roboflow.py": 87,
+        "scripts/eda.py": 211,
+        "scripts/generate_dataset.py": 211,
+        "scripts/train_yolo.py": 117,
+        "scripts/unify_dataset.py": 332,
+        "scripts/unify_dataset_v2.py": 337,
+        "scripts/unify_dataset_v3.py": 463
+      }
+    },
+    "thesis_selftrain_library": {
+      "files": 9,
+      "lines": 1017,
+      "per_file": {
+        "selftrain/__init__.py": 11,
+        "selftrain/__main__.py": 466,
+        "selftrain/config.py": 45,
+        "selftrain/data.py": 47,
+        "selftrain/evaluate.py": 136,
+        "selftrain/letterbox.py": 26,
+        "selftrain/metrics.py": 71,
+        "selftrain/unet.py": 127,
+        "selftrain/yoloseg.py": 88
+      }
+    },
+    "thesis_selftrain_system": {
+      "files": 15,
+      "lines": 8552,
+      "per_file": {
+        "selftrain/system/__init__.py": 28,
+        "selftrain/system/active.py": 157,
+        "selftrain/system/cycle.py": 398,
+        "selftrain/system/dashboard.py": 869,
+        "selftrain/system/dataset.py": 497,
+        "selftrain/system/dedupe.py": 459,
+        "selftrain/system/drift.py": 229,
+        "selftrain/system/gate.py": 135,
+        "selftrain/system/ingest.py": 1116,
+        "selftrain/system/modelcard.py": 751,
+        "selftrain/system/quality.py": 362,
+        "selftrain/system/registry.py": 355,
+        "selftrain/system/report.py": 2012,
+        "selftrain/system/steps.py": 653,
+        "selftrain/system/workspace.py": 531
+      }
+    },
+    "thesis_other_scripts": {
+      "files": 23,
+      "lines": 2746,
+      "per_file": {
+        "scripts/annotator_agreement.py": 187,
+        "scripts/build_seg_dataset.py": 366,
+        "scripts/check_thesis.py": 228,
+        "scripts/citation_contexts.py": 44,
+        "scripts/compare_models.py": 71,
+        "scripts/engineering_evidence.py": 201,
+        "scripts/evaluate.py": 219,
+        "scripts/external_piid.py": 99,
+        "scripts/external_piid_extra.py": 81,
+        "scripts/fetch_weights.py": 30,
+        "scripts/gate_power.py": 113,
+        "scripts/leakage_sensitivity.py": 65,
+        "scripts/learning_curve.py": 69,
+        "scripts/make_figures.py": 198,
+        "scripts/make_growth_batches.py": 65,
+        "scripts/make_qualitative.py": 56,
+        "scripts/make_sample_grids.py": 164,
+        "scripts/notify_telegram.py": 104,
+        "scripts/provenance_check.py": 106,
+        "scripts/source_overlap.py": 42,
+        "scripts/test_imports.py": 59,
+        "scripts/train_model.py": 34,
+        "scripts/verify_references.py": 145
+      }
+    },
+    "thesis_tests": {
+      "files": 8,
+      "lines": 4061,
+      "per_file": {
+        "tests/test_pipeline.py": 197,
+        "tests/test_system_cycle.py": 689,
+        "tests/test_system_dashboard.py": 331,
+        "tests/test_system_dataset.py": 601,
+        "tests/test_system_e2e.py": 257,
+        "tests/test_system_ingest.py": 767,
+        "tests/test_system_report.py": 490,
+        "tests/test_system_workspace.py": 729
+      }
+    }
+  },
+  "totals": {
+    "inherited": 3038,
+    "thesis": 16376,
+    "thesis_share": 0.844
+  },
+  "non_python_dashboard_assets": {
+    "files": 3,
+    "nonblank_lines": 1383
+  }
+}

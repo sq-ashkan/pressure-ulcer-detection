@@ -1,0 +1,20 @@
+{
+  "input": "1x3x512x512",
+  "flop_counter": "thop 2.0.18",
+  "flop_convention": "GFLOPs = 2 x multiply-accumulates (as ultralytics model.info)",
+  "unet": {
+    "weights": "runs/compare/unet/best.pt",
+    "architecture": "smp.Unet, ResNet-34 encoder, 5 output classes",
+    "parameters": 24436949,
+    "parameters_encoder": 21284672,
+    "gflops_512": 63.1
+  },
+  "yoloseg": {
+    "weights": "runs/compare/yoloseg/weights/selected.pt",
+    "architecture": "YOLOv8s-seg (ultralytics), 4 classes",
+    "parameters": 11791644,
+    "gflops_512": 25.72
+  },
+  "ratio_parameters_unet_over_yolo": 2.07,
+  "ratio_gflops_unet_over_yolo": 2.45
+}

@@ -1,0 +1,58 @@
+{
+  "n_positive": 91,
+  "n_negative": 45,
+  "missed": 3,
+  "missed_by_source": {
+    "roboflow_fid": 3
+  },
+  "dice_below_0_5": 9,
+  "dice_below_0_5_in_smallest_tercile": 7,
+  "area_tercile_bounds": [
+    0.121,
+    0.3596
+  ],
+  "dice_by_area_tercile": {
+    "small": {
+      "n": 31,
+      "mean_dice": 0.665
+    },
+    "middle": {
+      "n": 30,
+      "mean_dice": 0.801
+    },
+    "large": {
+      "n": 30,
+      "mean_dice": 0.893
+    }
+  },
+  "dice_by_source": {
+    "rf_petchs_seg": {
+      "n": 20,
+      "mean_dice": 0.856
+    },
+    "roboflow_fid": {
+      "n": 25,
+      "mean_dice": 0.663
+    },
+    "roboflow_maskrcnn": {
+      "n": 44,
+      "mean_dice": 0.821
+    },
+    "roboflow_mobile": {
+      "n": 2,
+      "mean_dice": 0.811
+    }
+  },
+  "false_positives": 22,
+  "false_positives_by_source": {
+    "neg_azh": 13,
+    "neg_fuseg": 8,
+    "roboflow_mobile": 1
+  },
+  "negatives_by_source": {
+    "neg_azh": 26,
+    "neg_fuseg": 13,
+    "roboflow_fid": 2,
+    "roboflow_mobile": 4
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "gate_rule": "promote iff mean(d) > 0 and lower 95 % percentile-bootstrap bound > -0.02 (selftrain.system.gate.decide, B = 2000, bootstrap seed 0)",
+  "bootstrap_p_value_formula": "selftrain.metrics.paired_bootstrap: d = a - b; means_j = mean of d resampled with replacement (j = 1..B, B = 2000, seed 0); p = min(1, 2 * min(mean(means_j <= 0), mean(means_j >= 0))). This is the two-sided percentile-bootstrap p-value (share of the bootstrap distribution, not centred under H0, on the far side of 0); its resolution is 1/B = 0.0005 and it is not used by the gate decision.",
+  "se_paired_mean_diff": {
+    "unet_vs_yoloseg_seed0": {
+      "n": 91,
+      "mean_diff": 0.06546215597169229,
+      "sd_diff": 0.30503928529635926,
+      "se_mean_diff": 0.031976805738066466,
+      "se_at_n91": 0.031976805738066466
+    },
+    "unet_seed1_vs_seed0": {
+      "n": 91,
+      "mean_diff": 0.014817214458773043,
+      "sd_diff": 0.16927925071928834,
+      "se_mean_diff": 0.017745287170067785,
+      "se_at_n91": 0.017745287170067785
+    },
+    "unet_shifted_copy_+0.02": {
+      "n": 91,
+      "mean_diff": 0.020000000000000014,
+      "sd_diff": 2.01606414914487e-17,
+      "se_mean_diff": 2.113409477407243e-18,
+      "se_at_n91": 2.113409477407243e-18
+    },
+    "growth_v1_vs_v0": {
+      "n": 91,
+      "mean_diff": 0.04955267218874372,
+      "sd_diff": 0.23948429685382572,
+      "se_mean_diff": 0.025104775702487613,
+      "se_at_n91": 0.025104775702487613
+    },
+    "growth_v2_vs_v1": {
+      "n": 91,
+      "mean_diff": -0.005923482197939424,
+      "sd_diff": 0.20149173906707338,
+      "se_mean_diff": 0.02112207347887424,
+      "se_at_n91": 0.02112207347887424
+    },
+    "growth_v3_vs_v2": {
+      "n": 91,
+      "mean_diff": 0.004659681550658411,
+      "sd_diff": 0.15091882475661347,
+      "se_mean_diff": 0.015820591556825036,
+      "se_at_n91": 0.015820591556825036
+    }
+  },
+  "note_shifted_copy": "a shifted copy has d constant, so sd(d) = SE = 0: the SE is set by the per-image disagreement of two models, not by the Dice level",
+  "power_simulation": {
+    "n_sim_per_delta": 200,
+    "deltas": [
+      0.0,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06
+    ],
+    "rng_seed": 12345,
+    "method": "centred observed paired differences resampled with replacement (n images) + Delta, gate.decide vs zeros",
+    "results": {
+      "growth_v1_vs_v0": {
+        "base_sd_diff": 0.23948429685382572,
+        "n": 91,
+        "p_promote": {
+          "0.00": 0.115,
+          "0.01": 0.25,
+          "0.02": 0.405,
+          "0.03": 0.565,
+          "0.04": 0.645,
+          "0.05": 0.83,
+          "0.06": 0.86
+        },
+        "type1_rate_delta0": 0.115,
+        "min_delta_grid_p50": 0.03,
+        "min_delta_grid_p80": 0.05
+      },
+      "unet_vs_yoloseg_seed0": {
+        "base_sd_diff": 0.30503928529635926,
+        "n": 91,
+        "p_promote": {
+          "0.00": 0.09,
+          "0.01": 0.155,
+          "0.02": 0.255,
+          "0.03": 0.435,
+          "0.04": 0.525,
+          "0.05": 0.66,
+          "0.06": 0.76
+        },
+        "type1_rate_delta0": 0.09,
+        "min_delta_grid_p50": 0.04,
+        "min_delta_grid_p80": null
+      },
+      "unet_seed1_vs_seed0": {
+        "base_sd_diff": 0.16927925071928834,
+        "n": 91,
+        "p_promote": {
+          "0.00": 0.235,
+          "0.01": 0.365,
+          "0.02": 0.67,
+          "0.03": 0.84,
+          "0.04": 0.895,
+          "0.05": 0.995,
+          "0.06": 0.995
+        },
+        "type1_rate_delta0": 0.235,
+        "min_delta_grid_p50": 0.02,
+        "min_delta_grid_p80": 0.03
+      }
+    }
+  },
+  "seed_to_seed_unet": {
+    "seeds": {
+      "seed0": {
+        "summary": "results/comparison/summary.json",
+        "threshold": 0.2,
+        "test_dice_mean_summary": 0.7848407641081044,
+        "test_dice_mean_positive_images": 0.7848407641081044,
+        "n_positive": 91
+      },
+      "seed1": {
+        "summary": "results/comparison_seed1/summary.json",
+        "threshold": 0.5,
+        "test_dice_mean_summary": 0.7996579785668777,
+        "test_dice_mean_positive_images": 0.7996579785668777,
+        "n_positive": 91
+      }
+    },
+    "range_positive_images": 0.014817214458773265,
+    "range_summary_dice_mean": 0.014817214458773265,
+    "seed2_present": false
+  }
+}

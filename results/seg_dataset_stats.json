@@ -1,0 +1,90 @@
+{
+  "generated": "20261105T220530Z",
+  "photographs": 928,
+  "perceptual_merges": 210,
+  "photographs_per_split": {
+    "test": 139,
+    "train": 650,
+    "val": 139
+  },
+  "images_per_split": {
+    "test": 139,
+    "train": 2820,
+    "val": 139
+  },
+  "negative_images_per_split": {
+    "val": 46,
+    "train": 308,
+    "test": 47
+  },
+  "per_source": {
+    "roboflow_maskrcnn": {
+      "test": 45,
+      "train": 1489,
+      "val": 46
+    },
+    "roboflow_woundcare": {
+      "train": 274
+    },
+    "roboflow_fid": {
+      "train": 460,
+      "val": 33,
+      "test": 27
+    },
+    "roboflow_mobile": {
+      "train": 222,
+      "test": 7,
+      "val": 5
+    },
+    "neg_azh": {
+      "train": 99,
+      "val": 21,
+      "test": 26
+    },
+    "rf_petchs_seg": {
+      "train": 209,
+      "test": 20,
+      "val": 20
+    },
+    "neg_fuseg": {
+      "test": 14,
+      "train": 67,
+      "val": 14
+    }
+  },
+  "instances_per_class": {
+    "test": {
+      "stage1": 17,
+      "stage4": 30,
+      "stage3": 43,
+      "stage2": 12
+    },
+    "train": {
+      "stage2": 648,
+      "stage1": 679,
+      "stage3": 983,
+      "stage4": 756
+    },
+    "val": {
+      "stage3": 36,
+      "stage1": 17,
+      "stage4": 37,
+      "stage2": 15
+    }
+  },
+  "dropped_dti_unstageable": {
+    "roboflow_maskrcnn": 1543,
+    "roboflow_woundcare": 282,
+    "roboflow_fid": 0,
+    "roboflow_mobile": 0,
+    "rf_petchs_seg": 25
+  },
+  "eval_with_train_twin": 7,
+  "extra_negatives": {
+    "N": 83,
+    "S": 136,
+    "D": 145,
+    "V": 200,
+    "BG": 82
+  }
+}

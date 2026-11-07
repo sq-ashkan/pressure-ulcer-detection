@@ -1,0 +1,120 @@
+{
+  "model": "yoloseg",
+  "threshold": 0.15,
+  "piid_total": 1091,
+  "overlap_removed": 16,
+  "external_n": 1075,
+  "sensitivity": 0.8,
+  "sensitivity_ci95": [
+    0.7750386856310084,
+    0.8228248005378603
+  ],
+  "sensitivity_per_stage": {
+    "stage1": {
+      "rate": 0.6899563318777293,
+      "ci95": [
+        0.6273312540466972,
+        0.7463133180572569
+      ]
+    },
+    "stage2": {
+      "rate": 0.7596153846153846,
+      "ci95": [
+        0.7092247980773791,
+        0.8036905366980271
+      ]
+    },
+    "stage3": {
+      "rate": 0.8523985239852399,
+      "ci95": [
+        0.8052491125247624,
+        0.8896966307688293
+      ]
+    },
+    "stage4": {
+      "rate": 0.8897338403041825,
+      "ci95": [
+        0.8461244370831067,
+        0.9221215935208169
+      ]
+    }
+  },
+  "stage_accuracy_detected": 0.5883720930232558,
+  "stage_accuracy_ci95": [
+    0.5551583358081162,
+    0.6207998491183795
+  ],
+  "quadratic_kappa": 0.797668295484557,
+  "confusion_rows_piid_stage_cols_pred0to4": [
+    [
+      71,
+      88,
+      63,
+      7,
+      0
+    ],
+    [
+      75,
+      8,
+      156,
+      66,
+      7
+    ],
+    [
+      40,
+      0,
+      25,
+      63,
+      143
+    ],
+    [
+      29,
+      0,
+      4,
+      31,
+      199
+    ]
+  ],
+  "overlap_examples": [
+    [
+      "stage_1_74781.jpg",
+      "roboflow_maskrcnn__130_jpg.rf.219a3ba9c049825cf39cf842aee9c089__8d1634.jpg"
+    ],
+    [
+      "stage_2_28271.jpg",
+      "roboflow_maskrcnn__Chronic-ulcer-136-_jpg.rf.623f2e819ffb02faf4b776a6d6fd8869__291057.jpg"
+    ],
+    [
+      "stage_3_13399.jpg",
+      "roboflow_maskrcnn__Chronic-ulcer-357-_jpg.rf.05e9a8a974b2d33879532c12aad8b24b__2cf0d9.jpg"
+    ],
+    [
+      "stage_3_70238.jpg",
+      "roboflow_maskrcnn__Chronic-ulcer-268-_jpg.rf.a868678edd5ab529332811cbd0bc5dc0__16db80.jpg"
+    ],
+    [
+      "stage_3_71562.jpg",
+      "roboflow_maskrcnn__Chronic-ulcer-427-_jpg.rf.20cfcf1bc6a0c17bca85f3bed454654d__0bfbb9.jpg"
+    ],
+    [
+      "stage_3_80922.jpg",
+      "roboflow_maskrcnn__Chronic-ulcer-48-_jpg.rf.a327d7b1dfb3b75038293241d53343ff__85a2c6.jpg"
+    ],
+    [
+      "stage_4_17173.jpg",
+      "roboflow_maskrcnn__Chronic-ulcer-88-_jpg.rf.a4873067ab6de579b43fcd1d3b8b46ed__c89108.jpg"
+    ],
+    [
+      "stage_4_19876.jpg",
+      "roboflow_fid__Stage4_13_jpg.rf.30f1227cc8ea56f8e4e0aa114b8d1d7d__456bf6.jpg"
+    ],
+    [
+      "stage_4_26515.jpg",
+      "roboflow_maskrcnn__Chronic-ulcer-40-_jpg.rf.daa6081149da23dc567504c39ccc94e9__7fed40.jpg"
+    ],
+    [
+      "stage_4_27359.jpg",
+      "roboflow_maskrcnn__Chronic-ulcer-270-_jpg.rf.f8c2ccfa1d67c5a2442c00d94b4230a9__f41a43.jpg"
+    ]
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "manifest": "data/seg/manifest.csv",
+  "photographs_per_source": {
+    "neg_azh": 143,
+    "neg_fuseg": 91,
+    "rf_petchs_seg": 150,
+    "roboflow_fid": 237,
+    "roboflow_maskrcnn": 267,
+    "roboflow_mobile": 203,
+    "roboflow_woundcare": 179
+  },
+  "distinct_photographs": 921,
+  "photographs_by_number_of_sources": {
+    "1": 630,
+    "2": 254,
+    "3": 16,
+    "4": 21
+  },
+  "shared_photographs": {
+    "neg_azh": {
+      "neg_azh": 143,
+      "neg_fuseg": 0,
+      "rf_petchs_seg": 0,
+      "roboflow_fid": 1,
+      "roboflow_maskrcnn": 0,
+      "roboflow_mobile": 1,
+      "roboflow_woundcare": 0
+    },
+    "neg_fuseg": {
+      "neg_azh": 0,
+      "neg_fuseg": 91,
+      "rf_petchs_seg": 0,
+      "roboflow_fid": 0,
+      "roboflow_maskrcnn": 0,
+      "roboflow_mobile": 0,
+      "roboflow_woundcare": 0
+    },
+    "rf_petchs_seg": {
+      "neg_azh": 0,
+      "neg_fuseg": 0,
+      "rf_petchs_seg": 150,
+      "roboflow_fid": 0,
+      "roboflow_maskrcnn": 0,
+      "roboflow_mobile": 0,
+      "roboflow_woundcare": 0
+    },
+    "roboflow_fid": {
+      "neg_azh": 1,
+      "neg_fuseg": 0,
+      "rf_petchs_seg": 0,
+      "roboflow_fid": 237,
+      "roboflow_maskrcnn": 35,
+      "roboflow_mobile": 132,
+      "roboflow_woundcare": 35
+    },
+    "roboflow_maskrcnn": {
+      "neg_azh": 0,
+      "neg_fuseg": 0,
+      "rf_petchs_seg": 0,
+      "roboflow_fid": 35,
+      "roboflow_maskrcnn": 267,
+      "roboflow_mobile": 23,
+      "roboflow_woundcare": 179
+    },
+    "roboflow_mobile": {
+      "neg_azh": 1,
+      "neg_fuseg": 0,
+      "rf_petchs_seg": 0,
+      "roboflow_fid": 132,
+      "roboflow_maskrcnn": 23,
+      "roboflow_mobile": 203,
+      "roboflow_woundcare": 22
+    },
+    "roboflow_woundcare": {
+      "neg_azh": 0,
+      "neg_fuseg": 0,
+      "rf_petchs_seg": 0,
+      "roboflow_fid": 35,
+      "roboflow_maskrcnn": 179,
+      "roboflow_mobile": 22,
+      "roboflow_woundcare": 179
+    }
+  }
+}

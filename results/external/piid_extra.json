@@ -1,0 +1,69 @@
+{
+  "piid_n": 1075,
+  "piid_stages_present": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "ulcer_free_photographs": 0,
+  "specificity": "not assessable: PIID contains only ulcer photographs (stages 1-4), no ulcer-free images",
+  "detected_by_both_n": 834,
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 0,
+    "method": "percentile"
+  },
+  "models": {
+    "unet": {
+      "threshold": 0.2,
+      "photographs_marked": 1021,
+      "photographs_not_marked": 54,
+      "stage_accuracy_all": 0.4669767441860465,
+      "stage_accuracy_all_correct": 502,
+      "stage_accuracy_all_ci95": [
+        0.43732279374647637,
+        0.4968658767682684
+      ],
+      "stage_accuracy_detected_by_both": 0.5239808153477218,
+      "stage_accuracy_detected_by_both_correct": 437,
+      "stage_accuracy_detected_by_both_n": 834,
+      "stage_accuracy_detected_by_both_ci95": [
+        0.4900529066203984,
+        0.5576888144877442
+      ],
+      "quadratic_kappa_detected": 0.6192847689146845,
+      "quadratic_kappa_detected_n": 1021,
+      "quadratic_kappa_matches_summary_json": true,
+      "quadratic_kappa_bootstrap_ci95": [
+        0.5822185307159023,
+        0.6567853775313757
+      ]
+    },
+    "yoloseg": {
+      "threshold": 0.15,
+      "photographs_marked": 860,
+      "photographs_not_marked": 215,
+      "stage_accuracy_all": 0.47069767441860466,
+      "stage_accuracy_all_correct": 506,
+      "stage_accuracy_all_ci95": [
+        0.44101665800408607,
+        0.5005873735794198
+      ],
+      "stage_accuracy_detected_by_both": 0.5887290167865707,
+      "stage_accuracy_detected_by_both_correct": 491,
+      "stage_accuracy_detected_by_both_n": 834,
+      "stage_accuracy_detected_by_both_ci95": [
+        0.5550003238382577,
+        0.62164404426187
+      ],
+      "quadratic_kappa_detected": 0.797668295484557,
+      "quadratic_kappa_detected_n": 860,
+      "quadratic_kappa_matches_summary_json": true,
+      "quadratic_kappa_bootstrap_ci95": [
+        0.7732645037582403,
+        0.8199621089333883
+      ]
+    }
+  }
+}

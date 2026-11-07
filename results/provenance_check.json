@@ -1,0 +1,4524 @@
+{
+ "method": "tesseract 5.5.2 CLI, --psm 11, eng; four outer border strips (12 % of side), side strips rotated +-90 deg, stacked, upscaled 2x; flag = OCR text matches \u00a9\\s?(?:\\d{4}|[A-Za-z]{3,})|\\(c\\)\\s?\\d{4}|copyright|mayo|foundation|istock|shutterstock|alamy|getty|dreamstime|adobe|depositphoto|123rf|medetec|www\\.|\\.com|\\.org|rights reserved|photo by|credit",
+ "images_checked": {
+  "train": 2820,
+  "val": 135,
+  "test": 136
+ },
+ "flagged_images_per_split": {
+  "train": 261,
+  "val": 5,
+  "test": 10
+ },
+ "flagged_images_per_source": {
+  "roboflow_fid": 7,
+  "roboflow_maskrcnn": 200,
+  "roboflow_mobile": 11,
+  "roboflow_woundcare": 58
+ },
+ "flagged_images_total": 276,
+ "flagged_photographs_total": 108,
+ "flagged_photographs_stock_named": 0,
+ "flagged_photographs_chronic_ulcer_series": 68,
+ "flagged_images_per_issuer": {
+  "other/unreadable": 28,
+  "Medetec": 202,
+  "NPIAP / Gordian Medical": 28,
+  "Shutterstock": 12,
+  "Mayo Foundation": 4,
+  "Medline": 2
+ },
+ "flagged_photographs_per_issuer": {
+  "Medetec": 77,
+  "other/unreadable": 9,
+  "Shutterstock": 6,
+  "NPIAP / Gordian Medical": 13,
+  "Mayo Foundation": 2,
+  "Medline": 1
+ },
+ "flagged_test_images": [
+  "roboflow_fid__p45_JPG.rf.b712dc736bfe048dc7cc294f516b7cad__4bbe29.jpg",
+  "roboflow_maskrcnn__Chronic-ulcer-126-_jpg.rf.377f912cee1303012c7fe9597ec1f661__4968a5.jpg",
+  "roboflow_maskrcnn__Chronic-ulcer-48-_jpg.rf.a327d7b1dfb3b75038293241d53343ff__85a2c6.jpg",
+  "roboflow_maskrcnn__Chronic-ulcer-494-_jpg.rf.c0b9eac7bcd7d09f7d9f75345805a52a__72704b.jpg",
+  "roboflow_maskrcnn__Chronic-ulcer-529-_jpg.rf.7ef96b6b0e1bdb39563de2be04299105__744cb8.jpg",
+  "roboflow_maskrcnn__Chronic-ulcer-539-_jpg.rf.8489aca0ef0a8380c522f7daef8eeb08__c0c776.jpg",
+  "roboflow_maskrcnn__Chronic-ulcer-6-_jpg.rf.ebcc2da84a79d57c78c99dddd3355340__6bfb92.jpg",
+  "roboflow_maskrcnn__stage2-1_jpg.rf.7fa3151b6735456e316f7ac7f3914802__fc3b70.jpg",
+  "roboflow_maskrcnn__stage3-5_jpg.rf.75685e54a5d7c8902fc698615f8e076e__ddc616.jpg",
+  "roboflow_mobile__extravasation-wound-a-002_jpg.rf.1fd4062a68eaabb9ea5872f82f6ea043__2e9667.jpg"
+ ],
+ "visual_check": "manual: contact sheets (48 thumbnails each) of one image per flagged photograph and of all 27 istock-named images were inspected; every flagged sheet image shows a printed notice; istock-named images show no visible watermark (re-cropped previews); a bare OCR '(c)' sign was a false positive on skin texture and is therefore not counted",
+ "stock_named_images_total": 27,
+ "flagged_photographs": {
+  "roboflow_fid:2740": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_fid:2761": {
+   "images": 1,
+   "splits": [
+    "val"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_fid:2878": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_fid:2994": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_fid:3336": {
+   "images": 1,
+   "splits": [
+    "test"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_fid:3378": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:111": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:126": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:135": {
+   "images": 1,
+   "splits": [
+    "val"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:139": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:146": {
+   "images": 9,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:149": {
+   "images": 1,
+   "splits": [
+    "test"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:152": {
+   "images": 8,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:153": {
+   "images": 4,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:156": {
+   "images": 4,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:170": {
+   "images": 7,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:178": {
+   "images": 4,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:18": {
+   "images": 1,
+   "splits": [
+    "test"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:180": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:183": {
+   "images": 3,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:196": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:210": {
+   "images": 10,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:2176": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:2181": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:2188": {
+   "images": 1,
+   "splits": [
+    "test"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:2240": {
+   "images": 1,
+   "splits": [
+    "test"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:2242": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:2251": {
+   "images": 1,
+   "splits": [
+    "test"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:226": {
+   "images": 1,
+   "splits": [
+    "val"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:23": {
+   "images": 4,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:24": {
+   "images": 6,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:25": {
+   "images": 3,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:2731": {
+   "images": 4,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:2755": {
+   "images": 8,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:2800": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:283": {
+   "images": 4,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:289": {
+   "images": 1,
+   "splits": [
+    "test"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:2957": {
+   "images": 4,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:316": {
+   "images": 1,
+   "splits": [
+    "test"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:329": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:3356": {
+   "images": 9,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:336": {
+   "images": 6,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:3372": {
+   "images": 6,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:339": {
+   "images": 3,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:353": {
+   "images": 1,
+   "splits": [
+    "test"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:363": {
+   "images": 3,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:454": {
+   "images": 3,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:46": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:49": {
+   "images": 7,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:519": {
+   "images": 7,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:564": {
+   "images": 8,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:611": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:62": {
+   "images": 5,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:660": {
+   "images": 4,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:70": {
+   "images": 8,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:74": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_maskrcnn:76": {
+   "images": 6,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:91": {
+   "images": 4,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:95": {
+   "images": 6,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_maskrcnn:982": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3378": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3424": {
+   "images": 1,
+   "splits": [
+    "test"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3507": {
+   "images": 1,
+   "splits": [
+    "val"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3575": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3633": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3637": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3647": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3663": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3671": {
+   "images": 1,
+   "splits": [
+    "val"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3673": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_mobile:3712": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_woundcare:126": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_woundcare:139": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:146": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:152": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:153": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:156": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_woundcare:170": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:178": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:180": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:183": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_woundcare:210": {
+   "images": 3,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:2176": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:2181": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:2242": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_woundcare:23": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:24": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:25": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:2731": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:2755": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:2800": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:283": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_woundcare:2957": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:3356": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:336": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:339": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:363": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:454": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:49": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:519": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:564": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:62": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_woundcare:660": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_woundcare:70": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  },
+  "roboflow_woundcare:76": {
+   "images": 1,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:91": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:95": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": true
+  },
+  "roboflow_woundcare:982": {
+   "images": 2,
+   "splits": [
+    "train"
+   ],
+   "stock_named": false,
+   "series_chronic_ulcer": false
+  }
+ },
+ "flagged_images": [
+  {
+   "file": "roboflow_fid__Stage4_3_PNG.rf.1af143dd908c17d99a80d69cfb038f31__bbd6e6.jpg",
+   "split": "train",
+   "source": "roboflow_fid",
+   "photograph": "roboflow_fid:2994",
+   "hits": [
+    "\u00a9 soj"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "CY A YY As ubfyb ond | CODALIGUS \u00a9 SOJ) COLGISU Weaicg) luc 3 Wa WE ICP |s\u00a2uuojodicz itr. FR ha! 2 <> wp ean; ae ae TT"
+  },
+  {
+   "file": "roboflow_fid__p66_JPG.rf.5b1e3d7e4c228a9c6ac306c5da711c59__cc2f83.jpg",
+   "split": "train",
+   "source": "roboflow_fid",
+   "photograph": "roboflow_fid:2740",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ay FA Li Copyright Medetes (http://www, meadetee co.uk) yo = \u2014 = & 4 = \u00bb 4"
+  },
+  {
+   "file": "roboflow_fid__p66_JPG.rf.b57f18eaca2af6924f78d47b8351c6aa__81bbca.jpg",
+   "split": "train",
+   "source": "roboflow_fid",
+   "photograph": "roboflow_fid:2740",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Mo. a Aa \u2122% | 4 4 Copyright Medetes (http://www. medelee. co.uk) \u2014 al"
+  },
+  {
+   "file": "roboflow_fid__pu116_JPG.rf.ca6541151266fb03122f72a4298e52f3__1b52b0.jpg",
+   "split": "train",
+   "source": "roboflow_fid",
+   "photograph": "roboflow_fid:3378",
+   "hits": [
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "\"a > . * ye: 7 hy vy nigh WWW. MadelEC.( x al ial} A ] M 04 \u2014 Ma Lc = - ior - had i a nea = dot -4+- = ae"
+  },
+  {
+   "file": "roboflow_fid__pu53_JPG.rf.c91924d0c6e6bb9b512d1423c1610f0d__30a430.jpg",
+   "split": "train",
+   "source": "roboflow_fid",
+   "photograph": "roboflow_fid:2878",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Madetec (http./wwiw.medetec. co.uk) (\u00a5N'00\u00b02,A2IUMMMY/ diy) Saapayy jybuAdo\u2019"
+  },
+  {
+   "file": "roboflow_maskrcnn__107_jpg.rf.40523aba052983a4ca17d172ac8f63be__052d60.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:74",
+   "hits": [
+    "\u00a9 sol"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "\u2014 = Ss aN egipolonrisaT iesibaM nesnamA 660 snl KesibeM neibyoo 1106 8 inpiyqod | mos.SAISH VbIWb cow | CODALION! \u00a9 SOl) GOLGI pPOQIEST\" UC\u2019 OD9 YINGLICSL WENqICS pocuuojodiee = tte Fs se aS"
+  },
+  {
+   "file": "roboflow_maskrcnn__107_jpg.rf.a9da00d237c826ba77d15f54327ff5fa__cdb38d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:74",
+   "hits": [
+    ".com"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "= Et \u201c<> \u00a2 bss a \u201c7 NPIAP.com fh Medi | Aha Ar \u00bb it t [ fi ; ri bt a ] yt nl WO?\u2019 ld i"
+  },
+  {
+   "file": "roboflow_maskrcnn__131_jpg.rf.37f2a0989ad4560c256b5b1f6565820a__cf0ca6.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:62",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "\u2014 2) = ss | shutterstock.com \u00bb 495734011 Tibheds\u00e9r-wensporsannys | = ~ >"
+  },
+  {
+   "file": "roboflow_maskrcnn__131_jpg.rf.460349f97354df704fdeacf0c6112c1a__ef0ba9.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:62",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "TIOPELSGP + WO yPO}sye}}NYsS Pe foo | shutterstock.com + 495734011"
+  },
+  {
+   "file": "roboflow_maskrcnn__131_jpg.rf.6b8d003191074463d6d71472ddc39961__29c531.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:62",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "ia shutterstock.com \u00ab 495734011"
+  },
+  {
+   "file": "roboflow_maskrcnn__131_jpg.rf.a137a34adcab9d9ad1dc7f45c32eb313__2c7ead.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:62",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "TIOPELSGP \u00ab WO \"y90}SJ8}}NYs A) aa) OS shutterstock.com + 495734011"
+  },
+  {
+   "file": "roboflow_maskrcnn__131_jpg.rf.d337a393506c264a55021039ee9bb480__1eb6a8.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:62",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "SS shutterstock.com \u00ab 495734011"
+  },
+  {
+   "file": "roboflow_maskrcnn__35_jpg.rf.4218ff3f94a1f111e7c20f5abfd0e593__36618a.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:126",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "avs SAV i, ed shutterstock.com \u00bb 1076541005 al a ee"
+  },
+  {
+   "file": "roboflow_maskrcnn__3_jpg.rf.47231bbf4b04dbd748bb675c31f8b5aa__0602b8.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:982",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "\u00bb 4c NETAPrcom | copyright crcl Gordkan\u2019 Medicah Inex Uda Americant Medical rechnovogies"
+  },
+  {
+   "file": "roboflow_maskrcnn__55_jpg.rf.82421c59ebdd1879d55afd5f7cff8526__2c5eea.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:183",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "EE =: shutterstock.com \u00bb 1355695175 SLTS69SSET \u00bb WOd'y20}sJe}nYs"
+  },
+  {
+   "file": "roboflow_maskrcnn__55_jpg.rf.aba1493b0aa900243dbdbfcc8335efbc__8be7b1.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:183",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "vy. ee ee pa Dal a shutterstock.com + 1355695175 _\u2014\u2014 \u2014\u2014 4"
+  },
+  {
+   "file": "roboflow_maskrcnn__55_jpg.rf.ade2422a9154563f7b2c062bb6c4cd96__e80d7b.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:183",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "\u2014\u2014_\u2014_ \u2014 oe \u2014\u2014\u2014\u2014 ty 4, \\ Fk Mita wi : i) % \u00e9! SLISA9SSET \u00bb Wod}20}sJe NYS shutterstock.com \u00ab 1355695175"
+  },
+  {
+   "file": "roboflow_maskrcnn__6_jpg.rf.7c20d1f530cffa6e61b2e66fa129ca89__c29051.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:70",
+   "hits": [
+    ".com",
+    "copyright"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "% a PS + 4A | iW U NPIAP.com | Copyright BS Ts Pal al atl mo Pr ="
+  },
+  {
+   "file": "roboflow_maskrcnn__6_jpg.rf.ca9035af96ecafc6fdfdce8909f5c334__33f029.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:70",
+   "hits": [
+    ".com",
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "\u2014\u2014 a suet a 7 NPIAP.com | Copyright \u00a9 2011 Gordian Medical, Inc. dba American Medical Technologies SIDOJOUYDA] [EMPay UEIUAWY eqD \"IU 'JeIBpaR UEIPIOD 1102 @ WYOUAGOS | woodyidN"
+  },
+  {
+   "file": "roboflow_maskrcnn__6_jpg.rf.dceddaeb10b93c4437289522cb8645fa__48802b.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:70",
+   "hits": [
+    ".com"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "\u2014 a NPIAPR.com W u \"i M WO \u00a5IdN"
+  },
+  {
+   "file": "roboflow_maskrcnn__6_jpg.rf.e081dd7471d5f2959b1d0ffd6110e5a0__437a65.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:70",
+   "hits": [
+    ".com",
+    "copyright"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "a ete i ifn\u2122 2011 Gordian Medical, Int. dba American Medical lect aes NPIAP.com | Copyright SalbojOUy Da] |RIPay URDU AWY POP \"2U] \u2018IRIAN UEIPIOD 1102 6 YoUAdOD | woodVIdN aS = \u2014 wT"
+  },
+  {
+   "file": "roboflow_maskrcnn__6_jpg.rf.edc3842a580403e42a2f9e4069a43400__586cda.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:70",
+   "hits": [
+    ".com"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "a NPIAP.com WV u fl 1 WO d\u00a5ldh"
+  },
+  {
+   "file": "roboflow_maskrcnn__82_jpg.rf.9348aa60fed654129ac32f6446c3fabc__bcab04.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:46",
+   "hits": [
+    "\u00a9 sou"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "eas fh Me 4 = ae bes i, / Ti \u2014 AbIVb cow CODALIOUE \u00a9 SOU COLgaU MERIC\u2019 UC Qpa yusikad ene ic yuoidi mor. TAlGH st 9 \u2014 IONE eis KIA 600 .nl l63ibsM neitnod 0S 2 Ipinyqo)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-123-_jpg.rf.00d969c07bcfd82fdb4315c019800106__85c450.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2755",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Ght M\u00e9detec (htip://www.medetec.co.uk) ye 3 a te ee =="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-123-_jpg.rf.6420123e659e6b1315d1aea5295099a1__2e4493.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2755",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ot a eo \u201c* = eee (htlp//www.medetec.co.uk) = \u2014 (yMGo'D0}epow MwA///d)yu) oan \\. = \\' \\\\ AA"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-123-_jpg.rf.6480477355a42fdb1cf7fa876fd55e5d__b4e10f.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2755",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "MS SRG i Medelec (http//www.medetec.co.uk) all may ie >< \u2014 | an Ye \u2014 | ae -&. = 3"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-123-_jpg.rf.79c3983920a831462e8073c5c24aa596__aa1ecc.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2755",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "8 2 s \"At . ers Oe \u2014 A = \\' \u2014 - (yM oo Da}epow MAWAy/:C)NU) omapay Z Neeoiec (htlp/www.medetec.co.uk) al"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-132-_jpg.rf.006381d049d7a9d8158e9004fefeb7af__d1e99a.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:170",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "-) > \u2014 Copyright Medetec (ntlp./www.medetec uk) ow Maay/\\C)iU) Sa}apey jubuAdo?) 7 ~ 5s ~~ . ~~ .* x = > . 5"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-132-_jpg.rf.151fff3ed25118f873b9ca31f40e2ba7__2b810e.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:170",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "x Sa ~~ \u2018 Copyright Medetec (http://w WME 60.Uk) ~ = = ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-132-_jpg.rf.83d72838554054261e5ecba67430e919__b62350.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:170",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "* a ~ a * ad Copyright Medetec (http,//www.medelec. co.uk) ws ta - Iwy i> \u2014 o Ed = ro) ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-132-_jpg.rf.95b36c5e073563b86c5f402d81f58fa8__ef8481.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:170",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a Ss = Copyright Medetec (http://www. medetec.co.uk) {9N'O2 38 OU MWY) SBOpOW BUBUA GQ Ane ) oy \u2019 . a* ~~ .* . 2 *"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-135-_jpg.rf.67504da39dce2e7643eede364088fac6__c49805.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:336",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "._ Copyright Medetec (htip./www.medetec.co.uk) L q"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-135-_jpg.rf.85ddda0c6679c271ea715a7b59dbf918__b6be7c.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:336",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014 - Copyright Medetec (http://www me JK)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-135-_jpg.rf.9208e3e1daa39713aa28850704e3566a__839cfe.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:336",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "- Copyright Medetec (http. www.medetec.co.uk) \" 7"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-143-_jpg.rf.72f51ed956e878499bf84800934f1191__b51955.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:210",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "FS a Wie es Copyright rdet (http://www medet uk) Pe r=}"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-143-_jpg.rf.b4b02ef0fc5dce8b62eb031f263715f7__7b1a33.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:210",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "= L_} c-\u2014 joer (yn'Oo oejapaw MmmMy/ diy) Sepapayy wyBAdOD Je te Copyright Medetec (http:/www.medetec. co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-152-_jpg.rf.3b425ea8273e845c4269d2618f5e0194__2210a7.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:24",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "i a we ow =\" jk Copyright Medelec (Nttp,//www.medete J \"f f ( ay ow mardi) sajapany judul"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-152-_jpg.rf.45113ebe053b8e4f427b82a7b5ed7232__08dc8a.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:24",
+   "hits": [
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "yright Medelec (Nttp,//www.me 0.Uk Fm. Aa ma aly 8 i > aa \u201c<< o~7 a ane as"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-152-_jpg.rf.d62e580c1d8dc8a338305c98b53a2637__d9fed5.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:24",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014 \u201ca \u201cTI Copyright Medelec (nttp://www.med 0,UK ) (\u00a5nr'O0 ur mavayidiu) sajapayy jyubuAdos a"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-156-_jpg.rf.2c0a0f0ecfc99c17a659b873c1657b74__a2c615.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:329",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014 wy ~ - Op ae fright Medetec sii 442-35 a a ys = St Dee ~~ ZT a i. oe ws"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-159-_jpg.rf.66d15a2688b36398712f581206009dff__2cfb6b.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:564",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "i = rt Copyright Medetec (http://www. medetec.co,uk) (yn'oo\u2019oalepous wam)//dyi) Seopa jybuAdos \"Sal wr, \u20184 my! \u2014 4 ae. a"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-159-_jpg.rf.9a5e9cfb9d04b1dc4ae3bdb471c1a979__178122.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:564",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "o- 2 ee 4 A a ~ ra \u00a5 (\u00a7A'Oo SB]OPOW MM) Nyy) sajapayy yuo www, medele yynignt Medetec (htt CO.UK)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-159-_jpg.rf.afe1bde58e0bfdc2b9e9d4bd8f8395be__3d8a5d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:564",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "- i Medetec (http://www. .medelec co.uk) ea ahs \u2014 uf"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-159-_jpg.rf.b8492cf19c50a1f7002ef8e989e58181__e702ff.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:564",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "~ - right Medetec (htlp,//www.medetec co.uk) _ ns et \u00bb* be i=) 2 = -\u00a5 > gt if, oy i = -<"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-160-_jpg.rf.43165824c33c67a9b621e349400fd12b__d8d35b.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:91",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a, Copyright Medetec (http./www,.medetec.co.uk) be oe"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-161-_jpg.rf.0dae807f91ab47b801e166f7feec852a__862973.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:210",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u00b0 Copyright Medetec (http:/www,medetec.co, uk) (yn 00 Sejapaw May/:dyy) Dsjapayy juBuAdo? am arm. fem Sem. tem 2m P= wp We ad"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-161-_jpg.rf.383f6d98a7eaed4723f5472b570f9a2d__fb822d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:210",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http fww.me JK} (yr Y ow 'MaMy/:diy) apapeyy jubuAdos \u201cuy WE we"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-161-_jpg.rf.532d31c6c0ca406b302dacfda8876341__aba3a6.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:210",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http://www.me ik wr aU MMM) / Cu) Oapapeyy jybUAdO? aon ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-161-_jpg.rf.947b4bcf95763cef951a32c5a968c222__f1a5af.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:210",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "vx Leow tum =9Om tem fom Sem. Copyright Medetec (http://www, medetec.co.uk) o 2 & 2"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-161-_jpg.rf.b5c0c9b929940fa7c05bed5f3c0b9e27__a73943.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:210",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "san fem Som fom Sem. Copyright Medetec (http://www,medetec. co.uk) o ao \u00b0 ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-163-_jpg.rf.0c6ef90a1d49cf5d680a43b76b1eaa8d__83686b.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:95",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "ow L) Copyright edetec (ntlp://www.mec ry \u2018O.UK ae = ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-163-_jpg.rf.edba47f7d37c8b677d91af49f70c8a55__b7fec4.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:95",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014\u2014 be) Copyright Medetec (nttp\\/www.med ele 20,UK} (yn'os ale SU MMM ju) Ja}apayy wyGuAdos)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-166-_jpg.rf.4d26702cd163ccea6f86d37af30b5496__222b2f.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:23",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "= ia Apynght Medetec f nedete 60,UK) (whoo OOPoU L aap jyBuA %,"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-166-_jpg.rf.80ad1c032df6c1f2b1b97ba656a97861__1f9430.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:23",
+   "hits": [
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "sas Or nt Medete h www. med 460, UK) \u2014 \u2014 me"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-166-_jpg.rf.98b567dd01e1bc931161a4f248657dbc__710c37.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:23",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ot Swill oT) aA. f>4 awe % bs g \u2014f rr Doge Fon \u2014 > *) 5, os vst 16 ay \u201ca hi, Se as & a\" ml ~ wt - (hodenopow many) diy) sajapoyy 1yBuAdOS f u \u2018tet if a i Copyright Medetec (http://www medologeaa)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-166-_jpg.rf.e06938fdde0e378e4a69f09f8368827b__252cfe.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:23",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "of ag \u00bb Copynght Medetec (htt v. med 200.UK) 3S >"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-264-_jpg.rf.1ef53052946ee7fe053a7257379178ef__08b7e1.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:152",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "o. o o Q \u2014 ape Copyright Medetec (http://www.medete C.cO. uk) \u2018any (yn\u2018oo'oa}ep aw MVM) /: Cu) Dejapayy jWOuAdOD"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-264-_jpg.rf.50b3936ff3bb8f3f12ece455cbb7ec25__449d93.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:152",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (hitp:/www,medetec.co.uk) si \u00b0 Gg 3 3 is) o \u2014"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-264-_jpg.rf.6293586cbb527eadb595c5676dc98f0a__aa8657.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:152",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "3 o o o \u2014_ a Copyright Madetec (http://www. medetec.c 0, uk) (ynoosajepaw'mavay:diiy) Jajapayy Budde?"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-264-_jpg.rf.81ad8310e153eb4b74b4ce2d2ce6d29a__f3ea97.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:152",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ane c.cO Copyright Medetec (hitp:/www,medete uk) 3 a g 3 = \u00a9 o >"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-264-_jpg.rf.b9065ccdd8f887fe48e52a3557fd0ba3__3b1899.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:152",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "= Ty Copyright Medetac (http://www.medetec.co.uk) 8 8"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-264-_jpg.rf.c53effe84feadf0e0896629ac14cddfb__11fc62.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:152",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http://www. medetec,co.uk) \u00b0 g 2 pd o o"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-266-_jpg.rf.4ad992605c86a57e68b9a18691c804cb__14cc50.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:25",
+   "hits": [
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "= =s8 awit vo 28) @POW MAA) ay 7 eyy hi oot * . htte (WWW. Te Jat aU"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-266-_jpg.rf.83b558b1b0efad397a466c914fbdcc3c__298077.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:25",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "= 7 a | Copyright Madetec (http:/www.medetec.c \u201c Otat jk yf + it) + D8} @POLL MMM) any \u201d oo * 1 oil"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-266-_jpg.rf.c8480a5e51a666658f4d8363014eee86__e767b5.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:25",
+   "hits": [
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "rae \u2014 _ \"4 Copynght Medelec (hitp://www.me uk ~"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-268-_jpg.rf.644ad9904630ba5f4d91b7fe2aedf695__a6a486.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3356",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "A - 4 Ve ~ s +3 ? ~, rt - Co ght Medetec (http://www. medeltec,co.uk) (yn oo'Saj}epew'mam)/'diu) Sapopeyy WyBuAd?) \" \\ \u00ab 4 \\"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-268-_jpg.rf.a868678edd5ab529332811cbd0bc5dc0__16db80.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3356",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http://www.medetec,.co.uk) eee LI 5% 7 > 2e- a x Sd wk Ss 2 43 2s =~"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-268-_jpg.rf.af0b3f91348ffa28633d0159bcf03ffb__7f3560.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3356",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copynght Medetec (http://www.medetec,co.uk) LIS a= ae c- Se 7 oy a ar"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-268-_jpg.rf.cc64a9b96e882b388afd43fee3e9b502__b3ccf2.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3356",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "' \\ Copynght Medetec (htip./www.medetes,co.uk) ey CC o* - x _ & 2 rm = \u201ce"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-269-_jpg.rf.5160d7034e3c9a4e8b80588e50f9e2d2__5ac5d1.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:76",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "8 re ah of oy sual > 2 eo os <4 ae = (yn oo os}apaw ww Y) SBpOpoyy | Copyng Medetec (htt www. madetec.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-269-_jpg.rf.72b641fe0bed7564cf76f8333cfe0868__eade5f.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:76",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "oF, a rt \u201ca per ar \u2014 | fet (yn oo o@japau Mwm):diy) Sepoyy jyBUAdOD Copyright Medetec (http://www, madelac.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-269-_jpg.rf.992e5b2fa956a88117622ab1a461bcb6__63919d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:76",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "_ Pu Copynght Medetec (http://www.medetec.co.uk) (yn oo o@j}epeusavam)/:dyy) Sajapeyy wyGuAdo> ly ee\u201d"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-270-_jpg.rf.f8c2ccfa1d67c5a2442c00d94b4230a9__f41a43.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2176",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\\ a \u2014_ Copyright Me c (http: /www.medet uk) s i \u2014"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-325-_jpg.rf.384f31bbcea1359787920f6432a4bce0__aeab05.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2731",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a i Copyright Medetec (http://www.medetec, co.uk) ee _ = z"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-325-_jpg.rf.8e3cc0e81b6ba0ba6d9924915663e0e2__e5ddf6.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2731",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a Copyright Medetec (http://www.medetec, co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-325-_jpg.rf.c30526d5f0295314a047ceebee8356b4__7d166d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2731",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "= cece i \u00ab tal Copyright Medetec (hitp://www.medetec, co.uk) arty ~ tt es"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-325-_jpg.rf.c583dc1b47df09a3b938cf80819d4735__cade68.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2731",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ale \u2014 \u2018ets (yn'00'ojepau'mwnydyu) daypeyy 1ybuAdos Copyright Medetec (hitp://www.medetec, co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-33-_jpg.rf.ce24c0b6ea21130c50aa0fa8b65995b9__ce18c0.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:178",
+   "hits": [
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "ef Copynght Madetec (hitp://www.medat 0.Uk) ai o Q ~ a a. 6 o ret \u2014_"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-332-_jpg.rf.1744e316514dbe1694105788ac01d144__4f6fab.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:178",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "& o 8 Copynght Medetec (http://www.medetec, co.uk) (yn-oo\"oe}epawnwwyy:du) dejapeyy pybuAdas OL ie EE"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-332-_jpg.rf.aa25adbe14ce7b2ae1fe85f2c474bfac__381f4c.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:178",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "&. me Copynght Medetec (hitp://www.medates.co.uk) =] ta} Pe a=] a oo. a o > o ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-332-_jpg.rf.d8466660753dcd4aa3661761cd7384b6__00400e.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:178",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "|) Copynght Medetec (hitp://www.medates.co.uk) 8 2 s o a 8 = 8"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-335-_jpg.rf.2b27a82b82262a59907fa709f2bd4f25__acc5a0.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:153",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "st > a elec | hey opynght & rip Www medetec co.uk) dit My oyu )J2 Wy PUDUAGC = faa"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-335-_jpg.rf.7bdd63d3eb1f2a7cab89299ea8bf577c__069d68.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:153",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copynght Medetec (htip,/www.medetec. co.uk) 7 = \u00a5 meet - 7 a Q ras ey o o re"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-335-_jpg.rf.f569efd58a95946635d9ca7817f48096__ea605c.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:153",
+   "hits": [
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "' \"\u2014 Ipyl ni fk v 4 tec selec ( httey tip Www.medete"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-335-_jpg.rf.f9f01f82309f5c5704925310c01e2f5a__6bb8c2.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:153",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Pm a vh ae Copynght Madetec (htip/www.medetec.co,uk) ow,"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-339-_jpg.rf.20954e534b39403a8c93bbc8eb1defc2__97231d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:49",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "=! 2 a F. ras = eh # \u00a9 Th a. =\" a (yn'oo Sajapaw avaNy/-diu) oapepayy jyBuAdoD Copyright Medetec (http:/www.medetec,co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-339-_jpg.rf.8a21315de2e9b64ef3cf4c3acccf06ed__97588b.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:49",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u00bb o = Copyright Medetec (http:/Avww.medetec,co.uk) (yn'ov Sajapaurmmay/-dyu) sayapeyy jyBuAdog re \u2014 af ? - S df"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-339-_jpg.rf.aa176060637ccf74e8b2dd0b92a8b827__82362d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:49",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014 rage a) td a isd \u00bb a! a@ a eal | Copyright Medetec (http:/Avww.medetec.co.uk) ia a4 ee o 9 o re]"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-339-_jpg.rf.ba234690c489ad24f1fc1d2059d2b765__dcd7d2.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:49",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "B. oi PT, \u00a7\u00bb ae * Ce \u00a5 es \u2018bey on Copyright Medetec (http:/www.medet 10.uk) is -"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-340-_jpg.rf.78a827080d08383aba9f9d4e2456a6a4__e4914a.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:146",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "~~ \u00a5 Copyright Medetec (http/www.medetec.co.uk) \u00b0o 2 & o > ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-340-_jpg.rf.a32fb75ea6cb834170a975cced733a8d__cbdcd2.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:146",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u00b0 Sa Res (yn co '2ejapaw mmMy diy) Sapepeyy juGUAGOS: Copynght Medetec (http:/www.medetec.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-340-_jpg.rf.bd30d282ab716d367b2464bc4966cee0__58518d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:146",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "= \u201cae ~ Fe \u201c= wiic \u2018 t be. Ba x (yn'oo sajepaw mmwyy-dny) ajepeyy JuoUAGOS \u2018See \u201cHe oe th 5 % iia Ry, \u2018Copynght Medetec (http:/www.medetec.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-340-_jpg.rf.f31a9c3c37f828113b63f94b94314c60__23ff79.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:146",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014 ~~ s a 5 = Cc a An re) uk) Copynght Medetec (hitp:/www.medete (yn oO oy9 \u201ci ajepaw Mawy/-diu) Ssjepayy juBUAGO>, .~ <"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-343-_jpg.rf.cfbe99c1ccff77edafd1dfbed06606e2__803500.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:139",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "rae re -s = . 7s 3 Medatec (http:/www.medetec. co. uk) aa ie \u2014 - ~z - wa tt Toh wr Ps SA:"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-343-_jpg.rf.dcf1ceea4d8691909340d9017fa3ad18__f560a2.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:139",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "e Br 7, ty fia =. & \u201c#\u00a3\u00b08 *- om\u201d uk Copyhigi Medetec (htip:/www.medet \u2014 ee |"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-349-_jpg.rf.6211069dc049848c0423f2929706f125__3a5eb0.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2181",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ee = Bed v si 3 Le eg : F . + -, \u2018 v* i Copyright Medetec (http/www.medetec.co.uk) \u2018 et 's- Oe a ak 3 \u201c45, 1s = \u00abte . \\. moe | b eS \u2018ek Ve ae ~_t ms. \u201ceX ~*~ 3\u00b0. Sale bee Cte i Sek Cr. we A tet a Q o "
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-357-_jpg.rf.7d2ec6435dfe2753bf3ac029be36e4bc__fe77ac.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3372",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "opyright Medetec ww. taihic ed i ay ata ro Yo)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-357-_jpg.rf.a8a1a6a2b753845eb1592b87d614095e__9ed6bb.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3372",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "bh. - Copyright Medetec (http://www. mawy/dyu) Seyopayy yybuAdoo a _> ro \u00b0"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-357-_jpg.rf.ca85c8ac52c2cf661c20367b0084666c__7f9257.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3372",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014_\u2014\u2014 \u2014 a 2 Wt yyright Medetec (http://wwy MM/S) DO} ayy }yBuAdos Sb , , Vv on \u2014 \u201cA"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-37-_jpg.rf.2a3496881d24c6d76635205ba4099d88__a5056b.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:49",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a) a r rr \u201ca AP) fs =v 4 a * he \u201c~ 3Baa! Copyright Medetec (http:/www.medeteo.co k) as 2 a D 4"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-37-_jpg.rf.47183f11a0c24a8f2d979cbc13c3efa1__ab37ef.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:49",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a a3 3) 2 Copyright Medetec (http:/www.medetec.co.uk) (yn oo ajapaw MMNY/-dyy) oajapeyy jybuAdos> ee wo \u00ae n 4! 2 i PR: ae seveos Th"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-37-_jpg.rf.ed570d0640e4500c33d6029cfa3f9cbd__bf4199.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:49",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Ce _ 10 pew es) os . | LU MAMA dyy) ospapeyy jybu ght Medetec (http im}"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-38-_jpg.rf.0f1b098b975de87571074128c47e2242__42ed85.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:146",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "try .. Copyright Medetec (http:/www.m uk) 7 aire oe Se . 3 ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-38-_jpg.rf.19f39c66714d06e1619db6dad8803498__b7178a.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:146",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": ".~ 6 en Copynght Medetec (http://www. medetec.co.uk) (yn 00 oBjepaw Mawy/:diiu) Sajapeyy jubuAdO>"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-38-_jpg.rf.a4a92c90bef5c0ad60d48c467a425d91__d5a228.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:146",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "+e a 7* J =v om. =r \u2018 ft _ (4n'00oejepau mnmypdiiy) S@18p WN HOUND, \u2018\u00a5o ~\u00a5 as Me ye = ee % ar > Pay Copyright Medetec (httpuwww.medetec.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-38-_jpg.rf.b41c389c09fea29680b17198765bb25b__4a19e3.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:146",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014 \u00b0o Gg Sey (roo Dajapaw MMM GAY) Sapapeyy JuGUAGOD Copyright Medetec (http:/iwww.medetec.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-38-_jpg.rf.f765a17d935bd402225ffcd52333993c__4c0760.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:146",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copynght Medetec (http:/iwww.medetec.co.uk) \u2014s wr KN ae & ot a*, \u2014 So 9 ao 2 ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-39-_jpg.rf.4555a5e32bde4c85bd4e716b57508a1b__966ab8.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:180",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "o = Copyright Medetec (http:/www.me: _ uk) 00\u00b033; wn (yn p au MMM) du) Sapapayy jyBuAdoD"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-39-_jpg.rf.d87b6bdeb519139ded2bfc9b82ed294e__8447d4.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:180",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (hitp:/www.medetec,co.uk) Q 2 \u00ab o i]"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-4-_jpg.rf.42c109dfd50e390d9819a049ff654c12__6cfd16.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:152",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "& eli ep BW MAW OW) OSj}aps ybuAdos 7 C if rig: ht Medetec (http://www.medel uk"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-4-_jpg.rf.a209452f5d0390eb903170dcbd4fa2de__be043c.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:152",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http://www, medetec.co.uk) o Q g | sz ay y J \u00a9 o o ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-427-_jpg.rf.127761dd90cb1830f260800716cc3c19__f1d814.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:519",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "(ano9 HOPOU MY) y) Dayapeyy jybuAdos Copyright Medetec ( www. medetec.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-427-_jpg.rf.20cfcf1bc6a0c17bca85f3bed454654d__0bfbb9.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:519",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http:/Awww.medetec.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-427-_jpg.rf.d41c3d1d29f73b4f730c54d7540a8be7__32686c.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:519",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "(arco sajepew mwwy/:dyy) 2e}epeyy yyBuAdos Copyright Medetec (http://www.medetec.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-427-_jpg.rf.e81ad8c71db6555b41f734442e08bc49__0c2304.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:519",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http:/www.medetec.co.uk) 7\u2122 a"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-437-_jpg.rf.b1c14fffeb27a643c95a7be6ea35dfe0__b13269.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:111",
+   "hits": [
+    "\u00a9 encortttit"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "= Weqecsbe item \u00a9 encortttith Aniae WIN YULeryer= 5qsoabsM"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-442-_jpg.rf.71bd65b7698890c02a885a18ec990f04__016c1a.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2800",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "% Oopipaght Medetec (httpywww.medetec.co.u Po Se > \u00ab| \u201c% rh oo #S he i=."
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-459-_jpg.rf.701f48c08dc9adaeb28d70f86a208006__e1c3b0.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2957",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "= or ote 8 a 2 5 7 rk a re cS a = a = i eo ropes \"Aa ye hp Yes fa \u201c~ Jal ie ew 4 we fas et ov str bag Ms * a ~s y> Ww a \\/ Pitts ~ dd \u201c9 (\u00a5N' OO Oa}SPawW' Mwy) Ciiu) Dajapayy IDA yi nt Medetec (http:/"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-459-_jpg.rf.7031f59297fb5a4112af9cca1b5d9fd2__0e1350.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2957",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a, +~ t? Cop Medetec (htt v T"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-459-_jpg.rf.ee86aed0fcdfe2f700ee0f6bb82ee3c8__71628e.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2957",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "Copyright Mede (nttp:/Awwew. tr jk <6 oe"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-474-_jpg.rf.0068427ff87c1720f3c03c30a92d642c__f69733.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2755",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u00a2 \u2014 o* Ohi M\u00e9delec (http.//www.medetec.co.uk) _\u2014 _\u2014. as ot ae -- os) ~\u2014"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-474-_jpg.rf.785267186337f8955ef09d6cc0507638__214dac.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2755",
+   "hits": [
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "am P=} \" Ont Me\u00e9detec (htip//www.med 0.Uk) os (ynre: Yow NAMY/\\ChY) Sea aHY 10 ae o \u00a9"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-474-_jpg.rf.a3ecadaaa2e815fa26351f0a7196fa8e__a16663.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2755",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "aw. \u201c= ~s a ~- 7, \u201c4 VA (yn wa//\\ CU) SVR wbuldag\u2019 =F git : an ~* _ K) Va \u00e9l sCopynan Medetec (http://www"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-474-_jpg.rf.c278e5102d8349dbd1bc2ed46274caf0__4ec134.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2755",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014 + ge ee ~%. \u201c> f ree Ps = 8 Q t Medetec (https www.medetec.co.uk) a . (Wrroo'sajepow MMMiy/ici) 2819004 = \\' oN"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-484-_jpg.rf.4a2d7569bdccb470db7a7c110d9344e4__bd68f6.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:170",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "s . pyright Medetec (nttp.//wy UNE \u20180,uK ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-484-_jpg.rf.6b637969e423902fb9ceefc1ca25a3ce__0f1624.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:170",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014_ Nt we ~*~} at (yn SOW MWA OU) SA}OPSW IY yd?) Copynght Medetec (nttp,//www.medet 0,Uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-484-_jpg.rf.aa64e20e5bd8352eea11a3bd1a3e18e8__fb7d58.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:170",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": ". NS yfight Medetec (nttp,//ww 0,uk) a =."
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-487-_jpg.rf.0cf37dc6017c82c0e4e486269e0f10e6__c42952.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:336",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "7 Copyright Medetec (hitp:/www.medetec.co.uk) (yn 00 'Se}apaw mMyy:d)4) Dejapayy INBUACOD yr a ~_ \u2014 _ =|"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-487-_jpg.rf.ab67661b8db0281f6f0725f9abb66971__2e1486.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:336",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "_ ee ~ Copyright Madetec (hitp:/www.medetec.co.uk) = 3 * \u00ab _ \u00ab ae o > = s Ss o o 4"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-487-_jpg.rf.de038a673536e75b345d7ebad3381ff1__e58a45.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:336",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": ". a Copyright Medetec (httpwww.medetec.co.uk) lk 7"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-524-_jpg.rf.a0268ca398f162404f9447dcdaf78426__d28763.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:24",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "x ).UK) Copyright Medelec (Nttp,//www.m > = 5 = * <2 a = re? a \u201c*% oe. as ae a0 is > ok ge a"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-524-_jpg.rf.b2876ce3849320d9fd8212fbb5009bad__bb3929.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:24",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "%, UH. Copyright Medetec (http//www.medetec, co.uk) ares = _ \u2014 eS = > \u2014"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-524-_jpg.rf.f27585c63a4242dce1e7f59629ac0093__841137.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:24",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "= ).UK Copyright Med \u00a2 (httpy/www.m \u2014 we -~ ae ae eae \u201cA Ys \u2018= Tee TaeT A xf\u201d ae. a < eee es on \u2014s"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-531-_jpg.rf.b7b9edda03a75ae9c59a7584b8cb4d90__c7e3d4.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:564",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "=== \u2014 aa ae 3 f wie < ri a e (3R' Os SaTapeW MAM)//dyy) Sa}opeyy jybuAdO Copyright Medetec (hitp:/www.medetes 6o.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-531-_jpg.rf.e96f4063c75912b8e8067d3fc51291cf__3cf882.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:564",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "seal fh, yright Medetec (hitp,//www.medetec co.uk) \u201d - - ue a PP on"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-531-_jpg.rf.f471ddeecdbcaf945f3037a79ec5644d__5b467d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:564",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "aay > + = pyright Medetec (hit www, Medeles \u00a2o. uk) \u2014 Po 3 ~ \u201ci ll ws) er cs g a 2"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-531-_jpg.rf.fd3866f52ae620eb38358d4bc3e17dbf__51bed0.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:564",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014\u2014 ; me |. ie - (i al = (an'oo'oajapaw wam)/dyil) sayopayy jybuAdos) Copyright Medetec (http://www, medetes co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-532-_jpg.rf.1f03a03e7f2014a8400172db4f2e47f9__61c37d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:91",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "<_ Copyright Medetec (http://www, medetec co.uk) ee 2 = 2 oSe ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-532-_jpg.rf.3a457a438e69c96a4895f2a5162da5e0__f5b0b7.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:91",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u201c* ao 0.uk) Copyright Medetec (http.//www,.mede be \u2014 \u2014 = -*"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-532-_jpg.rf.c5755b18de0b2376606b6f9a8098b35e__b765a2.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:91",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "| s Copyright Medetec (http://www, medetec.co.uk) (ynios'oa}apeus mmw)/:dyy) Sayepey 1WbuAdos \u00bb f = ee oo \u201c7 \u201c ay t2 ae a net tl ar) Pit \u201c~~ i Ae 4 \" ar\u2019 eo a oh 7"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-533-_jpg.rf.4012374247ba19f86a801d41e20e7737__2dd4de.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:210",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014\u201c_\u2014 a) vy \u201cte Ne ex Ot tam = 2em wm 4m km. (yhoo \u2018osjapew Mavay/:dyu) dsjapayy juBUAdOS Copyright Medetec (http://www,medetec, co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-533-_jpg.rf.7921301e2296b2e24a3e257269c62b10__128030.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:210",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (hitp://www,medetec, co.uk) (yn'00 \u2018Sejapew!Mumy/:dyu) Osjapayy jybuAdos Me e tem = 26m am fom Sem. a P= rar, 7M, WAS"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-533-_jpg.rf.d6bbcae74e2233b8dcee1d644df79e3d__6b8973.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:210",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "aan fem Sh fom Sem. Copyright Medetec (http://www, medetec. co.uk) =~ o 2 o \u00b0 & \u00b0 ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-535-_jpg.rf.10073446e29c652d8b57c5f9e33c4880__8e0e71.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:95",
+   "hits": [
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "2opyt hi c | www. medete ik"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-535-_jpg.rf.218c2cc778d030bbedc235b2c03c37a6__3512be.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:95",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "= \" Copyright Medet \u20ac c (Ntip//www.mede BC 4 \u00a5f'G: BU MAVAI/'G))) 99} ayy Hy 0 b 1Ado4) . ."
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-535-_jpg.rf.58432039702137663ed3fbd2af111c9d__92ed7c.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:95",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "Copyright Med c (htlo/iwww.mede O.UK \u2014 ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-535-_jpg.rf.d2b4a530b978055dd605f301e79712a5__56c27d.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:95",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "= * \u201d * wt \u00a2 wii cd vs mw Se A = Co aoe i cn (yn'oo'sajapaw mway/:djy) de}apayy jubukdos Copyright Medetec (http://www. medetec.co,uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-551-_jpg.rf.a177d22becb44108577a0ca0a2dac468__beb691.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:339",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "y ii Copyright Medetec (hitp://www.medetec.co.uk} {yn'oooajepaw mmamny/:cyy) Sajapayy 1ybuAdog | 74 JZ rah yy"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-551-_jpg.rf.b848b415f495144c94a1b4806fbf9064__831376.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:339",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Pp Copyright Medetec (http://www. medetec.co.uk) * E _\u2014 \u2014F \u00a7"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-551-_jpg.rf.f8c7d7e3a73c945bc45d900409bd777a__fad69a.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:339",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ich ee atl Copyright Medetec (http://www. medetec. co.uk) a \u00e9 q _\u2014 \u2014F | \u2014"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-59-_jpg.rf.23d0f462b7387593f5fff7f3c033eea3__f705b5.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:519",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http:/Awww.medetec,co.uk) X. *"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-59-_jpg.rf.8a7e28f231745cb480738e2d19fd0085__a99e8b.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:519",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http:/www.medetec,co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-59-_jpg.rf.9c1dc6849e5c0f7bd31cb16c3b8bc902__238f0c.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:519",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Q o Qo \u00ab =) (xnroo osjepaw Mwwy/:dyjy) 2aj}apayy jyGuAdoD Copyright Medetec (https/www.medetec.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-63-_jpg.rf.097c349dc84c2daf9921da70718e4edc__4459da.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:454",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "i+ Fy ae | Co'ajepausmuny/:dyy) Jeyapayy yBuAdop ~~ S Copyright Medetec (http://www.medetec.co. |"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-63-_jpg.rf.43a63572bc7ded3954c9bf826924aa37__e909df.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:454",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http:/www.medetec.co ik) as EE za"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-63-_jpg.rf.4e5c30bafd0e9ed75b61bcfd21a5fd2d__4d4698.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:454",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http:/www.medetec. co.uk a is \u00a9 ' E27"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-66-_jpg.rf.364610a8e0de2b90036f8439daaa3f45__02048f.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2181",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "wee 3f i ees \"Ne Od if Copyright Medetec (http:/www.medetec.co.uk) \u2018 iA Ee 0 at sy 2-4 \u2018> wet = SN Si eae a\u201c \u201c7 \u2018ok Soe ba. ae ot ~*~. a <p\u201d = b. Gt. = Trlsecs v & Sas & fs 5. id 2 &S"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-686-_jpg.rf.03a5d31b6ad8124af2eabbb197ac0431__21c0ab.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:363",
+   "hits": [
+    "foundation",
+    "mayo"
+   ],
+   "issuer": "Mayo Foundation",
+   "stock_named": false,
+   "ocr_text": "\u201cO3AU3SS0 SLHOIY TY \"HOWV3ESY ONY NOLLYONGS TWOIdSM BOI NOLIWONNO CAVING MAYO FOUNDATION FOR MEDICAL EDUCATION AND RESEARCH. ALL RIGHTS RESEAVED,"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-686-_jpg.rf.0ffa6422f8501966f1c736649dde1ea0__a81653.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:363",
+   "hits": [
+    "foundation",
+    "mayo",
+    "rights reser"
+   ],
+   "issuer": "Mayo Foundation",
+   "stock_named": false,
+   "ocr_text": "MAYO FOUNDATION FOR MEDICAL EDUCATION AND RESEARCH. ALL RIGHTS RESERVED,"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-686-_jpg.rf.20306be107bf92070ef06e58e5761046__9c5caa.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:363",
+   "hits": [
+    "foundation",
+    "mayo",
+    "rights reser"
+   ],
+   "issuer": "Mayo Foundation",
+   "stock_named": false,
+   "ocr_text": "O MAYO FOUNDATION FOR MEDICAL EDUCATION AND RESEARCH. ALL RIGHTS RESERVED,"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-7-_jpg.rf.1531845561bf44e6b73a892b0c253bd6__928d16.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3356",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": ". EEE _\u2014 . ~ dy * rm - - Copynght Medetec (http://www. jalec,co.uk) (yn'oo'Se}epow Mwm)/'djiy) Se}opeyy }yBUAdO> \\ ' \u2018"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-7-_jpg.rf.2e0e373706bf796ca11875f6898af276__525424.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3356",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u2014\u2014\u2014 -\u201d -f ow fern = -& FT See \u2018 \\ ' \\ (yn'oo'sajapaw mwm)/:cjiy) Sajopayy pyBuAdoy Copynght Medetec (http://www.medatec, co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-7-_jpg.rf.531db9023d22b1ded9fcd60f20b90a1b__0d3739.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3356",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\\ , Copyright Medetec (hitp://www.medetec,co.uk) ew 7. es . \u201d ? i * ass \u201c7 - = By / rn -_\u2014"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-7-_jpg.rf.9ab6ea1d4ede894ddc051dd7c50e3507__d5a2c0.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3356",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\\ , ~~ Copynght Medetec (hitp://www.medelec,co.uk) \u2014e ~ * a ta a) _\u2014 a fs _ rn ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-7-_jpg.rf.cd8107e2bdbe669658ac84b467487f71__64e9f8.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3356",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "AE = Nia 0a Copynght Medetec (http://www. medetec,co.uk) (yM'09'Se}epow mwm)/'djiy) Se}opeyy pyBUAGO> ~ a"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-731-_jpg.rf.40b52c8ab88941b9c9a338711ba17304__41d4d9.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:611",
+   "hits": [
+    "\u00a92017"
+   ],
+   "issuer": "Medline",
+   "stock_named": false,
+   "ocr_text": "\u2014\"* \u2014\u2014\u2014T+ \u00a2) oi \u2014O cS Cc. 2a ag I iJ =. = =| = \u2014_ b= ex. \u2014 6L08002(L0) 4 LNDI3Y 3NMGIW-008-L Ysn E6009 Ti PRPeUYLON *2YI \u2018SaLasnpuy aUIIpay :esed Ouiy) ua anbuqes Joy eu uy Paunmpeynuep U1 \u2018SeLasnpul "
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-731-_jpg.rf.4178592de23ee8a2201b65cb16edf466__c95c3a.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:611",
+   "hits": [
+    "\u00a92017"
+   ],
+   "issuer": "Medline",
+   "stock_named": false,
+   "ocr_text": "is \u2014\u2014 =) = \u2014 \u00a92017 Medline industries, Inc. ral, Est\u00e9rii si ef paquete no en Chine UAC A Para: Medline industries, \u20ac01)2008019% a arap {2 f ie \u2014S3 Fa tN id = =o \u2014T+ \u00a2] =O [ \"3 =. \u2014O o\u2014 -\u2014 o= Om 6 = ai"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-74-_jpg.rf.00cc778c1bd3889787ec30eec86843aa__517222.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3372",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "te | a \u201cA A = Vy many diy) Seyepeyy jyBuAdo> Copyright Medetec (http://www."
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-74-_jpg.rf.5f988a49a5b6fa2d6d40c89d2ecc92e4__df0087.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3372",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "o.- i Copyright Medetec (http://www. may du) Se;apayy jyBUAdO> a _> as 7"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-74-_jpg.rf.8201370fa47f2e9ffb9b77cf5acd42fc__f248f5.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:3372",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u00abe& wr al \u201cA i = Vs mamy/'diu) Sepepeyy jyBuAdoa Copyright Medetec (http://www."
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-8-_jpg.rf.7ba76ef4bb44e45f1a0a4fd64946453e__98fc41.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:76",
+   "hits": [
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ae | [an wf Spa wwam)/\u2018dijy) Sapapayy juBuAG ht Medet ac (Http www. ik"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-8-_jpg.rf.99e4637f7e993a5caee6408171e863e4__4d740f.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:76",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "inght Medetec (http://w medat uk) ~ x. 7 = 45"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-8-_jpg.rf.feda731cc3996f57ba6769643df16fd2__30a163.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:76",
+   "hits": [
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "2 45 Copyr ght Madetec (http://www.medet 14 . \" ub: GB] GPW AVAM)/CIU ) 8 OG} 4 WYO JAdo*) =o \u2014r"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-80-_jpg.rf.1e05e8c5019c1413f4c1952e55f22383__6645f1.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2800",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Oompaght Medetec (http://www medetec co.uk) ah +. a, = EE \u2018* Pe = tx os <= |"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-9-_jpg.rf.f8d0dd4421e95c6d492735b242af0b27__3deff5.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2176",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": ", ad _ uk) Copyright Mi (http://www. s \u2014 a \u2014\u2014\u2014 D ="
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-97-_jpg.rf.95ea0018b4ef59e2c7137fb0e02411da__4b0cdf.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2957",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u201d { pyngnt Medetec (nttp://www.med sk oo +e"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage1-2_jpg.rf.17a2c4971fb1c6987e7e5bfc2b3984f3__24824b.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:982",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "\u00bb 4c NETAPrcom | copyright crcl Gordkan\u2019 Medicah Inex Uda Americant Medical rechnovogies"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-10_jpg.rf.3f105c7bc0feadeb3f0cfc79c4cd8888__bac091.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:660",
+   "hits": [
+    "\u00a9 soji"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "+ 6 fae ual = ea. bade as > iad uy OS ~~ \u2122 oP dog HiryE cow | CODALOUL \u00a9 SOjI @oLg! 1U PRGQHCA UC\u201d GDF YIUGUICRU ASQ] [ECL OdIGe md ro aipalonrt 2 aI [3 boM MBIOMA 6db .2Al leseM neibyod 0S @ Ifehyqod"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-10_jpg.rf.76bd42b9cf058ef662a14692e920d8e0__f1ad81.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:660",
+   "hits": [
+    ".com"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "aA WU au APLAP.COM 5 Amer Vl"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-10_jpg.rf.bc5e9f1d9a3c4a0c1dcb8930769507d7__7967a3.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:660",
+   "hits": [
+    ".com"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "WU APLAP.COM g if u"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-10_jpg.rf.cab68123d85b6ccadf7d8a18ec7d931d__0efb71.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:660",
+   "hits": [
+    ".com"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "Ps ! WPIAP.com | Cogyright a 4 Way dha American Medica f } iogie alt 4) P29 URIUAWY POD ! OF | wl 02 JWOUAGO} Wworavidi = ="
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-6_jpg.rf.0b9fcea45bed739474b556518ee45bd4__3e2452.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:283",
+   "hits": [
+    ".com",
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "=] 4 NPIAP.com | Copyright \u00a9 2011 Gordian Medical, Inc, dba American Medical Technologies S3iDO/OUL/23] JENDa}y UEILUY BOD \u201cDuy YEA WPIPIO} 1107 @ WOUAGO) | WorgyiaN"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-6_jpg.rf.4ff0564a942b6e25acaadafaee1d0ac2__00f40c.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:283",
+   "hits": [
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "NPIAP-com | Copyright \u00a9 2011 Gordian Medical, Inc. dba American Medical Technologies - \u201d"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-6_jpg.rf.c29df0e0e7c56bdcf65c93c8a2647f7e__054cb2.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:283",
+   "hits": [
+    ".com",
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "_ i SalbojOUl)33) JEDI a UEDLLALIY Eqp *2u) YeoIaY UPIPIOS [102 yybisAdo> | woouyiEN NPIAP.com | Copyright \u00a9 2011 Gordian Medical, Inc. dba American Medical Technologies"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-6_jpg.rf.d3b2c32861f87d36eb71938054cdf3a4__fabdb9.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:283",
+   "hits": [
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "= ne NPIAP-com | Copyright \u00a9 2011 Gordian Medical, Inc, dba American Medical Technologies SalbOj/OUl) 23} /E20a)4 WEILBILTY BOD \u201cDuy Yerpayy UEIPIS [107 G WOUAGO) | worayidN fithy 4 as ts rng."
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-7_jpg.rf.5fecfe2860ec5f9e582e60324e6251f9__0b4933.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2242",
+   "hits": [
+    ".com",
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "NPIAP.com | Copyright \u00a9 2011 Gordian Medical, Inc. dba American Medical Technologies = = + +4 4, h \u00bb* rn"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-8_jpg.rf.22c00caa6b7baf6a9b563677a7c63a51__679f4e.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:156",
+   "hits": [
+    ".com",
+    "copyright"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "NPIAP.com | Copyright \u00a9 201i Gordian Medical, Inc. dba American Medical Technologies"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-8_jpg.rf.90fa6672a2ee8ff11bdd55def2f7e25f__25277f.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:156",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "NPIAP. com | Copyright \u00a9 201, Gordian Medical, Inc. dba American Medical Technologies"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-8_jpg.rf.a75a4bea7da2e80d39329608cfd2e11f__d6996e.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:156",
+   "hits": [
+    ".com",
+    "copyright"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "we _ - SaIDO/OUl}I9] EMP Sy] UEIUAWY BND \u201cDuy \u201cEda UEIDIND TIO7 G WOiiAd> | WO3\"d\u00a5idN NPIAP.com | Copyright \u00a9 201i Gordian Medical, Inc. dba American Medical Technologies"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-8_jpg.rf.fb89cb81d5e89ca1837de79f82ea440d__c32980.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:156",
+   "hits": [
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "NPIAP. com | Copyright \u00a9 2011 Gordian Medical, Inc. dba American Medical Technologies"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-9_jpg.rf.4f75d20bef0834912b3e53e83e784a2f__6e2d83.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:70",
+   "hits": [
+    ".com",
+    "copyright"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "% a PS + 4A | iW U NPIAP.com | Copyright BS Ts Pal al atl mo Pr ="
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-9_jpg.rf.c557fcc3fbab1e8c7d42119d3268034b__d22f57.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:70",
+   "hits": [
+    ".com",
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "6] \u2014 Sig \u2014 4, \" SaibO|OUYD9] |EMPay UEIVaWY EOP \"24 \u2018WeIMpayy URIPIOD [102 Wyouldos | woodyidN r NPIAP.com | Copyright \u00a9 2011 vO (dian Medecal, Inc. dba American Medical Technologies"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-9_jpg.rf.c9634793a5c094e7f1b93451ddd20e1a__9f9ce6.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:70",
+   "hits": [
+    ".com"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "ae NPIAR.com WV iF fi 1 u WOId\u00a5idi \u2018* \""
+  },
+  {
+   "file": "roboflow_maskrcnn__unstageable-7_jpg.rf.6835a138dece10f29547de50156a4098__16d344.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:196",
+   "hits": [
+    "\u00a9 sol"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "\u2014 a il ! Weiybcow | COLL \u00a9 Sol) CoLqisE yeqic 9) | I J 008 WWUSLIESU pecicsy [oc wucpodese B e 29mpolonela] Ie21D9M MEINSMA EdD 20 1 ] ib 21DSM NeW IO\" (10S G fripnyge) | mosAAlsH"
+  },
+  {
+   "file": "roboflow_maskrcnn__unstageable-7_jpg.rf.c545c33b99cd35335980f4b7398f3f62__b3d688.jpg",
+   "split": "train",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:196",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "z= NPIAP com | Copyright dba American Medic f 4 Milo) | WoId\u00a5IdN"
+  },
+  {
+   "file": "roboflow_mobile__extravasation-wound-b-001_jpg.rf.268f8a06eaeb0493461a5757399bcb51__d73131.jpg",
+   "split": "train",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3637",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "| \u2014 Medetec (hitp:/www,medetes.co.uk) Ss.: \u2014 we ve 8 or nt ae oe"
+  },
+  {
+   "file": "roboflow_mobile__foot-ulcer1-8_jpg.rf.5f870d08706d2e8d336042af6f55d1df__3c6cb6.jpg",
+   "split": "train",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3647",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http//www.medetec.co.uk) 8 8"
+  },
+  {
+   "file": "roboflow_mobile__meningitis-case-1-elbow-5_jpg.rf.ef83699bbc4d4419786cfff49d84cfd2__e8e41f.jpg",
+   "split": "train",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3663",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Ey) (hitpslwww.medetec. co.uk) a = i = ~"
+  },
+  {
+   "file": "roboflow_mobile__meningitis-case-1-elbow-6_jpg.rf.8aed6ed61328ec4ba6a60880d0bc9ee7__99e790.jpg",
+   "split": "train",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3575",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "> pyright Medetec (Ntip./weww. medetec.co.uk) (4M 00 Sajapew MMAMy/'dyy) Sa}apeyy ;yBUAG ee a"
+  },
+  {
+   "file": "roboflow_mobile__orthopaedic-wound-1-16_jpg.rf.de6ac34a8c1a51c398a3cb52124ab333__eba054.jpg",
+   "split": "train",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3633",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec oe ata: a a een \u2014 ~~ . \u201c~ A 2"
+  },
+  {
+   "file": "roboflow_mobile__orthopaedic-wound-2-4_jpg.rf.81a85b22a5259da3605e1511711551a5__19b74f.jpg",
+   "split": "train",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3673",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "moh edetec (nttp//www.medetec.co.uk) ad = a \u2014 -- = \u00b0 2 a 2 ="
+  },
+  {
+   "file": "roboflow_mobile__pu116_JPG.rf.89a938627587d0cc549489a0b91a21aa__0415bf.jpg",
+   "split": "train",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3378",
+   "hits": [
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "\"a > . * ye: 7 hy vy nigh WWW. MadelEC.( x al ial} A ] M 04 \u2014 Ma Lc = - ior - had i a nea = dot -4+- = ae"
+  },
+  {
+   "file": "roboflow_mobile__toes-0016_jpg.rf.b0777e65b9c805bb62e7311e391c399f__1a9f0a.jpg",
+   "split": "train",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3712",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ry i. .% Copyright Medetec (http://www.medetec.co.uk) o 2 & >"
+  },
+  {
+   "file": "roboflow_woundcare__131_jpg.rf.909f387c81961cf5427e50997dd8f0aa__05870e.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:62",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "SS shutterstock.com \u00ab 495734011"
+  },
+  {
+   "file": "roboflow_woundcare__35_jpg.rf.812d33c46dd1054c4d870c89ec0f17b1__42bc43.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:126",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "avs SAV i, ed shutterstock.com \u00bb 1076541005 al a ee"
+  },
+  {
+   "file": "roboflow_woundcare__3_jpg.rf.85cf271c43d90dc6c2a0a2545abf95f0__eba575.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:982",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "\u00bb 4c NETAPrcom | copyright crcl Gordkan\u2019 Medicah Inex Uda Americant Medical rechnovogies"
+  },
+  {
+   "file": "roboflow_woundcare__55_jpg.rf.f4f255c4b1b41ec5a7984383bc35fd7b__332005.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:183",
+   "hits": [
+    ".com",
+    "shutterstock"
+   ],
+   "issuer": "Shutterstock",
+   "stock_named": false,
+   "ocr_text": "vy. ee ee pa Dal a shutterstock.com + 1355695175 _\u2014\u2014 \u2014\u2014 4"
+  },
+  {
+   "file": "roboflow_woundcare__6_jpg.rf.e92e0da2760b56ea26d2d8167155f46b__c83c67.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:70",
+   "hits": [
+    ".com",
+    "copyright"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "% a PS + 4A | iW U NPIAP.com | Copyright BS Ts Pal al atl mo Pr ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-123-_jpg.rf.02cf4f71fd95cc721d559e2abad377a6__ba7539.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2755",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Ght M\u00e9detec (htip://www.medetec.co.uk) ye 3 a te ee =="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-132-_jpg.rf.9661fc53929839a8282247132d3553e6__1390e0.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:170",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "x Sa ~~ \u2018 Copyright Medetec (http://w WME 60.Uk) ~ = = ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-135-_jpg.rf.db81a8b018250972b5d31d60a5afe877__0b1fd5.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:336",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "._ Copyright Medetec (htip./www.medetec.co.uk) L q"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-143-_jpg.rf.e34322d64d6f502606e5b64653a7ba5f__4f93dd.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:210",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "FS a Wie es Copyright rdet (http://www medet uk) Pe r=}"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-152-_jpg.rf.3e5c3561fabc2fea09db5f2950d5ed08__6423cb.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:24",
+   "hits": [
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "yright Medelec (Nttp,//www.me 0.Uk Fm. Aa ma aly 8 i > aa \u201c<< o~7 a ane as"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-159-_jpg.rf.51f993adb5ff7b511c2cdd7c3a15fe3d__6d3374.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:564",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "~ - right Medetec (htlp,//www.medetec co.uk) _ ns et \u00bb* be i=) 2 = -\u00a5 > gt if, oy i = -<"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-160-_jpg.rf.7a9ff11c35faf71a6ae46f1bd6cbb3aa__7d32dd.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:91",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a, Copyright Medetec (http./www,.medetec.co.uk) be oe"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-161-_jpg.rf.e1729614a319233dbfbe3941ac38c76b__e96096.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:210",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "san fem Som fom Sem. Copyright Medetec (http://www,medetec. co.uk) o ao \u00b0 ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-163-_jpg.rf.6270870116816120468b60ba233544d4__830128.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:95",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "ow L) Copyright edetec (ntlp://www.mec ry \u2018O.UK ae = ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-166-_jpg.rf.08d702036ac023bb058028919b5cc405__c6bb5e.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:23",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "of ag \u00bb Copynght Medetec (htt v. med 200.UK) 3S >"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-264-_jpg.rf.75ce1b1409624e0a9f7100f137225edc__e8901e.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:152",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http://www. medetec,co.uk) \u00b0 g 2 pd o o"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-266-_jpg.rf.1bc20e840b434ad64bb9fa15c3c6fff0__4549d7.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:25",
+   "hits": [
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "rae \u2014 _ \"4 Copynght Medelec (hitp://www.me uk ~"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-268-_jpg.rf.fc140944d985a96ab7abf62837ee1c46__cab251.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:3356",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copynght Medetec (http://www.medetec,co.uk) LIS a= ae c- Se 7 oy a ar"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-270-_jpg.rf.0c15283b2be2bbcce1cddbf88c9be94a__84f8b5.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2176",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\\ a \u2014_ Copyright Me c (http: /www.medet uk) s i \u2014"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-325-_jpg.rf.84840e14462b1f9c55b3494b80c0f035__6a3280.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2731",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a i Copyright Medetec (http://www.medetec, co.uk) ee _ = z"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-33-_jpg.rf.a62affaa4327f23c228132c60cf67cc5__58ddfb.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:178",
+   "hits": [
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "ef Copynght Madetec (hitp://www.medat 0.Uk) ai o Q ~ a a. 6 o ret \u2014_"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-332-_jpg.rf.431bfd694b67378e12e07b5dd2505eb8__78f940.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:178",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "&. me Copynght Medetec (hitp://www.medates.co.uk) =] ta} Pe a=] a oo. a o > o ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-335-_jpg.rf.6116c21849d64fb5cab019eb105362c1__e10ec3.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:153",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copynght Medetec (htip,/www.medetec. co.uk) 7 = \u00a5 meet - 7 a Q ras ey o o re"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-339-_jpg.rf.38fc5ac2e8b9fc3a6ee94ff8748f28db__5bfe27.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:49",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "B. oi PT, \u00a7\u00bb ae * Ce \u00a5 es \u2018bey on Copyright Medetec (http:/www.medet 10.uk) is -"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-340-_jpg.rf.13fe32c85ebf3bccdb9bd648546b5aa5__24e006.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:146",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "~~ \u00a5 Copyright Medetec (http/www.medetec.co.uk) \u00b0o 2 & o > ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-343-_jpg.rf.e64a0024f0537239c1a15e5ca0809c45__a3ecdd.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:139",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "e Br 7, ty fia =. & \u201c#\u00a3\u00b08 *- om\u201d uk Copyhigi Medetec (htip:/www.medet \u2014 ee |"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-349-_jpg.rf.a22513ed232c8891c03410ec6ea38af4__9b3a5c.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2181",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ee = Bed v si 3 Le eg : F . + -, \u2018 v* i Copyright Medetec (http/www.medetec.co.uk) \u2018 et 's- Oe a ak 3 \u201c45, 1s = \u00abte . \\. moe | b eS \u2018ek Ve ae ~_t ms. \u201ceX ~*~ 3\u00b0. Sale bee Cte i Sek Cr. we A tet a Q o "
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-37-_jpg.rf.0cf58228e5dfbb4ac993ba8ac5b0ff6a__c10714.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:49",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a) a r rr \u201ca AP) fs =v 4 a * he \u201c~ 3Baa! Copyright Medetec (http:/www.medeteo.co k) as 2 a D 4"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-38-_jpg.rf.b093570abee720a397e4dffd9df13f99__2eccdd.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:146",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copynght Medetec (http:/iwww.medetec.co.uk) \u2014s wr KN ae & ot a*, \u2014 So 9 ao 2 ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-39-_jpg.rf.1720bbab6020d294b768735f30d6ffab__0ce499.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:180",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (hitp:/www.medetec,co.uk) Q 2 \u00ab o i]"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-4-_jpg.rf.763c6310dcef327f96fcfe054d5aabb3__bdca3c.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:152",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http://www, medetec.co.uk) o Q g | sz ay y J \u00a9 o o ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-427-_jpg.rf.48db3ddc9c33dd581f730d4d00564076__f3be20.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:519",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http:/Awww.medetec.co.uk)"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-442-_jpg.rf.2a33fc5c5477c08ad412fe5baff136ba__c94229.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2800",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "% Oopipaght Medetec (httpywww.medetec.co.u Po Se > \u00ab| \u201c% rh oo #S he i=."
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-459-_jpg.rf.7dd894ec3420ac8adab44a5867b97407__91b01e.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2957",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "Copyright Mede (nttp:/Awwew. tr jk <6 oe"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-474-_jpg.rf.b072119436aa3940caa46279e25df118__f9caf8.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2755",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u00a2 \u2014 o* Ohi M\u00e9delec (http.//www.medetec.co.uk) _\u2014 _\u2014. as ot ae -- os) ~\u2014"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-484-_jpg.rf.45f405964d275e1995944146a1f2bd80__cfa1d9.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:170",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": ". NS yfight Medetec (nttp,//ww 0,uk) a =."
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-487-_jpg.rf.7d613cd28bd27a5e9fb9c96a7c417356__a44ffa.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:336",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": ". a Copyright Medetec (httpwww.medetec.co.uk) lk 7"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-524-_jpg.rf.3038e1c735df9b93fbc369833bfc0dfb__c4a94f.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:24",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "= ).UK Copyright Med \u00a2 (httpy/www.m \u2014 we -~ ae ae eae \u201cA Ys \u2018= Tee TaeT A xf\u201d ae. a < eee es on \u2014s"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-531-_jpg.rf.acbbc4987cb0d9396ed1ba160ff89163__bc12d6.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:564",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "seal fh, yright Medetec (hitp,//www.medetec co.uk) \u201d - - ue a PP on"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-532-_jpg.rf.38b5fbe3e59ef4d776044594ebc98280__f37820.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:91",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u201c* ao 0.uk) Copyright Medetec (http.//www,.mede be \u2014 \u2014 = -*"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-533-_jpg.rf.9b6882eaff3b1694eba1fd5220e8c3a8__499106.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:210",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "aan fem Sh fom Sem. Copyright Medetec (http://www, medetec. co.uk) =~ o 2 o \u00b0 & \u00b0 ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-535-_jpg.rf.b03326f02ed8708a227d4039de2b065c__db481d.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:95",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "Copyright Med c (htlo/iwww.mede O.UK \u2014 ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-551-_jpg.rf.d42c64918de94442c98816dc695c250e__283e4a.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:339",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "ich ee atl Copyright Medetec (http://www. medetec. co.uk) a \u00e9 q _\u2014 \u2014F | \u2014"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-59-_jpg.rf.532ce24d8c3aad4fa9485bc8a9672d0f__bca1ef.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:519",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http:/www.medetec,co.uk)"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-63-_jpg.rf.4e5fc2e0cccfebb5e3ea2dc8ca1aa9cb__29344e.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:454",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Copyright Medetec (http:/www.medetec.co ik) as EE za"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-66-_jpg.rf.f731b7d3db2a6bd82738698cd91f16cc__35741a.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2181",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "wee 3f i ees \"Ne Od if Copyright Medetec (http:/www.medetec.co.uk) \u2018 iA Ee 0 at sy 2-4 \u2018> wet = SN Si eae a\u201c \u201c7 \u2018ok Soe ba. ae ot ~*~. a <p\u201d = b. Gt. = Trlsecs v & Sas & fs 5. id 2 &S"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-686-_jpg.rf.e19d71b27d2817cfa80640c7437f333c__244a2b.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:363",
+   "hits": [
+    "foundation",
+    "mayo",
+    "rights reser"
+   ],
+   "issuer": "Mayo Foundation",
+   "stock_named": false,
+   "ocr_text": "MAYO FOUNDATION FOR MEDICAL EDUCATION AND RESEARCH. ALL RIGHTS RESERVED,"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-7-_jpg.rf.c798c296c9a1305f9fd6cfaf7fe54eb6__1898c2.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:3356",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\\ , ~~ Copynght Medetec (hitp://www.medelec,co.uk) \u2014e ~ * a ta a) _\u2014 a fs _ rn ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-8-_jpg.rf.f03491ff02cf79a09cd58f32e67edb1d__8f26c7.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:76",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "inght Medetec (http://w medat uk) ~ x. 7 = 45"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-80-_jpg.rf.5a073ff82f8570b16bb7bb310825db45__b6ca68.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2800",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Oompaght Medetec (http://www medetec co.uk) ah +. a, = EE \u2018* Pe = tx os <= |"
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-9-_jpg.rf.c9b99ac63facb383fc34d67f8944f251__d1f06b.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2176",
+   "hits": [
+    "copyright",
+    "www."
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": ", ad _ uk) Copyright Mi (http://www. s \u2014 a \u2014\u2014\u2014 D ="
+  },
+  {
+   "file": "roboflow_woundcare__Chronic-ulcer-97-_jpg.rf.bb6b9c100d3a103ba05d6d1a59c9fb18__173152.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2957",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u201d { pyngnt Medetec (nttp://www.med sk oo +e"
+  },
+  {
+   "file": "roboflow_woundcare__stage1-2_jpg.rf.5b001f23e78a6caa5d4d606c111c0e14__5d57e3.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:982",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "\u00bb 4c NETAPrcom | copyright crcl Gordkan\u2019 Medicah Inex Uda Americant Medical rechnovogies"
+  },
+  {
+   "file": "roboflow_woundcare__stage3-10_jpg.rf.77b85d9694411ee537e4b74e3f140841__376ba7.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:660",
+   "hits": [
+    ".com"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "aA WU au APLAP.COM 5 Amer Vl"
+  },
+  {
+   "file": "roboflow_woundcare__stage3-6_jpg.rf.7014c58fec0d179eae4652fee830b7ed__b67669.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:283",
+   "hits": [
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "NPIAP-com | Copyright \u00a9 2011 Gordian Medical, Inc. dba American Medical Technologies - \u201d"
+  },
+  {
+   "file": "roboflow_woundcare__stage3-7_jpg.rf.ae4a12dc78f5e816560eea18a6626191__018466.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:2242",
+   "hits": [
+    ".com",
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "NPIAP.com | Copyright \u00a9 2011 Gordian Medical, Inc. dba American Medical Technologies = = + +4 4, h \u00bb* rn"
+  },
+  {
+   "file": "roboflow_woundcare__stage3-8_jpg.rf.b0e11b3dd37193a4e1730ddbfc5780bf__a6cc13.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:156",
+   "hits": [
+    "copyright",
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "NPIAP. com | Copyright \u00a9 2011 Gordian Medical, Inc. dba American Medical Technologies"
+  },
+  {
+   "file": "roboflow_woundcare__stage3-9_jpg.rf.1a61ba3eef21a1a6be79a85d377a9fd7__dbf44d.jpg",
+   "split": "train",
+   "source": "roboflow_woundcare",
+   "photograph": "roboflow_woundcare:70",
+   "hits": [
+    ".com",
+    "copyright"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "% a PS + 4A | iW U NPIAP.com | Copyright BS Ts Pal al atl mo Pr ="
+  },
+  {
+   "file": "roboflow_fid__b20_JPG.rf.96f6667ca025fb333e01a477b7e9e656__836674.jpg",
+   "split": "val",
+   "source": "roboflow_fid",
+   "photograph": "roboflow_fid:2761",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "aa SS \u2014\u2014eeV\u2014 + Ae ds \u2014\u2014 i \u2014\u2014\u2014\u2014 (yoy oa) Se a\u00bb? Hap Db gry wr . ot \"fe An eslnhh Made |medetec.c0.vk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-40-_jpg.rf.daa6081149da23dc567504c39ccc94e9__7fed40.jpg",
+   "split": "val",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:135",
+   "hits": [
+    "copyright"
+   ],
+   "issuer": "other/unreadable",
+   "stock_named": false,
+   "ocr_text": "\u2014 \u2014 7 _\u2014 ~e 7. an nn Copyright M (http:/Awy MNO \\\u00a5 Japa N jyBuAdO> . Ce, e -_ A a e \u201c AS a oa ~-> \u2014 ry \u00aet ) ve cay f = ;* q i ad ee"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-411-_jpg.rf.1ba9397d1ce833658c6c31d5cd5a60f3__8b8385.jpg",
+   "split": "val",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:226",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "2 y . Wy aM (hin oo'os;epow monic ht Al ds mA = We A \\A\u00a5 Si) Kh As dal medetec.co,uk) eu Taba"
+  },
+  {
+   "file": "roboflow_mobile__foot-ulcer-2-2_jpg.rf.8fbc85071f78948276ff49eec08ee2c0__ee9271.jpg",
+   "split": "val",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3507",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "i Copyright Medetec (htp:/ivany"
+  },
+  {
+   "file": "roboflow_mobile__leg-ulcers-0011_jpg.rf.a77e9f815e64889638baa5561ca6452b__0b7579.jpg",
+   "split": "val",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3671",
+   "hits": [
+    "copyright",
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "Tin i 3 \u00bb Copyright Medelec (http://www, medetec.co.uk) _- a Ne = \u2014E \u00ab"
+  },
+  {
+   "file": "roboflow_fid__p45_JPG.rf.b712dc736bfe048dc7cc294f516b7cad__4bbe29.jpg",
+   "split": "test",
+   "source": "roboflow_fid",
+   "photograph": "roboflow_fid:3336",
+   "hits": [
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "nor Copy \u00a5 \\t Medelec (Ntp:/WwW.medele\u00a2. CO.UK"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-126-_jpg.rf.377f912cee1303012c7fe9597ec1f661__4968a5.jpg",
+   "split": "test",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:18",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "\u00b0 fs C 4 ~ iF (yn co oejepew Mwy du) ~ ~ ane es ny {itp ://www.medetec.co.uk) a"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-48-_jpg.rf.a327d7b1dfb3b75038293241d53343ff__85a2c6.jpg",
+   "split": "test",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:289",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "= my = Copyright Medetec (http;//www.medetec.co.uk) (xn'oo'9ajepaw mmam)/dny) Sa}apeyy jyBUAdOD &"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-494-_jpg.rf.c0b9eac7bcd7d09f7d9f75345805a52a__72704b.jpg",
+   "split": "test",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:316",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "am *\u00bb ai \u201c2 Copyright Medetec (http;//www.medetec JR}"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-529-_jpg.rf.7ef96b6b0e1bdb39563de2be04299105__744cb8.jpg",
+   "split": "test",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2188",
+   "hits": [
+    "medetec"
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a - Conanight Medetec (hitp:/www medetec co.uk) NS \\_=z a; me Ti * eo yt D4, + id, a? LES"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-539-_jpg.rf.8489aca0ef0a8380c522f7daef8eeb08__c0c776.jpg",
+   "split": "test",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:149",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "- \u201c =H, (\u00a5N'O! ou MMAYy ON) Sajapay juuAdos - \u2014_ Copyright Medetec (http://www. me: 0,Uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__Chronic-ulcer-6-_jpg.rf.ebcc2da84a79d57c78c99dddd3355340__6bfb92.jpg",
+   "split": "test",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:353",
+   "hits": [
+    "copyright",
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": "a b. (xn'op'oajapaw'mwvay/dyiu) Sajopayy jyGuAdo? - \u2018= a = af Copyright Medetec (http:/www.medatec.co.uk)"
+  },
+  {
+   "file": "roboflow_maskrcnn__stage2-1_jpg.rf.7fa3151b6735456e316f7ac7f3914802__fc3b70.jpg",
+   "split": "test",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2251",
+   "hits": [
+    ".com",
+    "copyright"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "ae NPIAP.com | Copyright ieee American Medical Technologies \u2014 = \"Ad ="
+  },
+  {
+   "file": "roboflow_maskrcnn__stage3-5_jpg.rf.75685e54a5d7c8902fc698615f8e076e__ddc616.jpg",
+   "split": "test",
+   "source": "roboflow_maskrcnn",
+   "photograph": "roboflow_maskrcnn:2240",
+   "hits": [
+    "\u00a9 2011"
+   ],
+   "issuer": "NPIAP / Gordian Medical",
+   "stock_named": false,
+   "ocr_text": "Fed ye? drop ~ \u201ca if \u2014 = NPIAR Com optim \u00a9 2011 Gardian ee ine dba American Medica Te hnctoge + te Billion ae = a=] : on ont"
+  },
+  {
+   "file": "roboflow_mobile__extravasation-wound-a-002_jpg.rf.1fd4062a68eaabb9ea5872f82f6ea043__2e9667.jpg",
+   "split": "test",
+   "source": "roboflow_mobile",
+   "photograph": "roboflow_mobile:3424",
+   "hits": [
+    "medetec",
+    "www."
+   ],
+   "issuer": "Medetec",
+   "stock_named": false,
+   "ocr_text": ". Ua ae. | = Ese (N09 20;0p9W MAMY/-OK) 9 \u2014 wbuldos ed wae i\u00bb \u00a2 (ntipywww.medetec.co.uk)"
+  }
+ ]
+}

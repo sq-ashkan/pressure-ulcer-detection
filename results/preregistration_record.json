@@ -1,0 +1,30 @@
+{
+  "protocol_file": "docs/ROADMAP.md",
+  "section_rule": "lines from '**Pre-registered evaluation protocol**' to the next code fence or '## ' heading",
+  "commits_touching_protocol": [
+    {
+      "commit": "cdf55aa6f21b4eb8b10c22fcc621eaa8ac626779",
+      "author_time": "2026-11-05T19:54:02+01:00",
+      "commit_time": "2026-11-05T19:54:02+01:00",
+      "subject": "Add segmentation dataset builder, training/evaluation library and roadmap",
+      "change": "added",
+      "protocol_sha256": "0c90de8db75dfca8622429a42d47e6d073f85d450b5631af8d78e13aa78b7b3e"
+    }
+  ],
+  "current_protocol_sha256": "0c90de8db75dfca8622429a42d47e6d073f85d450b5631af8d78e13aa78b7b3e",
+  "current_equals_HEAD": true,
+  "current_equals_first_version": true,
+  "test_evaluation_files_mtime_utc": {
+    "results/comparison/unet_evaluation.json": "2026-11-06T05:42:41+00:00",
+    "results/comparison/yoloseg_evaluation.json": "2026-11-06T05:43:17+00:00"
+  },
+  "compare_models_log": {
+    "path": "logs/compare_models.log",
+    "mtime_utc": "2026-11-06T05:43:17+00:00",
+    "timestamps_in_log": [],
+    "note": "log lines carry no timestamps; file mtime given instead"
+  },
+  "first_test_evaluation_utc": "2026-11-06T05:42:41+00:00",
+  "protocol_added_before_first_test_evaluation": true,
+  "hours_between_protocol_added_and_first_test_evaluation": 10.81
+}

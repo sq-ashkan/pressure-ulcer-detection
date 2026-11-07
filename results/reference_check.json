@@ -1,0 +1,710 @@
+[
+ {
+  "key": "settles2009active",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "budd2021survey",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "rabanser2019failing",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "quinonerocandela2009dataset",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "hasler2003measuring",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "pechpacheco2000diatom",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "massey1951kolmogorov",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "massey1951distribution",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "dunn1961multiple",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "gal2017deep",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "daneshjou2022disparities",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "adamson2018machine",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "kore2024empirical",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "wen2022characteristics",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "mitchell2019model",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "castro2020causality",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "zhang2021wound",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "hodges1958significance",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "ronneberger2015unet",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "he2016deep",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "redmon2016you",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "bolya2019yolact",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "jocher2023ultralytics",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "lin2014microsoft",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "deng2009imagenet",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "iakubovskii2019segmentation",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "paszke2019pytorch",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "buslaev2020albumentations",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "milletari2016vnet",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "loshchilov2019decoupled",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "loshchilov2017sgdr",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "isensee2021nnunet",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "he2020mask",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "terven2023comprehensive",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "azad2024medical",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "isensee2024nnunet",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "epuap2019prevention",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "npiap2026prevention",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "edsberg2016revised",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "li2020global",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "padula2019national",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "defloor2004interrater",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "oozageergunowa2018pressure",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "tomovasimitchieva2019epidemiologie",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "kottner2009trend",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "beeckman2007epuap",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "vanderwee2006reliability",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "kottner2020pressure",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "gefen2022our",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "baumgarten2009validity",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "sahbudak2026comparing",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "pressureinjury2025maskrcnn",
+  "method": "url",
+  "ok": false,
+  "problems": [
+   "URL https://universe.roboflow.com/pressure-injury/maskrcnn-swd7w: HTTP 403"
+  ]
+ },
+ {
+  "key": "pi2024advances",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "fid2023pressureulcer",
+  "method": "url",
+  "ok": false,
+  "problems": [
+   "URL https://universe.roboflow.com/fid-fvcc6/pressureulcer-ctn4w: HTTP 403"
+  ]
+ },
+ {
+  "key": "class2023mobile",
+  "method": "url",
+  "ok": false,
+  "problems": [
+   "URL https://universe.roboflow.com/class-vx0ys/mobile-application-for-diagnostic-of-pressure-ulcer: HTTP 403"
+  ]
+ },
+ {
+  "key": "petchsworkspace2026pressure",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "mweber2026dekubitus",
+  "method": "url",
+  "ok": false,
+  "problems": [
+   "URL https://universe.roboflow.com/mweber1-rheinahrcampus-de/dekubitus: HTTP 403"
+  ]
+ },
+ {
+  "key": "thanyaratthadchpong2025pressure",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "meheditusar2025piseg",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "uwmbigdata2023wound",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "uwmbigdata2021wound",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "fumedicalai2022piid",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "tusar2026aipowered",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "ay2022deep",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "anisuzzaman2022multimodal",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "patel2024integrated",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "wang2020fully",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "wang2024fuseg",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "gebru2021datasheets",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "willemink2020preparing",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "karimi2020deep",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "daneshjou2021lack",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "dice1945measures",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "maierhein2024metrics",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "kapoor2023leakage",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "barz2020do",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "varoquaux2022machine",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "roberts2021common",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "efron1993introduction",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "wilson1927probable",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "cohen1960coefficient",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "rublee2011orb",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "lowe2004distinctive",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "fischler1981random",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "zauner2010implementation",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "figueroa2012predicting",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "reinke2024understanding",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "christodoulou2024confidence",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "cohen1968weighted",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "brown2001interval",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "koehn2004statistical",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "ahn2013how",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "sculley2015hidden",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "breck2017ml",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "kreuzberger2023machine",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "paleyes2022challenges",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "pianykh2020continuous",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "lee2020clinical",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "eu2017regulation",
+  "method": "url",
+  "ok": false,
+  "problems": [
+   "URL http://data.europa.eu/eli/reg/2017/745/oj: HTTP 202"
+  ]
+ },
+ {
+  "key": "fda2025marketing",
+  "method": "url",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "wu2021how",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "eu2024regulation",
+  "method": "url",
+  "ok": false,
+  "problems": [
+   "URL http://data.europa.eu/eli/reg/2024/1689/oj: HTTP 202"
+  ]
+ },
+ {
+  "key": "feng2022clinical",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "sahiner2023data",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "anisuzzaman2022imagebased",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "zahia2018tissue",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "chang2022deep",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "swerdlow2023simultaneous",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "aldughayfiq2023yolobased",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "fard2025ftarm",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "liu2023automatic",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "wang2024novel",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "zahia2020pressure",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "scebba2022detectandsegment",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "marchal2026comparing",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "key": "fergus2023pressure",
+  "method": "crossref",
+  "ok": true,
+  "problems": []
+ }
+]

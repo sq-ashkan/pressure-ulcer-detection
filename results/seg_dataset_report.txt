@@ -1,0 +1,21 @@
+SEGMENTATION DATASET  (20261105T220530Z)
+
+distinct photographs: 928  (perceptual merges: 210)
+eval images with a train twin (SIFT audit): 7
+
+train images= 2820 photographs= 650 negatives= 308  stage1=679 stage2=648 stage3=983 stage4=756
+val   images=  139 photographs= 139 negatives=  46  stage1=17 stage2=15 stage3=36 stage4=37
+test  images=  139 photographs= 139 negatives=  47  stage1=17 stage2=12 stage3=43 stage4=30
+external images=    0 photographs=   0 negatives=   0  stage1=0 stage2=0 stage3=0 stage4=0
+
+per source (train/val/test/external):
+  neg_azh              train=99 val=21 test=26 external=0
+  neg_fuseg            train=67 val=14 test=14 external=0
+  rf_petchs_seg        train=209 val=20 test=20 external=0
+  roboflow_fid         train=460 val=33 test=27 external=0
+  roboflow_maskrcnn    train=1489 val=46 test=45 external=0
+  roboflow_mobile      train=222 val=5 test=7 external=0
+  roboflow_woundcare   train=274 val=0 test=0 external=0
+
+dropped images containing DTI/Unstageable: {"roboflow_maskrcnn": 1543, "roboflow_woundcare": 282, "roboflow_fid": 0, "roboflow_mobile": 0, "rf_petchs_seg": 25}
+extra negatives (AZH, for FP rates): {"N": 83, "S": 136, "D": 145, "V": 200, "BG": 82}

@@ -1,0 +1,104 @@
+{
+  "frozen_matches": {
+    "images": 227,
+    "by_split_and_method": {
+      "extra_negatives/dhash": 205,
+      "extra_negatives/pixel": 5,
+      "test/dhash": 9,
+      "test/orb": 8
+    },
+    "distinct_photographs": {
+      "extra_negatives": 27,
+      "test": 4
+    }
+  },
+  "visual_inspection": {
+    "test_pairs_inspected": 4,
+    "test_true_copies": 1,
+    "extra_negative_pairs_inspected": 12,
+    "extra_negative_true_copies": 0,
+    "true_copy": "test roboflow_fid Stage2_4 (photograph 2934) = mirrored, cropped, recoloured copy of train roboflow_maskrcnn/woundcare Chronic-ulcer-686 (8 training images)"
+  },
+  "comparison_seed0": {
+    "all": {
+      "n_pos": 91,
+      "n_neg": 45,
+      "unet_dice": 0.7848,
+      "yolo_dice": 0.7194,
+      "mean_diff": 0.0655,
+      "ci95": [
+        0.0025,
+        0.1249
+      ],
+      "p_value": 0.039,
+      "unet_fpr": 0.4889
+    },
+    "without_true_copy": {
+      "n_pos": 90,
+      "n_neg": 45,
+      "unet_dice": 0.7868,
+      "yolo_dice": 0.7223,
+      "mean_diff": 0.0645,
+      "ci95": [
+        0.0027,
+        0.13
+      ],
+      "p_value": 0.042,
+      "unet_fpr": 0.4889
+    },
+    "without_all_flagged": {
+      "n_pos": 89,
+      "n_neg": 43,
+      "unet_dice": 0.7894,
+      "yolo_dice": 0.7204,
+      "mean_diff": 0.0691,
+      "ci95": [
+        0.0076,
+        0.1327
+      ],
+      "p_value": 0.03,
+      "unet_fpr": 0.5116
+    }
+  },
+  "comparison_seed1": {
+    "all": {
+      "n_pos": 91,
+      "n_neg": 45,
+      "unet_dice": 0.7997,
+      "yolo_dice": 0.7117,
+      "mean_diff": 0.0879,
+      "ci95": [
+        0.0398,
+        0.1428
+      ],
+      "p_value": 0.0,
+      "unet_fpr": 0.4667
+    },
+    "without_true_copy": {
+      "n_pos": 90,
+      "n_neg": 45,
+      "unet_dice": 0.8046,
+      "yolo_dice": 0.7146,
+      "mean_diff": 0.09,
+      "ci95": [
+        0.0392,
+        0.1442
+      ],
+      "p_value": 0.001,
+      "unet_fpr": 0.4667
+    },
+    "without_all_flagged": {
+      "n_pos": 89,
+      "n_neg": 43,
+      "unet_dice": 0.8078,
+      "yolo_dice": 0.7135,
+      "mean_diff": 0.0943,
+      "ci95": [
+        0.0454,
+        0.151
+      ],
+      "p_value": 0.0,
+      "unet_fpr": 0.4884
+    }
+  }
+}
