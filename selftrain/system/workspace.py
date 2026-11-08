@@ -257,7 +257,7 @@ def validate_manifest(df: pd.DataFrame) -> pd.DataFrame:
     ``added_cycle`` as int64, a fresh 0..n-1 index. Rules: ``name``, ``source`` and
     ``split`` are non-empty; names are unique (a name is the image's id in the pool);
     splits are one of SPLITS; ``added_cycle`` >= 0; and every photograph lies in exactly
-    one split -- the leakage-free split of the thesis is enforced on every write."""
+    one split -- the photograph-disjoint split of the thesis is enforced on every write."""
     if not isinstance(df, pd.DataFrame):
         raise TypeError(f"manifest must be a pandas DataFrame, got {type(df).__name__}")
     if df.columns.duplicated().any():

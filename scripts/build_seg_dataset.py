@@ -1,5 +1,5 @@
 """
-Build the leakage-free SEGMENTATION dataset for the Bachelor thesis.
+Build the photograph-disjoint SEGMENTATION dataset for the Bachelor thesis.
 
 One set of photographs, two label formats, so U-Net and YOLOv8-seg are
 compared on exactly the same images:

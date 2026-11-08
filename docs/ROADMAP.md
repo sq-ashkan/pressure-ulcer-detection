@@ -20,7 +20,7 @@ report plan, presentation plan, and (at the end) the running work log.
 - **First work step / first technical chapter:** compare **U-Net** with **YOLOv8-seg**
   on the same mask data, pick the better model, build the rest on it. This answers
   Prof. Chalopin's PPA comments (boxes vs masks; why no U-Net).
-- Keep the leakage-free split by photograph and the negative examples.
+- Keep the photograph-disjoint split and the negative examples.
 
 ## 2. Operating rules for autonomous work
 
